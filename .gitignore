@@ -13,3 +13,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/
+/app/src/main/java/com/example/icebreak/
+/app/src/main/java/com/example/icebreak/StatusOfGame.java
+/app/src/main/java/com/example/icebreak/Task.java
+/app/src/androidTest/java/com/example/icebreak/
+/app/src/test/java/com/example/icebreak/

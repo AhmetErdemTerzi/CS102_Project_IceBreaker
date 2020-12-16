@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">IceBreak</string>
+    <string name="title_activity_global_task1">Map</string>
 </resources>

@@ -1,7 +1,15 @@
 package com.example.icebreak;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,6 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+
 public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback, Task {
 
     private GoogleMap mMap;
@@ -22,6 +32,25 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
     private String taskText;
     private boolean taskCompleted;
     private int seconds;
+    private LocationListener myLocationListener;
+    private LocationManager locationManager;
+
+    public GlobalTask1(String taskText)
+    {
+        this.taskText = taskText;
+        createRandomLocation();
+        myLocationListener = new MyLocationListener();
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+
+
+            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
+                    11 );
+        }
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, myLocationListener);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +58,7 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_global_task1);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.GlobalTask1);
         mapFragment.getMapAsync(this);
     }
 
@@ -38,6 +67,7 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         this.seconds = seconds;
         timer = new Timer();
         timer.schedule(new TaskTimer(), seconds*1000);
+
     }
 
     @Override
@@ -47,12 +77,17 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public String getTaskText() {
-        return null;
+        return taskText;
     }
 
     @Override
     public void taskOver() {
+        timer.cancel();
+    }
 
+    public void createRandomLocation()
+    {
+        LatLng randomLocation = new LatLng(0,0);
     }
 
     public class TaskTimer extends TimerTask {
@@ -62,6 +97,18 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         {
             taskOver();
         }
+    }
+
+    public class MyLocationListener implements LocationListener
+    {
+
+        @Override
+        public void onLocationChanged(Location location)
+        {
+
+        }
+
+
     }
 
     /**

@@ -2,4 +2,4 @@ Ahmet Erdem Terzi | 21702256
 
 Change log:
 
-16.12.2020	| StatusOfGame interface and Task class is coded.
+16.12.2020	| StatusOfGame interface and Task class is coded. GPS and Internet permissions are added into manifest file. -> StatusOfGame deleted and Task is converted to an interface.

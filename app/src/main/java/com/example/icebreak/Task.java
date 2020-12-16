@@ -1,15 +1,24 @@
 package com.example.icebreak;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Task implements StatusOfGame {
 
     private Timer timer;
     private String taskText;
+    private boolean taskCompleted;
 
-    public void setTime(Timer time)
+    public Task(String taskText)
     {
-        this.timer = time;
+        this.taskText = taskText;
+        taskCompleted = false;
+    }
+
+    public void setAndStartTimer(int seconds)
+    {
+        timer = new Timer();
+        timer.schedule(new TaskTimer(), seconds*1000);
     }
 
     public Timer getTime()
@@ -22,4 +31,18 @@ public abstract class Task implements StatusOfGame {
         return taskText;
     }
 
+    public void taskOver()
+    {
+        timer.cancel();
+
+    }
+
+    public class TaskTimer extends TimerTask{
+
+        @Override
+        public void run()
+        {
+            taskOver();
+        }
+    }
 }

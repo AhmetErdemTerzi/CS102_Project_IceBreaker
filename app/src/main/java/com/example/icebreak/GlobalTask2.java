@@ -23,7 +23,7 @@ public class GlobalTask2 extends AppCompatActivity implements Task {
         this.time = time;
     }
 
-    
+
     public String setTaskText(){
         return "Global Task2";
     }

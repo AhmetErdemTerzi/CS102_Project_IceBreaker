@@ -11,9 +11,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback {
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback, Task {
 
     private GoogleMap mMap;
+
+    private Timer timer;
+    private String taskText;
+    private boolean taskCompleted;
+    private int seconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,37 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void setAndStartTimer(int seconds) {
+        this.seconds = seconds;
+        timer = new Timer();
+        timer.schedule(new TaskTimer(), seconds*1000);
+    }
+
+    @Override
+    public Timer getTime() {
+        return timer;
+    }
+
+    @Override
+    public String getTaskText() {
+        return null;
+    }
+
+    @Override
+    public void taskOver() {
+
+    }
+
+    public class TaskTimer extends TimerTask {
+
+        @Override
+        public void run()
+        {
+            taskOver();
+        }
     }
 
     /**

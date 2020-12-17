@@ -1,23 +1,28 @@
 package com.example.icebreak;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.ArrayMap;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.TestLooperManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -58,7 +63,7 @@ public class QuizActivity extends AppCompatActivity {
         score = 0;
 
 
-        countDownTimer = new CountDownTimer(10500,1000) {
+        countDownTimer = new CountDownTimer(8700,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 time.setText(String.valueOf(millisUntilFinished/1000));
@@ -208,7 +213,7 @@ public class QuizActivity extends AppCompatActivity {
         D.setText(question.getD());
         D.setTextColor(Color.WHITE);
         flag = false;
-        count.setText(Integer.toString(countere+1) + "/" + Integer.toString(questionList.size()-1));
+        count.setText(Integer.toString(countere+1) + "/" + Integer.toString(questionList.size()));
         sco.setText(Integer.toString(score));
         A.setClickable(true);
         B.setClickable(true);
@@ -229,7 +234,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void changeQuestion(){
 
-        if( countere < questionList.size() - 1)
+        if( countere < questionList.size())
         {
             setQuestion();
             countere++;

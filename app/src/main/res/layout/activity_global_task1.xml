@@ -1,9 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/GlobalTask1"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GlobalTask1" />
+    tools:context=".GlobalTask1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2b2b2b">
+
+
+        <LinearLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#2b2b2b">
+
+            <Button
+                android:id="@+id/btnGame"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Game"
+                android:textColor="#7B8D93"
+                app:backgroundTint="#2b2b2b" />
+
+            <Button
+                android:id="@+id/btnScoreboard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Scoreboard"
+                android:textColor="#7B8D93"
+                android:textSize="12sp"
+                app:backgroundTint="#2b2b2b" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/goBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutMain"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/design_default_color_primary"
+            android:text="Go Back" />
+
+        <TextView
+            android:id="@+id/taskText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/goBackButton"
+            android:background="#808080"
+            android:text="Task 1: Go specified location"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            />
+
+        <fragment
+            android:id="@+id/GlobalTask1_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="400dp"
+            android:layout_height="450dp"
+            android:layout_below="@id/taskText"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            tools:context=".GlobalTask1" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

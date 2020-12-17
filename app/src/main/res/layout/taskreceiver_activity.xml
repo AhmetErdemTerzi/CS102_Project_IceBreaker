@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TaskReceiverActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#2b2b2b">
+        <LinearLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#2b2b2b">
+
+            <Button
+                android:id="@+id/btnGame"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Game"
+                android:textColor="#7B8D93"
+                app:backgroundTint="#2b2b2b" />
+
+            <Button
+                android:id="@+id/btnScoreboard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Scoreboard"
+                android:textColor="#7B8D93"
+                android:textSize="12sp"
+                app:backgroundTint="#2b2b2b" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Info"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#2b2b2b">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Time"
+                android:textSize="21sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Task Giver"
+                android:textSize="21sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/TimeUser"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#2b2b2b">
+
+            <TextView
+                android:id="@+id/Timer"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textSize="21sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/User"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Receiver"
+                android:textSize="21sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Task"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:text="Welcome"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:background="#808080"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="65dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+            <TextView
+                android:id="@+id/Completion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:background="#2b2b2b"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

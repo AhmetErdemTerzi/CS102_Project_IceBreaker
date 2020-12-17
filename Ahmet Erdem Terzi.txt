@@ -3,3 +3,4 @@ Ahmet Erdem Terzi | 21702256
 Change log:
 
 16.12.2020	| StatusOfGame interface and Task class is coded. GPS and Internet permissions are added into manifest file. -> StatusOfGame deleted and Task is converted to an interface.
+17.12.2020	| GlobalTask1 class is written partly and GUI part is coded in XML. Google maps view and instantaneous GPS traction is added. GPS permission request part is added. 

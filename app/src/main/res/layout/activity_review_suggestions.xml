@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reviewSuggestionsActivity"
+    android:background="@color/teal_700">
+
+    <LinearLayout
+        android:id="@+id/layoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+        <Button
+            android:id="@+id/btnUser"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="User"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC"
+            />
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Play"
+            android:textColor="#7B8D93"
+            app:backgroundTint="#CFD8DC" />
+
+        <Button
+            android:id="@+id/btnNotifications"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Notifications"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/notifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+
+        >
+
+        <TextView
+            android:id="@+id/notif1"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_lobby"
+            android:textSize="20sp"
+            android:background="#CFD8DC"/>
+        <LinearLayout
+            android:id="@+id/review1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+
+            <Button
+                android:id="@+id/accept1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="#CFD8DC"
+                android:text="Accept"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/dec1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Decline" />
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/notif2"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_lobby"
+            android:textSize="20sp"
+            android:background="#CFD8DC"/>
+        <LinearLayout
+            android:id="@+id/review2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+
+            <Button
+                android:id="@+id/accept2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="#CFD8DC"
+                android:text="Accept"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/dec2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Decline" />
+
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/notif3"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_lobby"
+            android:textSize="20sp"
+            android:background="#CFD8DC"/>
+        <LinearLayout
+            android:id="@+id/review3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+
+            <Button
+                android:id="@+id/accept3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="#CFD8DC"
+                android:text="Accept"
+                android:textSize="12sp"/>
+
+            <Button
+                android:id="@+id/dec3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Decline" />
+
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/notif4"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_lobby"
+            android:textSize="20sp"
+            android:background="#CFD8DC"
+            />
+        <LinearLayout
+            android:id="@+id/review4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+
+            <Button
+                android:id="@+id/accept4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="#CFD8DC"
+                android:text="Accept"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/dec4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Decline" />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/adminPart"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/userInfo"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="User Info"
+                android:textColor="#7B8D93"
+                android:textSize="12sp"
+                app:backgroundTint="#CFD8DC" />
+
+            <Button
+                android:id="@+id/revSug"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Review Suggestions"
+                android:textColor="#7B8D93"
+                app:backgroundTint="#CFD8DC" />
+
+
+
+        </LinearLayout>
+
+        ></LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

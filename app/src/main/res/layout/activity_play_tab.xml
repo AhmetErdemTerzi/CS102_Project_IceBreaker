@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".playTabActivity">
+
+    <LinearLayout
+        android:id="@+id/layoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnUser"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="User"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC" />
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Play"
+            android:textColor="#7B8D93"
+            app:backgroundTint="#CFD8DC" />
+
+        <Button
+            android:id="@+id/btnNotifications"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Notifications"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+    <RelativeLayout
+        android:id="@+id/joinaGame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/teal_700">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JOIN LOBBY"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:textSize="25sp"/>
+
+        <EditText
+            android:id="@+id/lobbyCode"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginRight="50dp"
+            android:hint="Enter Lobby Code."/>
+
+        <Button
+            android:id="@+id/joinBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join"
+
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="75dp"
+            />
+        ></RelativeLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="#15CA5E"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="CREATE GAME"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/gametypeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+            android:text="GAME TYPE"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/label"
+            android:textSize="18sp"/>
+        <Spinner
+            android:id="@+id/gameType"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:spinnerMode="dropdown"
+            android:layout_below="@id/gametypeTxt"
+            android:layout_centerHorizontal="true"
+            android:background="#CFD8DC"
+
+            />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+            android:text="DATE"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/gameType"
+            android:textSize="18sp"/>
+
+        <Spinner
+            android:id="@+id/dateTime"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:spinnerMode="dropdown"
+            android:layout_below="@id/date"
+            android:layout_centerHorizontal="true"
+            android:background="#CFD8DC"
+
+            />
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+            android:text="DATE"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/dateTime"
+
+            android:textSize="18sp"/>
+        <Spinner
+            android:id="@+id/numOfPlayers"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:spinnerMode="dropdown"
+
+            android:layout_below="@id/num"
+            android:layout_centerHorizontal="true"
+            android:background="#CFD8DC"
+
+            />
+        <Button
+            android:id="@+id/createBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:layout_below="@id/numOfPlayers"
+            android:layout_centerHorizontal="true"
+            android:text="Create"
+            />
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

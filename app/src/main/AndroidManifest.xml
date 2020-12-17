@@ -35,6 +35,21 @@
         <activity
             android:name=".GlobalTask1"
             android:label="@string/title_activity_global_task1" />
+
+        <activity android:name=".reviewSuggestionsActivity"></activity>
+        <activity android:name=".notifActivity" />
+        <activity android:name=".playTabActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".UserTab" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

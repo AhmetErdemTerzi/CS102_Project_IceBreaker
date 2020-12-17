@@ -148,7 +148,7 @@
                     android:textSize="30sp"
                     android:textColor="@color/white"
                     android:background="#808080"
-                    android:textAlignment="center"/>/>
+                    android:textAlignment="center"/>
 
             </LinearLayout>
 

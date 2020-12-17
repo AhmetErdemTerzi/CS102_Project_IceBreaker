@@ -1,4 +1,42 @@
 <resources>
     <string name="app_name">IceBreak</string>
     <string name="title_activity_global_task1">Map</string>
+
+
+    <string name="welcome">WELCOME!</string>
+    <string name="username">USERNAME</string>
+    <string name="win_count">Win Count:</string>
+    <string name="games_payed">Games Payed:</string>
+    <string name="average_points">Average Points:</string>
+    <string name="quiz_suggestions">Quiz Suggestions</string>
+    <string name="enter_quiz_suggestions_here">Enter quiz suggestions here.</string>
+    <string name="send">SEND!!</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="enter_notifications_only_admins">Enter notifications (only admins)</string>
+    <string name="join_lobby">JOIN LOBBY</string>
+
+    <string-array name="game_type">
+        <item>SELECT GAME TYPE</item>
+        <item>Indoor Game</item>
+        <item>Outdoor Game</item>
+    </string-array>
+
+    <string-array name="time_date">
+        <item>SELECT TIME</item>
+        <item>in 5 mins</item>
+        <item>in 10 mins</item>
+    </string-array>
+
+    <string-array name="num_of_players">
+        <item>SELECT PLAYER COUNT</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+
+
 </resources>

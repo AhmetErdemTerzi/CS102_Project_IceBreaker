@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".notifActivity"
+    android:background="@color/teal_700">
+
+
+    <LinearLayout
+        android:id="@+id/layoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <Button
+            android:id="@+id/btnUser"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="User"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC"
+            />
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Play"
+            android:textColor="#7B8D93"
+            app:backgroundTint="#CFD8DC" />
+
+        <Button
+            android:id="@+id/btnNotifications"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Notifications"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/notifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="50dp"
+        android:orientation="vertical"
+
+        >
+
+        <EditText
+            android:id="@+id/notif1"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="@string/enter_notifications_only_admins"
+            android:layout_marginTop="50dp"
+            android:textSize="20sp"
+            android:background="#CFD8DC"
+             />
+        <Button
+            android:id="@+id/SEND"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send"
+            android:layout_marginStart="200dp"
+            />
+        <TextView
+            android:id="@+id/notif2"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_lobby"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:background="#CFD8DC"/>
+
+        <TextView
+            android:id="@+id/notif3"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_lobby"
+            android:layout_marginTop="50dp"
+            android:textSize="20sp"
+            android:background="#CFD8DC"/>
+
+        <TextView
+            android:id="@+id/notif4"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/join_lobby"
+            android:layout_marginTop="50dp"
+            android:textSize="20sp"
+            android:background="#CFD8DC"
+            />
+
+
+        ></LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

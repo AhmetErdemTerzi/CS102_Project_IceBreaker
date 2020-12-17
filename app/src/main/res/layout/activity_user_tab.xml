@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserTab"
+    android:background="@color/teal_700">
+
+    <LinearLayout
+        android:id="@+id/layoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnUser"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="User"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC" />
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Play"
+            android:textColor="#7B8D93"
+            app:backgroundTint="#CFD8DC" />
+
+        <Button
+            android:id="@+id/btnNotifications"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CFD8DC"
+            android:text="Notifications"
+            android:textColor="#7B8D93"
+            android:textSize="12sp"
+            app:backgroundTint="#CFD8DC" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/userTab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:text="@string/welcome"
+            android:textSize="25sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+
+            />
+
+        <TextView
+            android:id="@+id/txtUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+
+            android:text="@string/username"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/winCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/win_count"
+            android:textSize="20sp"
+
+            android:layout_below="@id/txtUsername"/>
+        <TextView
+            android:id="@+id/gamesPlayed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/games_payed"
+            android:textSize="20sp"
+
+            android:layout_below="@id/winCount"/>
+
+        <TextView
+            android:id="@+id/averagePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/average_points"
+            android:textSize="20sp"
+
+            android:layout_below="@id/gamesPlayed"/>
+
+        <TextView
+            android:id="@+id/quizSuggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+
+            android:layout_marginTop="10dp"
+            android:text="@string/quiz_suggestions"
+            android:textSize="15sp"
+            android:layout_below="@id/averagePoints"/>
+
+        <EditText
+            android:id="@+id/enterSuggestion"
+            android:layout_width="286dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:layout_below="@id/quizSuggestion"
+
+
+            android:hint="@string/enter_quiz_suggestions_here" />
+
+        <Button
+            android:id="@+id/btnSuggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="100dp"
+
+
+            android:background="#CFD8DC"
+            android:text="@string/send"
+            android:layout_below="@id/enterSuggestion"
+           />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/btnSuggestion"
+
+            android:background="#CFD8DC"
+            android:text="@string/log_out"
+
+            android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:id="@+id/adminPart"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/userInfo"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="User Info"
+                android:textColor="#7B8D93"
+                android:textSize="12sp"
+                app:backgroundTint="#CFD8DC" />
+
+            <Button
+                android:id="@+id/revSug"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Review Suggestions"
+                android:textColor="#7B8D93"
+                app:backgroundTint="#CFD8DC" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

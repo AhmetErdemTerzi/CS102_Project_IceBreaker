@@ -123,6 +123,5 @@ public class TaskReceiverActivity extends AppCompatActivity {
             }
         };
         time.setText("5:00");
-
     }
 }

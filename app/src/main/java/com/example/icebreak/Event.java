@@ -1,6 +1,7 @@
 package com.example.icebreak;
 
 public class Event {
+    //Lobby lobby
     Task currentTask;
     int numOfPlayers;
     boolean gameStatus;
@@ -19,11 +20,6 @@ public class Event {
     }
 
     public void updatePoints()
-    {
-
-    }
-
-    public void generateLobbyCode()
     {
 
     }

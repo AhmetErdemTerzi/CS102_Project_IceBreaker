@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:936732062759:android:10f9772cbf366e63228a02",
         "android_client_info": {
-          "package_name": "com.example.happybirthday"
+          "package_name": "com.example.icebreak"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "936732062759-o4bjf8ou2o6heomseifasr42d1ncr883.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.happybirthday",
+            "package_name": "com.example.icebreak",
             "certificate_hash": "41df444cc1027332d2efc04611e12fff3227eabd"
           }
         },

@@ -9,6 +9,7 @@ Ahmet Erdem Terzi 21702256
 
 16.12.2020 | StatusOfGame interface and Task class is coded. GPS and Internet permissions are added into manifest file. -> StatusOfGame deleted and Task is converted to an interface.
 17.12.2020 | GlobalTask1 class is written partly and GUI part is coded in XML. Google maps view and instantaneous GPS traction is added. GPS permission request part is added.
+
 ***********************
 Aral Salehyan 21703955
 
@@ -24,18 +25,16 @@ Aral Salehyan 21703955
 Emrecan Kutay 21702500
 
 14.12.2020 | Question Class was done.
-
 15.12.2020 | Quiz Activity Class and its xml were finished.
-
 17.12.2020 | DirectTask class, TaskGiverActivity and TaskReceiverActivity and their xml s were done.
-
 17.12.2020 | Event and OutDoor classes were worked but not finished.
-
 18.12.2020 | ScoreBoard and OutdoorScoreBoard were started to be worked on.
 
 ***********************  
 Barkın Saday 21902967
 
+17.12.2020 | Lobby is mostly coded. Consturactor of Lobby and generateCode method has been changed.Not finished
+17.12.2020 | OutdoorEvent is partially coded. Not finished
 
 ***********************
 

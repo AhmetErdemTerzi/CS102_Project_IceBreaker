@@ -47,6 +47,13 @@ public class playTabActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dateTime.setAdapter(adapter2);
 
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent( playTabActivity.this, OutdoorScoreboardActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +85,9 @@ public class playTabActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(playTabActivity.this, "Congrats! You created a game.", Toast.LENGTH_SHORT).show();
                 //TODO: SERVER'A BAĞLI Bİ LOBİ OLUŞCAK.
+
                 }
+
             }
         });
 

@@ -21,7 +21,7 @@ public class OutDoorScoreBoard extends ScoreBoard{
     ArrayList<String> Notifications;
     String str;
 
-    public OutDoorScoreBoard(Lobby gameLobby, OutdoorEvent event){
+    /*public OutDoorScoreBoard(Lobby gameLobby, OutdoorEvent event){
         super(gameLobby);
         this.outDoorEvent = event;
 
@@ -30,7 +30,6 @@ public class OutDoorScoreBoard extends ScoreBoard{
         reference = database.getReference().child("Direct_Task"); //task receiver adı
         reference2 = database.getReference().child("Users");
         reference1 = database.getReference().child("Notifications"); //notification için
-""
 
         reference1.addValueEventListener(new ValueEventListener() {
             @Override

@@ -31,7 +31,7 @@ public class TaskGiverActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.taskgiver_activity);
+        setContentView(R.layout.activity_task_giver);
 
         datacı = FirebaseDatabase.getInstance();
         reference = datacı.getReference().child("Direct_Task");

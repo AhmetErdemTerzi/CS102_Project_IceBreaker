@@ -1,4 +1,4 @@
 Özmen Erkin Kökten 21702264
 
-14.12.2020 Menu geçişleri bitti.
-17.12.2020 Started coding User class. Connection between User class and database is made. minSdk version is corrected.
+14.12.2020 | Menu screen transitions are done.
+17.12.2020 | Started coding User class. Connection between User class and database is made. minSdk version is corrected.

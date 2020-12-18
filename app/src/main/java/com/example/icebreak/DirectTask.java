@@ -41,17 +41,12 @@ public class DirectTask{
     Timer time;
     int random;
     String str;
-    int x;
-    boolean flag;
 
     public  DirectTask(){
-        flag = false;
         store = FirebaseFirestore.getInstance();
         taskList = new ArrayList<>();
         getTasklist();
 
-
-        x = 0;
         database =  FirebaseDatabase.getInstance();
         reference = database.getReference().child("Direct_Task");
 
@@ -128,11 +123,6 @@ public class DirectTask{
                 setTask();
             }
         });
-    }
-
-
-    public boolean getFlag(){
-        return flag;
     }
 
     public void setTask(){

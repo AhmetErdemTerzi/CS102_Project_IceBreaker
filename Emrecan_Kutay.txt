@@ -1,2 +1,14 @@
 Emrecan Kutay 21702500
- 
+
+Question Class was done. -- 14.12.2020
+
+Quiz Activity Class and its xml were finished. -- 15.12.2020
+
+DirectTask class, TaskGiverActivity and TaskReceiverActivity and their xml s were done. -- 17.12.2020
+
+
+Event and OutDoor classes were worked but not finished. -- 17.12.2020
+
+ScoreBoard and OutdoorScoreBoard were started to be worked on. -- 18.12.2020
+
+

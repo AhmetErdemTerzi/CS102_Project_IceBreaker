@@ -1,5 +1,7 @@
 package com.example.icebreak;
 
+import android.content.DialogInterface;
+import android.renderscript.Sampler;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -11,12 +13,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 public class User {
 
     double[] coordinate;
     String uid, username;
-    boolean available, isLobbyLeader;
+    boolean available, isLobbyLeader; //available is for availability for requests
     FirebaseUser user;
     DatabaseReference userInstances;
     int currentPoint, winCount, loseCount;
@@ -128,6 +131,8 @@ public class User {
             }
         });
         controller();
+        userInstances.child(uid).child("controller").setValue(0);
+
     }
 
     public void listenValuesAlways(){
@@ -229,11 +234,42 @@ public class User {
     }
 
     public void setName(String name){
-        username = name;
         userInstances.child(getUID()).child("Username").setValue(name);
     }
 
     //public double getAveragePoint(){}
+
+    /*public void listenRequests(){
+
+        userInstances.child(uid).child("outdoorRequestReceived").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue(Boolean.class) && available ){
+                    AlertDialog dialog = new AlertDialog.Builder(OutDoorScoreBoardActivity.this)
+                            .setMessage("You received a request!")
+                            .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    userInstances.child(uid).child("outdoorRequestReceived").setValue(false);
+                                }
+                            })
+                            .show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }*/
 
     public void setAveragePoint(double point){}
 
@@ -253,8 +289,6 @@ public class User {
     //increment lose count + increment win count
 
     public int getWinCount(){
-
-
         return winCount;
     }
 

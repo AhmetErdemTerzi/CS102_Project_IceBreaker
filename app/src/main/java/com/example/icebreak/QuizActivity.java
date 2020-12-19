@@ -40,7 +40,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.quiz_activity);
+        setContentView(R.layout.activity_quiz);
         A = (Button) findViewById(R.id.A);
         B = (Button) findViewById(R.id.B);
         C = (Button) findViewById(R.id.C);

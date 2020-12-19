@@ -88,11 +88,12 @@ public class SignUpActivity extends AppCompatActivity {
         usernameReference.setValue(userName);
         //TODO Add other instances to user database
         rootReference.child("Users").child(user.getUid()).child("isAdmin").setValue(0);
-        rootReference.child("Users").child(user.getUid()).child("Available").setValue(false);
+        rootReference.child("Users").child(user.getUid()).child("Available").setValue(true);
         rootReference.child("Users").child(user.getUid()).child("isLobbyLeader").setValue(false);
         rootReference.child("Users").child(user.getUid()).child("Win Count").setValue(0);
         rootReference.child("Users").child(user.getUid()).child("Lose Count").setValue(0);
         rootReference.child("Users").child(user.getUid()).child("Average Points").setValue(0);
+        rootReference.child("Users").child(user.getUid()).child("outdoorRequestReceived").setValue(false);
 
     }
 }

@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ScoreBoard {
-/*
+
     ArrayList<User> usersInScoreBoard;
     Lobby gameLobby;
     ArrayList<User> tempList;
@@ -26,7 +26,7 @@ public class ScoreBoard {
 
     public void sortUsers(ArrayList<User> bom)
     {
-       maxIndex = 0;
+        maxIndex = 0;
 
         if(bom.size() == 0){
         }
@@ -45,5 +45,5 @@ public class ScoreBoard {
         }
     }
 
-*/
+
 }

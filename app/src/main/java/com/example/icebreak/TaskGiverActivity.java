@@ -51,9 +51,6 @@ public class TaskGiverActivity extends AppCompatActivity {
         });
         directTask = new DirectTask();
 
-
-        directTask.setTaskGiver("emrecaaan");
-        directTask.setTaskReceiver("ASDEQWQ");
         directTask.setRandom((int) (Math.random()*4));
 
 

@@ -21,15 +21,15 @@ public class OutDoorScoreBoard extends ScoreBoard{
     ArrayList<String> Notifications;
     String str;
 
-    /*public OutDoorScoreBoard(Lobby gameLobby, OutdoorEvent event){
+    public OutDoorScoreBoard(Lobby gameLobby){
         super(gameLobby);
-        this.outDoorEvent = event;
 
         Notifications = new ArrayList<>();
         database =  FirebaseDatabase.getInstance();
         reference = database.getReference().child("Direct_Task"); //task receiver adı
         reference2 = database.getReference().child("Users");
         reference1 = database.getReference().child("Notifications"); //notification için
+
 
         reference1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -50,21 +50,24 @@ public class OutDoorScoreBoard extends ScoreBoard{
     }
 
 
-    /*
-    public void sendTaskRequest(User taskGiver, User taskReceiver)
+
+    public void sendTaskRequest(User taskReceiver)
     {
-        this.TaskGiver = taskGiver;
         this.TaskReceiver = taskReceiver;
+        reference2.child(taskReceiver.getUID()).child("Outdoor").child("senderUID").setValue(UserTab.userClass.getUID());
         reference.child("TaskReceiver").setValue(taskReceiver.getName());
-        reference.child("TaskGiver").setValue(taskGiver.getName());
-        reference2.child(user.getUId).child("Request").setValue(1);
+        reference.child("TaskGiver").setValue(UserTab.userClass.getName());
+        reference2.child(taskReceiver.getUID()).child("Outdoor").child("outdoorRequestReceived").setValue(true);
     }
 
-    public void responseTaskRequest(int i)
+    public void responseTaskRequest(int i,String uid)
     {
         // EĞER 1 VERİLİRSE KABUL -1 İSE RET
-        reference2.child(TaskGiver.getUId).child("Response").setValue(i);
-        reference.child("Random").setValue((int) (Math.random()*4));
+        reference2.child(uid).child("Outdoor").child("Response").setValue(i);
+
+        if(i == 1){
+            reference.child("Random").setValue((int) (Math.random()*4));
+        }
     }
-*/
+
 }

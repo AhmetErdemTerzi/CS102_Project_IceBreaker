@@ -3,6 +3,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
+        setContentView(R.layout.quiz_activity);
         A = (Button) findViewById(R.id.A);
         B = (Button) findViewById(R.id.B);
         C = (Button) findViewById(R.id.C);
@@ -249,6 +250,8 @@ public class QuizActivity extends AppCompatActivity {
             // Go to Score Activity
             // GO TO SCOREBOARD
             //QuestionActivity.this.finish();
+            Intent intent = new Intent(QuizActivity.this, ScoreBoardActivity.class);
+            startActivity(intent);
         }
 
     }

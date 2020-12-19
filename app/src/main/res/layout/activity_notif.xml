@@ -60,55 +60,81 @@
         android:layout_height="match_parent"
         android:layout_margin="50dp"
         android:orientation="vertical"
+        android:gravity="center"
 
         >
 
         <EditText
             android:id="@+id/notif1"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:hint="@string/enter_notifications_only_admins"
             android:layout_marginTop="50dp"
             android:textSize="20sp"
             android:background="#CFD8DC"
-             />
+            />
         <Button
             android:id="@+id/SEND"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="send"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="100dp"
             />
         <TextView
             android:id="@+id/notif2"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/join_lobby"
-            android:layout_marginTop="5dp"
             android:textSize="20sp"
             android:background="#CFD8DC"/>
+
+
+
+        <Button
+            android:id="@+id/del2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:layout_marginStart="100dp"
+            />
+
 
         <TextView
             android:id="@+id/notif3"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginTop="20dp"
             android:text="@string/join_lobby"
-            android:layout_marginTop="50dp"
             android:textSize="20sp"
             android:background="#CFD8DC"/>
+        <Button
+            android:id="@+id/del3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:layout_marginStart="100dp"
+            />
 
         <TextView
             android:id="@+id/notif4"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:text="@string/join_lobby"
-            android:layout_marginTop="50dp"
             android:textSize="20sp"
             android:background="#CFD8DC"
+            />
+        <Button
+            android:id="@+id/del4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:layout_marginStart="100dp"
             />
 
 

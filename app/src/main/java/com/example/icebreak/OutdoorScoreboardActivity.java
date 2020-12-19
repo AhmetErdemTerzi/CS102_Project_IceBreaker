@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OutDoorScoreBoardActivity extends AppCompatActivity {
+public class OutdoorScoreboardActivity extends AppCompatActivity {
 
     FirebaseDatabase data;
     TextView user1, user2, user3, user4, user5, user6, user7, user8;
@@ -93,7 +93,7 @@ public class OutDoorScoreBoardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue(Boolean.class) && UserTab.userClass.getAvailability()){
-                    AlertDialog dialog = new AlertDialog.Builder(OutDoorScoreBoardActivity.this)
+                    AlertDialog dialog = new AlertDialog.Builder(OutdoorScoreboardActivity.this)
                             .setMessage("You received a request!")
                             .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                                 @Override
@@ -101,7 +101,7 @@ public class OutDoorScoreBoardActivity extends AppCompatActivity {
                                     reference.child(UserTab.userClass.getUID()).child("outdoorRequestReceived").setValue(false);
                                     reference.child(UserTab.userClass.getUID()).child("Availability").setValue(false);
                                     outDoorScoreBoard.responseTaskRequest(1,taskGiverUID);
-                                    Intent intent = new Intent(OutDoorScoreBoardActivity.this, TaskReceiverActivity.class);
+                                    Intent intent = new Intent(OutdoorScoreboardActivity.this, TaskReceiverActivity.class);
                                     startActivity(intent);
                                 }
                             })
@@ -127,7 +127,7 @@ public class OutDoorScoreBoardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue(Integer.class) == 1){
-                    Intent intent = new Intent(OutDoorScoreBoardActivity.this, TaskGiverActivity.class);
+                    Intent intent = new Intent(OutdoorScoreboardActivity.this, TaskGiverActivity.class);
                     reference.child(UserTab.userClass.getUID()).child("Availability").setValue(false);
                 }
             }
@@ -239,7 +239,7 @@ public class OutDoorScoreBoardActivity extends AppCompatActivity {
             }
 
             else if(x == exit.getId()){
-                Intent intent = new Intent(OutDoorScoreBoardActivity.this, UserTab.class);
+                Intent intent = new Intent(OutdoorScoreboardActivity.this, UserTab.class);
                 startActivity(intent);
             }
 

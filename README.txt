@@ -21,6 +21,7 @@ Aral Salehyan 21703955
 14.12.2020 | Menu screen transition was completed.
 17.12.2020 | Started coding User class. Connection between User class and database were made. minSdk version was corrected.
 18.12.2020 | Pop up request message and its functionality is done for outdoor activity. User class is still on process. Little problems about .xml and activities are fixed.
+19.12.2020 | Notification Tab is fully functioning now. AdminUser is in progress. User is updated. User has new features in database now.
 
 ***********************  
 Emrecan Kutay 21702500

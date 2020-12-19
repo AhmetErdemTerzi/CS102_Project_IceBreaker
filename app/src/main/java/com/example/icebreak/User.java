@@ -82,6 +82,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 str = snapshot.getValue(String.class);
+                username = str;
                 //System.out.println(username);
 
             }
@@ -117,6 +118,17 @@ public class User {
 
             }
         });
+        userInstances.child(uid).child("Current Point").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                currentPoint = snapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         userInstances.child(uid).child("Win Count").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -142,6 +154,18 @@ public class User {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 averagePoint = snapshot.getValue(Double.class);
                 System.out.println("ava 2");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        userInstances.child(uid).child("Current Point").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                currentPoint = snapshot.getValue(Integer.class);
             }
 
             @Override
@@ -220,14 +244,6 @@ public class User {
 
     }
 
-    public boolean getChangeFlag(){
-        return  change_flag;
-    }
-
-    public void setChangeFlag(boolean bool){
-        change_flag= bool;
-    }
-
     public String getName(){
 
         return username;
@@ -237,71 +253,57 @@ public class User {
         userInstances.child(getUID()).child("Username").setValue(name);
     }
 
-    //public double getAveragePoint(){}
+    public boolean getChangeFlag(){
+        return  change_flag;
+    }
 
-    /*public void listenRequests(){
+    public void setChangeFlag(boolean bool){
+        change_flag= bool;
+    }
 
-        userInstances.child(uid).child("outdoorRequestReceived").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(Boolean.class) && available ){
-                    AlertDialog dialog = new AlertDialog.Builder(OutDoorScoreBoardActivity.this)
-                            .setMessage("You received a request!")
-                            .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+    public double getAveragePoint(){
+        return averagePoint;
+    }
 
-                                }
-                            })
-                            .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    userInstances.child(uid).child("outdoorRequestReceived").setValue(false);
-                                }
-                            })
-                            .show();
-                }
+    public void setAveragePoint(double point){
+        userInstances.child(getUID()).child("Average Points").setValue(point);
+    }
 
-            }
+    public void setCurrentPoint(int point){
+        userInstances.child(getUID()).child("Current Point").setValue(point);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+    }
 
-            }
-        });
-    }*/
-
-    public void setAveragePoint(double point){}
-
-    public void setCurrentPoint(int point){}
-
-    //public int getCurrentPoint(){}
+    public int getCurrentPoint(){
+        return currentPoint;
+    }
 
     public String getUID(){
         return user.getUid();
     }
 
     public int getLoseCount (){
-
         return loseCount;
     }
-
-    //increment lose count + increment win count
 
     public int getWinCount(){
         return winCount;
     }
 
-   /* public double[] getLocation(){
-        //TODO use googlemaps
-    }*/
+    public void increaseWinCount(){userInstances.child(getUID()).child("Win Count").setValue(winCount+1);}
 
+    public void increaseLoseCount(){userInstances.child(getUID()).child("Lose Count").setValue(loseCount+1);}
+
+    /* public double[] getLocation(){
+         //TODO use googlemaps
+     }*/
+    //Quiz sug.
     public void addRequest(String request){
 
     }
 
-    public void setAvailable(boolean available){
-        userInstances.child("Available").setValue(available);
+    public void setAvailability(boolean available){
+        userInstances.child(getUID()).child("Available").setValue(available);
     }
 
     public boolean getAvailability(){

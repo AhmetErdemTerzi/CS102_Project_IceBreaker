@@ -93,7 +93,9 @@ public class SignUpActivity extends AppCompatActivity {
         rootReference.child("Users").child(user.getUid()).child("Win Count").setValue(0);
         rootReference.child("Users").child(user.getUid()).child("Lose Count").setValue(0);
         rootReference.child("Users").child(user.getUid()).child("Average Points").setValue(0);
-        rootReference.child("Users").child(user.getUid()).child("outdoorRequestReceived").setValue(false);
-
+        rootReference.child("Users").child(user.getUid()).child("Current Point").setValue(0);
+        rootReference.child("Users").child(user.getUid()).child("Outdoor").child("outdoorRequestReceived").setValue(false);
+        rootReference.child("Users").child(user.getUid()).child("Outdoor").child("senderUID").setValue("");
+        rootReference.child("Users").child(user.getUid()).child("Outdoor").child("Response").setValue(0);
     }
 }

@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OutDoorScoreBoardActivity extends AppCompatActivity {
+public class OutdoorScoreboardActivity extends AppCompatActivity {
 
     FirebaseDatabase data;
     TextView user1, user2, user3, user4, user5, user6, user7, user8;
@@ -71,7 +71,7 @@ public class OutDoorScoreBoardActivity extends AppCompatActivity {
 
         exit = findViewById(R.id.Exit);
 
-        outDoorScoreBoard = new OutDoorScoreBoard(lobbyClass.getLoby());  //LOBY STATİK OLACAK ÇEKİLECEK !!!
+       // outDoorScoreBoard = new OutDoorScoreBoard(lobbyClass.getLoby());  //LOBY STATİK OLACAK ÇEKİLECEK !!!
 
 
         //TASK GIVERIN UID SINI ALMA. TASK RECEIVERIN TASK GIVERI HABERDAR ETMESI ICIN

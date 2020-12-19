@@ -33,7 +33,6 @@ public class UserTab extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +40,39 @@ public class UserTab extends AppCompatActivity {
 
         userClass = new User();
 
-         enterSuggestion = (EditText) this.findViewById(R.id.enterSuggestion);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference root = firebaseDatabase.getReference();
+        System.out.println(userClass.getUID());
+        DatabaseReference isAdmin = root.child("Users").child(userClass.getUID()).child("isAdmin");
 
-         welcome = (TextView) this.findViewById(R.id.welcome);
-         txtUsername = (TextView) this.findViewById(R.id.txtUsername);
-         winCount = (TextView) this.findViewById(R.id.winCount);
-         gamesPlayed = (TextView) this.findViewById(R.id.gamesPlayed);
+        isAdmin.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue().toString().equals("1")){
+
+                    adminPart.setVisibility(View.VISIBLE);
+                    userClass = new AdminUser();
+
+                }
+                else {
+                    System.out.println("falsch");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        enterSuggestion = (EditText) this.findViewById(R.id.enterSuggestion);
+
+        welcome = (TextView) this.findViewById(R.id.welcome);
+        txtUsername = (TextView) this.findViewById(R.id.txtUsername);
+        winCount = (TextView) this.findViewById(R.id.winCount);
+        gamesPlayed = (TextView) this.findViewById(R.id.gamesPlayed);
         averagePoints = (TextView) this.findViewById(R.id.averagePoints);
         quizSuggestion = (TextView) this.findViewById(R.id.quizSuggestion);
 
@@ -90,14 +116,6 @@ public class UserTab extends AppCompatActivity {
         btnSuggestion = (Button) this.findViewById(R.id.btnSuggestion);
         btnLogout = (Button) this.findViewById(R.id.btnLogout);
 
-
-
-
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference root = firebaseDatabase.getReference();
-        DatabaseReference isAdmin = root.child("Users").child(userClass.getUID()).child("isAdmin");
-
         root.child(userClass.getUID()).child("controller").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -125,10 +143,10 @@ public class UserTab extends AppCompatActivity {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    txtUsername.setText(userClass.getName());
-                    winCount.setText("Win Count: " + userClass.getWinCount());
-                    gamesPlayed.setText("Games Played: " + (userClass.getWinCount() + userClass.getLoseCount()));
-                    averagePoints.setText("Average Points: " + userClass.getAvgPoints());
+                txtUsername.setText(userClass.getName());
+                winCount.setText("Win Count: " + userClass.getWinCount());
+                gamesPlayed.setText("Games Played: " + (userClass.getWinCount() + userClass.getLoseCount()));
+                averagePoints.setText("Average Points: " + userClass.getAvgPoints());
             }
 
             @Override
@@ -147,21 +165,7 @@ public class UserTab extends AppCompatActivity {
             }
         });
 
-        isAdmin.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue().toString().equals("1")){
-                    //Toast.makeText(UserTab.this, "Signed up successfully: ", Toast.LENGTH_SHORT).show();
-                    adminPart.setVisibility(View.VISIBLE);
 
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
         btnLogout.setOnClickListener(new View.OnClickListener() {

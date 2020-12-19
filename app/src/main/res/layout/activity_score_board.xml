@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".OutdoorScoreboardActivity">
+    tools:context=".ScoreBoardActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,7 +42,7 @@
                     android:background="#CFD8DC"
                     android:text="Scoreboard"
                     android:textColor="#7B8D93"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:backgroundTint="#2b2b2b" />
 
             </LinearLayout>
@@ -80,23 +80,6 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Task:"
-                    android:textSize="25sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
 
             </LinearLayout>
 
@@ -105,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
-                android:layout_marginTop="35dp">
+                android:layout_marginTop="30dp">
 
                 <TextView
                     android:id="@+id/User1"
@@ -119,6 +102,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -137,24 +121,6 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button1"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
@@ -164,8 +130,8 @@
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
                 android:layout_marginTop="15dp">
-
                 <TextView
+
                     android:id="@+id/User2"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
@@ -177,6 +143,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -195,25 +162,6 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button2"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
@@ -223,8 +171,8 @@
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
                 android:layout_marginTop="15dp">
-
                 <TextView
+
                     android:id="@+id/User3"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
@@ -236,6 +184,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -254,27 +203,9 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button3"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -282,8 +213,8 @@
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
                 android:layout_marginTop="15dp">
-
                 <TextView
+
                     android:id="@+id/User4"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
@@ -295,6 +226,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -313,27 +245,9 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button4"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -341,8 +255,8 @@
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
                 android:layout_marginTop="15dp">
-
                 <TextView
+
                     android:id="@+id/User5"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
@@ -354,6 +268,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -372,27 +287,9 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button5"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -400,8 +297,8 @@
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
                 android:layout_marginTop="15dp">
-
                 <TextView
+
                     android:id="@+id/User6"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
@@ -413,6 +310,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -431,27 +329,9 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button6"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -459,8 +339,8 @@
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
                 android:layout_marginTop="15dp">
-
                 <TextView
+
                     android:id="@+id/User7"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
@@ -472,6 +352,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -490,25 +371,6 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button7"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
@@ -518,8 +380,8 @@
                 android:layout_height="30dp"
                 android:background="#2b2b2b"
                 android:layout_marginTop="15dp">
-
                 <TextView
+
                     android:id="@+id/User8"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
@@ -531,6 +393,7 @@
                     android:background="#808080"
                     android:textAlignment="center"/>
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="0.03"
@@ -549,25 +412,6 @@
                     android:background="#808080"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button8"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
@@ -582,8 +426,6 @@
                 android:text="Exıt"
                 android:textSize="11sp"
                 android:textStyle="bold" />
-
-
 
         </LinearLayout>
 

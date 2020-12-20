@@ -114,6 +114,15 @@ public class UserTab extends AppCompatActivity {
         });
 
         btnSuggestion = (Button) this.findViewById(R.id.btnSuggestion);
+
+        btnSuggestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userClass.addRequest(enterSuggestion.getText().toString());
+                enterSuggestion.setText("");
+            }
+        });
+
         btnLogout = (Button) this.findViewById(R.id.btnLogout);
 
         root.child(userClass.getUID()).child("controller").addValueEventListener(new ValueEventListener() {

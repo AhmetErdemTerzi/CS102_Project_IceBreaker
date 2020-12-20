@@ -27,7 +27,7 @@ public class User {
     boolean change_flag;
     String str;
     //Event currentEvent;
-
+    int requestCount;
 
     public User(){
         userInstances = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -299,6 +299,19 @@ public class User {
      }*/
     //Quiz sug.
     public void addRequest(String request){
+
+        FirebaseDatabase.getInstance().getReference().child("Suggestions").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                requestCount = (int) snapshot.getChildrenCount();
+                FirebaseDatabase.getInstance().getReference().child("Suggestions").child("Sug"+(requestCount+1)).setValue(request);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

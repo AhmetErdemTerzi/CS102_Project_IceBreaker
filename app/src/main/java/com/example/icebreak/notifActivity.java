@@ -162,8 +162,10 @@ public class notifActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         else if(v.getId() == R.id.SEND){
-            if(!notif1.getText().equals(""))
-                ((AdminUser) UserTab.userClass).setNotifications( notif1.getText().toString() );
+            if(!notif1.getText().equals("")) {
+                ((AdminUser) UserTab.userClass).setNotifications(notif1.getText().toString());
+                notif1.setText("");
+            }
 
         }
 

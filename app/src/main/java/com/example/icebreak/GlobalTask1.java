@@ -7,10 +7,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -36,7 +39,8 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
-        Task {
+        Task,
+        View.OnClickListener {
 
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
@@ -44,27 +48,33 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
     private Location currentLocation;
     private Marker currentLocationMarker;
     private static final int REQUEST_USER_LOCATION_CODE = 99;
+    private boolean isRandomLocationCreated;
+    private LatLng randomLocation;
+    private User currentUser;
 
-    private String taskText;
+    private static boolean taskSuccessful = false;
     private Timer timer;
     private int seconds;
+    private Button btnScoreboard, btnGame, btnGoBack;
 
 
-
-    public GlobalTask1(String taskText)
-    {
-        this.taskText = taskText;
-        createRandomLocation();
-
-    }
-
-    // Buttonlara listener eklenicek, random location oluşturulma kısmı yazılacak, o noktada yeni marker oluşturulacak. Hedefe ulaşma kontrol edilecek/ her pozisyon değiştiğinde.
+    // Buttonlara listener eklenicek,   Hedefe ulaşma kontrol edilecek/ her pozisyon değiştiğinde.
     //  Hedefe ulaşıldıktan sonra sonra puan verme yapılacak. timer kısmı yapılacak.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_global_task1);
+        currentUser = UserTab.userClass;
+        isRandomLocationCreated = false;
+
+        btnScoreboard = (Button) this.findViewById(R.id.btnScoreboard);
+        btnGame = (Button) this.findViewById(R.id.btnGame);
+        btnGoBack = (Button) this.findViewById(R.id.btnGoBack);
+
+        btnGoBack.setOnClickListener(this);
+        btnGame.setOnClickListener(this);
+        btnScoreboard.setOnClickListener(this);
 
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -76,6 +86,28 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.GlobalTask1_map);
         mapFragment.getMapAsync(this);
+    }
+
+
+    public void onClick(View v)
+    {
+        int id = v.getId();
+
+        switch(id)
+        {
+            case R.id.btnGame:
+
+            case R.id.btnGoBack:
+                // TODO GAME SCREEN FOR OUTDOOR EVENT taskOver çğır
+                break;
+
+            case R.id.btnScoreboard:
+                Intent intent = new Intent(GlobalTask1.this, OutDoorScoreBoard.class);
+                startActivity(intent);
+                break;
+        }
+
+
     }
 
     @Override
@@ -93,17 +125,41 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public String getTaskText() {
-        return taskText;
+        return "Go to the marker!";
     }
 
     @Override
     public void taskOver() {
         timer.cancel();
+
+        if(taskSuccessful)
+        {
+            currentUser.setCurrentPoint(currentUser.getCurrentPoint() + 1);
+            // TODO NOTİFİCATİON
+        }
+        else
+        {
+            //TODO NOTİFİCATİON
+        }
     }
 
     public void createRandomLocation()
     {
-        LatLng randomLocation = new LatLng(0,0);
+        double longitude = currentLocation.getLongitude();
+        double latitude = currentLocation.getLatitude();
+
+        double distanceR = 0.003;
+        double degree = (int)(Math.random()*360);
+        double randomLat = latitude + distanceR*Math.sin(degree/(2*Math.PI));
+        double randomLng = longitude + distanceR*Math.cos(degree/(2*Math.PI));
+
+        randomLocation = new LatLng(randomLat,randomLng);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(randomLocation);
+        markerOptions.title("Go Here");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+        currentLocationMarker = mMap.addMarker(new MarkerOptions().position(randomLocation).title("Go Here"));
+
     }
 
     public class TaskTimer extends TimerTask {
@@ -187,6 +243,8 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
                 .addApi(LocationServices.API)
                 .build();
 
+        googleApiClient.connect();
+
     }
 
     @Override
@@ -198,14 +256,6 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         }
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("User Current Location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
-
-        currentLocationMarker = mMap.addMarker(markerOptions);
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
 
@@ -213,6 +263,30 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         {
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
         }
+
+        if(!isRandomLocationCreated)
+        {
+            createRandomLocation();
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(randomLocation));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            isRandomLocationCreated = true;
+        }
+
+        // Location check for arriving the target.
+
+        double differenceLatitude = location.getLatitude() - randomLocation.latitude;
+        double differenceLongitude = location.getLongitude() - randomLocation.longitude;
+
+        double differenceR = differenceLatitude+ differenceLongitude;
+
+        if(differenceR < 0.00007)
+        {
+            taskSuccessful = true;
+            taskOver();
+        }
+
+
+
     }
 
     @Override

@@ -46,7 +46,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/goBackButton"
+            android:id="@+id/btnGoBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutMain"
@@ -60,7 +60,7 @@
             android:id="@+id/taskText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/goBackButton"
+            android:layout_below="@id/btnGoBack"
             android:background="#808080"
             android:text="Task 1: Go specified location"
             android:textSize="22sp"

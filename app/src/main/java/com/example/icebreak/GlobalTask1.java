@@ -7,13 +7,17 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -56,6 +60,7 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
     private Timer timer;
     private int seconds;
     private Button btnScoreboard, btnGame, btnGoBack;
+    private Dialog dialog;
 
 
     // Buttonlara listener eklenicek,   Hedefe ulaşma kontrol edilecek/ her pozisyon değiştiğinde.
@@ -67,6 +72,7 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_global_task1);
         currentUser = UserTab.userClass;
         isRandomLocationCreated = false;
+        dialog = new Dialog(this);
 
         btnScoreboard = (Button) this.findViewById(R.id.btnScoreboard);
         btnGame = (Button) this.findViewById(R.id.btnGame);
@@ -135,11 +141,12 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         if(taskSuccessful)
         {
             currentUser.setCurrentPoint(currentUser.getCurrentPoint() + 1);
-            // TODO NOTİFİCATİON
+            // TODO NOTİFİCATİON open winDialog method
+            openWinDialog();
         }
         else
         {
-            //TODO NOTİFİCATİON
+            openLoseDialog();
         }
     }
 
@@ -313,4 +320,53 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
+    private void openWinDialog()
+    {
+        dialog.setContentView(R.layout.activity_winnotification);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imageViewClose = dialog.findViewById(R.id.imageViewClose);
+        Button OKButton = dialog.findViewById(R.id.OKButton);
+
+        imageViewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        OKButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void openLoseDialog()
+    {
+        dialog.setContentView(R.layout.activity_losenotification);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imageViewClose = dialog.findViewById(R.id.imageViewClose);
+        Button OKButton = dialog.findViewById(R.id.OKButton);
+
+        imageViewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        OKButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
 }

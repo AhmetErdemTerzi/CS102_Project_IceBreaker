@@ -1,30 +1,45 @@
 package com.example.icebreak;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
-import android.os.Build;
+
+
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,82 +48,117 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-
-public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener,
+public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback,
         Task,
         View.OnClickListener {
 
+    private static final String TAG = "GlobalTask1";
+    private static final int LOCATION_REQUEST_CODE = 99;
     private GoogleMap mMap;
-    private GoogleApiClient googleApiClient;
-    private LocationRequest locationRequest;
     private Location currentLocation;
-    private Marker currentLocationMarker;
-    private static final int REQUEST_USER_LOCATION_CODE = 99;
-    private boolean isRandomLocationCreated;
     private LatLng randomLocation;
-    private User currentUser;
+    private Marker randomLocationMarker;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    LocationRequest locationRequest;
+    LocationCallback locationCallback = new LocationCallback()
+    {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            if(locationResult == null)
+            {
+                return;
+            }
+            for(Location location: locationResult.getLocations())
+            {
+                currentLocation = location;
+                Log.d(TAG, "onLocationResult: " + location.toString());
+                if(!isRandomLocationCreated)
+                {
+                    createRandomLocation();
+                    isRandomLocationCreated = true;
+                }
+                double differenceLatitude = Math.abs(location.getLatitude() - randomLocation.latitude);
+                double differenceLongitude = Math.abs(location.getLongitude() - randomLocation.longitude);
+
+                double differenceR = differenceLatitude+ differenceLongitude;
+
+                if(differenceR < 0.00009)
+                {
+                    taskSuccessful = true;
+                    taskOver();
+                }
+            }
+        }
+    };
+
 
     private static boolean taskSuccessful = false;
-    private Timer timer;
-    private int seconds;
+    private TextView remainingTime;
     private Button btnScoreboard, btnGame, btnGoBack;
-    private Dialog dialog;
+    private User currentUser = UserTab.userClass;
+    private CountDownTimer countDownTimer;
+
+    private boolean isRandomLocationCreated = false;
 
 
-    // Buttonlara listener eklenicek,   Hedefe ulaşma kontrol edilecek/ her pozisyon değiştiğinde.
-    //  Hedefe ulaşıldıktan sonra sonra puan verme yapılacak. timer kısmı yapılacak.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_global_task1);
-        currentUser = UserTab.userClass;
-        isRandomLocationCreated = false;
-        dialog = new Dialog(this);
 
-        btnScoreboard = (Button) this.findViewById(R.id.btnScoreboard);
-        btnGame = (Button) this.findViewById(R.id.btnGame);
-        btnGoBack = (Button) this.findViewById(R.id.btnGoBack);
+        // XML files
+        btnScoreboard = this.findViewById(R.id.btnScoreboard);
+        btnGame = this.findViewById(R.id.btnGame);
+        btnGoBack = this.findViewById(R.id.btnGoBack);
+        remainingTime = this.findViewById(R.id.timer);
 
         btnGoBack.setOnClickListener(this);
         btnGame.setOnClickListener(this);
         btnScoreboard.setOnClickListener(this);
 
+        // Other instances
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(4000);
+        locationRequest.setFastestInterval(1000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            checkUserLocationPermission();
-        }
+        // Start the timer
+        setAndStartTimer(300);
+
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.GlobalTask1_map);
         mapFragment.getMapAsync(this);
+
+
     }
 
-
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         int id = v.getId();
+        Intent intent;
 
-        switch(id)
-        {
+        switch (id) {
             case R.id.btnGame:
-
             case R.id.btnGoBack:
-                // TODO GAME SCREEN FOR OUTDOOR EVENT taskOver çğır
+                intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.btnScoreboard:
-                Intent intent = new Intent(GlobalTask1.this, OutDoorScoreBoard.class);
+                intent = new Intent(GlobalTask1.this, OutDoorScoreBoard.class);
                 startActivity(intent);
                 break;
         }
@@ -118,15 +168,26 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void setAndStartTimer(int seconds) {
-        this.seconds = seconds;
-        timer = new Timer();
-        timer.schedule(new TaskTimer(), seconds*1000);
+        countDownTimer = new CountDownTimer(seconds*1000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                remainingTime.setText("Remaining: " + String.valueOf(millisUntilFinished/1000));
+            }
+
+            @Override
+            public void onFinish() {
+                countDownTimer.cancel();
+                taskOver();
+            }
+        };
+
+        countDownTimer.start();
 
     }
 
     @Override
     public Timer getTime() {
-        return timer;
+        return null;
     }
 
     @Override
@@ -136,47 +197,29 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void taskOver() {
-        timer.cancel();
 
-        if(taskSuccessful)
+        if (taskSuccessful)
         {
+            if(countDownTimer != null)
+                countDownTimer.cancel();
             currentUser.setCurrentPoint(currentUser.getCurrentPoint() + 1);
-            // TODO NOTİFİCATİON open winDialog method
+            stopLocationUpdates();
             openWinDialog();
+            Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+            startActivity(intent);
         }
         else
         {
+            if(countDownTimer != null)
+                countDownTimer.cancel();
+            stopLocationUpdates();
             openLoseDialog();
+            Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+            startActivity(intent);
         }
-    }
-
-    public void createRandomLocation()
-    {
-        double longitude = currentLocation.getLongitude();
-        double latitude = currentLocation.getLatitude();
-
-        double distanceR = 0.003;
-        double degree = (int)(Math.random()*360);
-        double randomLat = latitude + distanceR*Math.sin(degree/(2*Math.PI));
-        double randomLng = longitude + distanceR*Math.cos(degree/(2*Math.PI));
-
-        randomLocation = new LatLng(randomLat,randomLng);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(randomLocation);
-        markerOptions.title("Go Here");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
-        currentLocationMarker = mMap.addMarker(new MarkerOptions().position(randomLocation).title("Go Here"));
 
     }
 
-    public class TaskTimer extends TimerTask {
-
-        @Override
-        public void run()
-        {
-            taskOver();
-        }
-    }
 
 
     /**
@@ -192,136 +235,80 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
-
-            buildGoogleApiClient();
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-
         }
 
     }
 
-    public boolean checkUserLocationPermission()
+    public void createRandomLocation()
     {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_USER_LOCATION_CODE);
-            else
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_USER_LOCATION_CODE);
-            return false;
-        }
-        else
-            return true;
+        Location cLocation = currentLocation;
+        double longitude = cLocation.getLongitude();
+        double latitude = cLocation.getLatitude();
+
+        double distanceR = 0.0015;
+        double degree = (int)(Math.random()*360);
+        double randomLat = latitude + distanceR*Math.sin(degree/(2*Math.PI));
+        double randomLng = longitude + distanceR*Math.cos(degree/(2*Math.PI));
+
+        randomLocation = new LatLng(randomLat,randomLng);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(randomLocation);
+        markerOptions.title("Go Here");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+        randomLocationMarker = mMap.addMarker(new MarkerOptions().position(randomLocation).title("Go Here"));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(randomLocation, 17);
+        mMap.animateCamera(cameraUpdate);
+
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode)
-        {
-            case REQUEST_USER_LOCATION_CODE:
-                if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+    private void checkSettingsAndStartLocationUpdates()
+    {
+        LocationSettingsRequest request = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest).build();
+
+        SettingsClient client = LocationServices.getSettingsClient(this);
+
+        com.google.android.gms.tasks.Task<LocationSettingsResponse> locationSettingsResponseTask= client.checkLocationSettings(request);
+        locationSettingsResponseTask.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
+            @Override
+            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                // Settings of the device are satisfied, start location updates
+                startLocationUpdates();
+            }
+        });
+
+        locationSettingsResponseTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(e instanceof ResolvableApiException)
                 {
-                    if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
-                    {
-                        if(googleApiClient == null)
-                        {
-                            buildGoogleApiClient();
-                        }
-
-                        mMap.setMyLocationEnabled(true);
+                    ResolvableApiException apiException = (ResolvableApiException) e;
+                    try {
+                        apiException.startResolutionForResult(GlobalTask1.this, 100);
+                    } catch (IntentSender.SendIntentException sendIntentException) {
+                        sendIntentException.printStackTrace();
                     }
-                    else
-                    {
-                        Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
-                    }
-                    return;
                 }
-        }
-
+            }
+        });
     }
 
-    protected  synchronized  void buildGoogleApiClient()
+    @SuppressLint("MissingPermission")
+    private void startLocationUpdates()
     {
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-
-        googleApiClient.connect();
-
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
     }
 
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        currentLocation = location;
-        if(currentLocationMarker != null)
-        {
-            currentLocationMarker.remove();
-        }
-
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
-
-        if(googleApiClient != null)
-        {
-            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
-        }
-
-        if(!isRandomLocationCreated)
-        {
-            createRandomLocation();
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(randomLocation));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            isRandomLocationCreated = true;
-        }
-
-        // Location check for arriving the target.
-
-        double differenceLatitude = location.getLatitude() - randomLocation.latitude;
-        double differenceLongitude = location.getLongitude() - randomLocation.longitude;
-
-        double differenceR = differenceLatitude+ differenceLongitude;
-
-        if(differenceR < 0.00007)
-        {
-            taskSuccessful = true;
-            taskOver();
-        }
-
-
-
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
-            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
-        }
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    private void openWinDialog()
+    private void stopLocationUpdates()
     {
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
+    }
+
+
+    private void openWinDialog() {
+        Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.activity_winnotification);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -345,8 +332,8 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         dialog.show();
     }
 
-    private void openLoseDialog()
-    {
+    private void openLoseDialog() {
+        Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.activity_losenotification);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -368,5 +355,93 @@ public class GlobalTask1 extends FragmentActivity implements OnMapReadyCallback,
         });
 
         dialog.show();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            checkSettingsAndStartLocationUpdates();
+        } else {
+            askLocationPermission();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopLocationUpdates();
+    }
+
+    public void getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        com.google.android.gms.tasks.Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
+
+        locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if(location != null)
+                {
+                    Log.d(TAG, "onSuccess: "+ location.toString());
+                    Log.d(TAG, "onSuccess: " + location.getLongitude());
+                    Log.d(TAG, "onSuccess: " + location.getLatitude());
+                }
+                else
+                {
+                    Log.d(TAG, "onSuccess: Location was null");
+                }
+            }
+        });
+
+        locationTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: " + e.getLocalizedMessage() );
+            }
+        });
+    }
+
+    private void askLocationPermission()
+    {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
+            {
+                Log.d(TAG, "askLocationPermission: Alert no location permission");
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},  LOCATION_REQUEST_CODE);
+            }
+            else
+            {
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},  LOCATION_REQUEST_CODE);
+            }
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == LOCATION_REQUEST_CODE)
+        {
+            if(grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                //Permission granted
+                checkSettingsAndStartLocationUpdates();
+            }
+            else
+            {
+                //Permission not granted
+                askLocationPermission();
+            }
+        }
     }
 }

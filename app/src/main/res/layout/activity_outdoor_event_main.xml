@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GlobalTask1">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D1D1D1"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <TextView
+            android:id="@+id/globalTasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutMain"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="380dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Enter Orienteering Code"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutMain" />
+
+        <LinearLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#2b2b2b"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btnGame"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Game"
+                android:textColor="#7B8D93"
+                app:backgroundTint="#2b2b2b" />
+
+            <Button
+                android:id="@+id/btnScoreboard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Scoreboard"
+                android:textColor="#7B8D93"
+                android:textSize="12sp"
+                app:backgroundTint="#2b2b2b" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/GlobalTasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutMain"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="56dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Global Tasks"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutMain" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="51dp"
+            android:layout_height="49dp"
+            android:layout_marginEnd="288dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/GlobalTasks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/taskicon" />
+
+        <ImageButton
+            android:id="@+id/mapImageButton"
+            android:layout_width="94dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="52dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/GlobalTasks"
+            app:srcCompat="@drawable/googlemapsicon" />
+
+        <ImageButton
+            android:id="@+id/walkImageButton"
+            android:layout_width="131dp"
+            android:layout_height="124dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="52dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/mapImageButton"
+            app:layout_constraintTop_toBottomOf="@+id/GlobalTasks"
+            app:srcCompat="@drawable/pedometericon" />
+
+        <EditText
+            android:id="@+id/codeEditText"
+            android:layout_width="247dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="  Enter Code!"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/globalTasks" />
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="80dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="38dp"
+            android:background="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Send"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toEndOf="@+id/codeEditText"
+            app:layout_constraintTop_toBottomOf="@+id/globalTasks" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

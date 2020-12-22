@@ -25,7 +25,7 @@ public class playTabActivity extends AppCompatActivity {
 
     boolean admin;
     public static Event event;
-    Lobby lobby;
+    public static Lobby lobby;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +64,6 @@ public class playTabActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 lobby = new Lobby(lobbyCode.getText().toString());
-                event = new Event(lobby.getGameType(),lobby.getOfficial(),"",0);
-                event.setLobby(lobby);
                 joinLobby();
             }
         });

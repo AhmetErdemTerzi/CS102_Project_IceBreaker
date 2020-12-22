@@ -22,9 +22,9 @@ public class Event {
         //TODO: ERDEM HELP ME!
         double[] coordinates = new double[2];
 
-       // if (gameType.equals("Outdoor Game"))
-       //     lobby = new Lobby(coordinates, isEventOfficial,  dateTime, lobbyCode);
-       // else if(gameType.equals("Indoor Game"))
+        if (gameType.equals("Outdoor Game"))
+            lobby = new Lobby(coordinates, isEventOfficial,  dateTime, lobbyCode);
+        else if(gameType.equals("Indoor Game"))
             lobby = new Lobby(isEventOfficial,  dateTime, lobbyCode);
 
         if(isEventOfficial)
@@ -40,11 +40,6 @@ public class Event {
     public Lobby getLobby(){
         return lobby;
     }
-
-    public void setLobby(Lobby lobby){
-        this.lobby = lobby;
-    }
-
 
     public String getLobbyCode()
     {

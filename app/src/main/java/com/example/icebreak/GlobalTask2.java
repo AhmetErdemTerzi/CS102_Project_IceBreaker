@@ -1,6 +1,9 @@
 package com.example.icebreak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.content.pm.PackageManager;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -9,29 +12,38 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
+
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.*;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 
+
 import java.util.*;
 
 
-public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventListener {
+public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventListener{
 
     //instances for sensor
+    //private User currentUser = UserTab.userClass;
     private SensorManager sensorManager;
     private Sensor stepCounter;
     private boolean isStepCounter;
     private int step = 0;
     private CircularProgressBar circularProgressBar;
 
-
     private int totalStep;
     private Timer time;
     private int seconds;
     private final int upperStep = 600;
     private final int lowerStep = 500;
+    private static boolean taskSucessful2 = false;
+    private int step_number;
+    private int prev_step;
+    private boolean checkk = false;
+
     TextView max_step;
     TextView step_taken;
     TextView step_text;
@@ -42,10 +54,6 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
         //this.time = time;
     }
 
-
-    public String setTaskText(){
-        return "Global Task2";
-    }
 
     @Override
     public String getTaskText() {
@@ -66,6 +74,10 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
 
 
     public void taskOver() {
+        time.cancel();
+        if(taskSucessful2){
+
+        }
 
     }
 
@@ -86,16 +98,23 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
+            //ask for permission
+            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_global_task2);
         int a = this.randomTotalStep();
+        step_number = a;
         step_text = findViewById(R.id.textViewStepCounter);
         max_step = findViewById(R.id.textView3);
         max_step.setText("" + a );
         step_taken = findViewById(R.id.textViewNumberOfStep);
         circularProgressBar = findViewById(R.id.myCircularProgressBar);
         //circularProgressBar.setProgress(65f);
-        a = 65;
         float f = Float.intBitsToFloat(a);
         circularProgressBar.setProgressMax(f);
         //
@@ -115,11 +134,27 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
         if(event.sensor == stepCounter){
-            step = (int) event.values[0];
-            step_taken.setText(String.valueOf(step));
-            float step_f = Float.intBitsToFloat(step);
-            circularProgressBar.setProgress(step_f);
+
+            if(!checkk){
+
+                prev_step = (int) (event.values[0]);
+                checkk = true;
+            }
+
+            step = (int) (event.values[0]) -prev_step;
+            if(step >= step_number) {
+                taskSucessful2 = true;
+                step_taken.setText(String.valueOf(step_number));
+                float step_full = Float.intBitsToFloat(step_number);
+                circularProgressBar.setProgress(step_full);
+            }
+            else {
+                step_taken.setText(String.valueOf(step));
+                float step_f = Float.intBitsToFloat(step);
+                circularProgressBar.setProgressWithAnimation(step_f);
+            }
         }
     }
 

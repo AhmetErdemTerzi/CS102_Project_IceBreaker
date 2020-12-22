@@ -112,8 +112,10 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_global_task1);
+        isRandomLocationCreated = false;
 
         // XML files
         btnScoreboard = this.findViewById(R.id.btnScoreboard);
@@ -134,6 +136,7 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
 
         // Start the timer
         setAndStartTimer(300);
+
 
 
 
@@ -202,11 +205,14 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
         {
             if(countDownTimer != null)
                 countDownTimer.cancel();
-            currentUser.setCurrentPoint(currentUser.getCurrentPoint() + 1);
+
+            //current user puan alınımı eklenecek sorun çıkardığı için comment atıldı
+            //currentUser.setCurrentPoint(currentUser.getCurrentPoint() + 1);
+
+
             stopLocationUpdates();
             openWinDialog();
-            Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
-            startActivity(intent);
+
         }
         else
         {
@@ -214,8 +220,6 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
                 countDownTimer.cancel();
             stopLocationUpdates();
             openLoseDialog();
-            Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
-            startActivity(intent);
         }
 
     }
@@ -319,6 +323,8 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -326,6 +332,8 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -344,6 +352,8 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -351,6 +361,8 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -23,6 +23,7 @@ Aral Salehyan 21703955
 18.12.2020 | Pop up request message and its functionality is done for outdoor activity. User class is still on process. Little problems about .xml and activities are fixed.
 19.12.2020 | Notification Tab is fully functioning now. AdminUser is in progress. User is updated. User has new features in database now.
 20.12.2020 | AdminUser and User classes are almost done. reviewSuggestionsActivity is fully functioning. Firestore and database communication is achieved.
+22.12.2020 | Lobby class is almost done. LobbyActivity screen in progress. Minor mistakes are fixed.
 
 ***********************  
 Emrecan Kutay 21702500

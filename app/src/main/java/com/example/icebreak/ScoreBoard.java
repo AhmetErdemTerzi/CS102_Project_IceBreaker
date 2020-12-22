@@ -16,7 +16,8 @@ public class ScoreBoard {
     public ScoreBoard(Lobby gameLoby)
     {
         this.gameLobby = gameLobby;
-        usersInScoreBoard = gameLobby.getUsers();
+        gameLoby.findPlayers();
+        usersInScoreBoard = gameLobby.getPlayers();
     }
 
     public ArrayList<User> sortingUsers(){
@@ -34,7 +35,7 @@ public class ScoreBoard {
         else {
             temp = bom.get(0);
             for (int i = 0; i < bom.size(); i++) {
-                if (temp.getScore() < bom.get(i).getScore()) {
+                if (temp.getCurrentPoint() < bom.get(i).getCurrentPoint()) {//EMRECAN BU getScore değil getCurrentPoint olcak
                     temp = bom.get(i);
                     maxIndex = i;
                 }

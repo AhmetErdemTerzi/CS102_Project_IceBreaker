@@ -71,8 +71,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
 
         exit = findViewById(R.id.Exit);
 
-        outDoorScoreBoard = new OutDoorScoreBoard(lobbyClass.getLoby());  //LOBY STATİK OLACAK ÇEKİLECEK !!!
-
+        outDoorScoreBoard = new OutDoorScoreBoard(playTabActivity.event.getLobby());  //LOBY STATİK OLACAK ÇEKİLECEK !!!
 
         //TASK GIVERIN UID SINI ALMA. TASK RECEIVERIN TASK GIVERI HABERDAR ETMESI ICIN
         reference.child(UserTab.userClass.getUID()).child("Outdoor").child("SenderUID").addValueEventListener(new ValueEventListener() {

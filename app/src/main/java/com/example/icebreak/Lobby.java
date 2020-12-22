@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -165,11 +166,16 @@ public class Lobby {
         });
 
     }
+    public boolean getOfficial(){return isEventOfficial;}
 
     public ArrayList<User> getPlayers(){
 
         System.out.println(players);
         return players;
+    }
+
+    public void setPlayers(ArrayList<User> players){
+        this.players = players;
     }
 
     public void setDateTime(String dateTime){}

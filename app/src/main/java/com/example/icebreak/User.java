@@ -52,10 +52,8 @@ public class User {
         userInstances.child(uid).child("HOSHBULDUUUUUK").setValue(true);
 
 
-
-
-        // getValuesFromDatabase();
-        // listenValuesAlways();
+        //getValuesFromDatabase();
+        //listenValuesAlways();
 //
 
     }

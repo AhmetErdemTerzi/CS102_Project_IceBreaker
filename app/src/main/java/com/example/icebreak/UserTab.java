@@ -30,6 +30,7 @@ public class UserTab extends AppCompatActivity {
     Button btnUser, btnPlay, btnNotifications, btnSuggestion, btnLogout,userInfo,revSug;
     LinearLayout adminPart;
     public static User userClass;
+    public static User usa;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;

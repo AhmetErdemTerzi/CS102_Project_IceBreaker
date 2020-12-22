@@ -45,7 +45,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
         exit = findViewById(R.id.Exit);
 
-        scoreBoard = new ScoreBoard(lobbyClass.getLobby());
+        scoreBoard = new ScoreBoard(playTabActivity.event.getLobby());
 
         sortedUsers = scoreBoard.sortingUsers();
 

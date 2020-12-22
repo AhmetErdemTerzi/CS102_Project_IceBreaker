@@ -32,8 +32,7 @@ public class User {
     public User(){
         userInstances = FirebaseDatabase.getInstance().getReference().child("Users");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = getUID();
-        username = "";
+        uid = user.getUid();
         userInstances.child(uid).child("controller").setValue(0);
         change_flag = false;
         getValuesFromDatabase();
@@ -43,6 +42,21 @@ public class User {
 
 
 
+
+    }
+    public User(String uid){
+        userInstances = FirebaseDatabase.getInstance().getReference().child("Users");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        this.uid = uid;
+        userInstances.child(uid).child("controller").setValue(0);
+        userInstances.child(uid).child("HOSHBULDUUUUUK").setValue(true);
+
+
+
+
+        // getValuesFromDatabase();
+        // listenValuesAlways();
+//
 
     }
 
@@ -56,8 +70,10 @@ public class User {
         userInstances.child(uid).child("isLobbyLeader").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                isLobbyLeader = (Boolean) snapshot.getValue();
-                System.out.println(isLobbyLeader);
+                System.out.println(snapshot);
+                isLobbyLeader = snapshot.getValue(Boolean.class);
+
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -69,7 +85,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 available = (Boolean) snapshot.getValue();
-                System.out.println(available);
+                //  System.out.println(available);
             }
 
             @Override
@@ -81,8 +97,8 @@ public class User {
         userInstances.child(uid).child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                str = snapshot.getValue(String.class);
-                username = str;
+                username = snapshot.getValue(String.class);
+                str = username;
                 //System.out.println(username);
 
             }
@@ -97,7 +113,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 loseCount = snapshot.getValue(Integer.class);
-                System.out.println(loseCount);
+                // System.out.println(loseCount);
             }
 
             @Override
@@ -110,7 +126,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 averagePoint = snapshot.getValue(Double.class);
-                System.out.println(averagePoint);
+                // System.out.println(averagePoint);
             }
 
             @Override
@@ -134,7 +150,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 winCount = snapshot.getValue(Integer.class);
-                System.out.println(winCount);
+                // System.out.println(winCount);
             }
 
             @Override
@@ -143,7 +159,7 @@ public class User {
             }
         });
         controller();
-        userInstances.child(uid).child("controller").setValue(0);
+
 
     }
 
@@ -153,7 +169,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 averagePoint = snapshot.getValue(Double.class);
-                System.out.println("ava 2");
+                // System.out.println("ava 2");
             }
 
             @Override
@@ -180,7 +196,7 @@ public class User {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 isLobbyLeader = (Boolean) snapshot.getValue();
-                System.out.println("lobi 2");
+                //System.out.println("lobi 2");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -192,7 +208,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 available = (Boolean) snapshot.getValue();
-                System.out.println("avail 2");
+                //System.out.println("avail 2");
             }
 
             @Override
@@ -205,7 +221,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 username = (String) snapshot.getValue().toString();
-                System.out.println("username 2 ");
+                //System.out.println("username 2 ");
             }
 
             @Override
@@ -219,7 +235,7 @@ public class User {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 loseCount = snapshot.getValue(Integer.class);
 
-                System.out.println("lose 2");
+                //System.out.println("lose 2");
             }
 
             @Override
@@ -232,7 +248,7 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 winCount = snapshot.getValue(Integer.class);
-                System.out.println("win 2");
+                //System.out.println("win 2");
             }
 
             @Override
@@ -279,7 +295,7 @@ public class User {
     }
 
     public String getUID(){
-        return user.getUid();
+        return uid;
     }
 
     public int getLoseCount (){

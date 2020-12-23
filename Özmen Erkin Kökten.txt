@@ -6,3 +6,4 @@
 19.12.2020 | Notification Tab is fully functioning now. AdminUser is in progress. User is updated. User has new features in database now.
 20.12.2020 | AdminUser and User classes are almost done. reviewSuggestionsActivity is fully functioning. Firestore and database communication is achieved.
 22.12.2020 | Lobby class is almost done. LobbyActivity screen in progress. Minor mistakes are fixed.
+23.12.2020 | Lobby to QuizActivity transition for all players is achieved.

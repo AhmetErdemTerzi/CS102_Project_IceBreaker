@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.TestLooperManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,11 +20,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+
+import io.perfmark.Tag;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -32,11 +41,15 @@ public class QuizActivity extends AppCompatActivity {
     TextView time, quest,count, sco;
     View.OnClickListener listen = new Listener();
     FirebaseFirestore store;
-    ArrayList<Question> questionList;
+    ArrayList<Question> questionList, SelectedQuestionList;
     Question question;
     int countere, score;
     boolean flag;
     char selected;
+    int random1, random2, random3, random4, random5;
+    ArrayList<Integer> randoms;
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +75,7 @@ public class QuizActivity extends AppCompatActivity {
 
         countere = 0;
         score = 0;
-
+        randoms = new ArrayList<>();
 
         countDownTimer = new CountDownTimer(8700,1000) {
             @Override
@@ -134,6 +147,48 @@ public class QuizActivity extends AppCompatActivity {
                 }, 2000);
             }
         };
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference().child("Lobby").child(Lobby.getLobbyCode()).child("Quiz");
+        reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnap : snapshot.getChildren()) {
+                    randoms.add(dataSnap.getValue(Integer.class));
+                }
+                setRandoms();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void setRandoms(){
+        random1 = randoms.get(0);
+
+        if(randoms.get(1) != random1){
+            random2 = randoms.get(1);}
+        else{
+            random2 = randoms.get(5);}
+
+        if(randoms.get(2) != random2){
+            random3 = randoms.get(2);}
+        else{
+            random3 = randoms.get(5);}
+
+        if(randoms.get(3) != random3){
+            random4 = randoms.get(3);}
+        else{
+            random4 = randoms.get(5);}
+
+        if(randoms.get(4) != random4){
+            random5 = randoms.get(4);}
+        else{
+            random5 = randoms.get(5);}
     }
 
     public class Listener implements View.OnClickListener {
@@ -195,15 +250,26 @@ public class QuizActivity extends AppCompatActivity {
                             doc.getString("C"),doc.getString("D"),
                             doc.getString("correct").charAt(0)));
                 }
+
+                setSelectedQuestionList();
                 changeQuestion();
             }
         });
     }
 
+    private void setSelectedQuestionList(){
+        SelectedQuestionList = new ArrayList<>();
+        SelectedQuestionList.add(questionList.get(random1));
+        SelectedQuestionList.add(questionList.get(random2));
+        SelectedQuestionList.add(questionList.get(random3));
+        SelectedQuestionList.add(questionList.get(random4));
+        SelectedQuestionList.add(questionList.get(random5));
+    }
+
     private void setQuestion(){
         time.setText("10");
         time.setTextColor(Color.WHITE);
-        question = questionList.get(countere);
+        question = SelectedQuestionList.get(countere);
         quest.setText(question.getQuestion());
         A.setText(question.getA());
         A.setTextColor(Color.WHITE);
@@ -214,7 +280,7 @@ public class QuizActivity extends AppCompatActivity {
         D.setText(question.getD());
         D.setTextColor(Color.WHITE);
         flag = false;
-        count.setText(Integer.toString(countere+1) + "/" + Integer.toString(questionList.size()));
+        count.setText(Integer.toString(countere+1) + "/" + Integer.toString(SelectedQuestionList.size()));
         sco.setText(Integer.toString(score));
         A.setClickable(true);
         B.setClickable(true);
@@ -235,7 +301,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void changeQuestion(){
 
-        if( countere < questionList.size())
+        if( countere < SelectedQuestionList.size())
         {
             setQuestion();
             countere++;
@@ -249,11 +315,19 @@ public class QuizActivity extends AppCompatActivity {
         {
             // Go to Score Activity
             // GO TO SCOREBOARD
-            //QuestionActivity.this.finish();
+            UserTab.userClass.setCurrentPoint(score);
+            this.finish();
             Intent intent = new Intent(QuizActivity.this, ScoreBoardActivity.class);
             startActivity(intent);
+            setContentView(R.layout.activity_score_board);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        countDownTimer.cancel();
     }
 
 }

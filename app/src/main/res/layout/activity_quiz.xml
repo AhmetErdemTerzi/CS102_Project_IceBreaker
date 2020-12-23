@@ -46,35 +46,35 @@
             android:id="@+id/Info"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="17dp"
             android:background="#2b2b2b">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="17dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:text="Time:"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textColor="@color/white"
                 android:textAlignment="center"/>
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="17dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:text="Question:"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textColor="@color/white"
                 android:textAlignment="center"/>
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="17dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:text="Score:"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:textColor="@color/white"
                 android:textAlignment="center"/>
 
@@ -110,7 +110,7 @@
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:text="10"
-                        android:textSize="30sp"
+                        android:textSize="17sp"
                         android:textColor="@color/white"
                         android:textAlignment="center"/>
                     <TextView
@@ -120,7 +120,7 @@
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
                         android:text="1/10"
-                        android:textSize="30sp"
+                        android:textSize="17sp"
                         android:textColor="@color/white"
                         android:textAlignment="center"/>
                     <TextView
@@ -130,7 +130,7 @@
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
                         android:text="0"
-                        android:textSize="30sp"
+                        android:textSize="17sp"
                         android:textColor="@color/white"
                         android:textAlignment="center"/>
 
@@ -140,12 +140,12 @@
                 <TextView
                     android:id="@+id/Question"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="15dp"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center_horizontal"
                     android:text="Welcome"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
                     android:background="#808080"
                     android:textAlignment="center"/>
@@ -156,8 +156,7 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:gravity="center"
+                android:layout_marginTop="23dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -173,7 +172,7 @@
                     android:elevation="3dp"
                     android:padding="10dp"
                     android:text="A"
-                    android:textSize="17sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -185,7 +184,7 @@
                     android:elevation="3dp"
                     android:padding="10dp"
                     android:text="B"
-                    android:textSize="17sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -197,7 +196,7 @@
                     android:elevation="3dp"
                     android:padding="10dp"
                     android:text="C"
-                    android:textSize="17sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -209,7 +208,7 @@
                     android:elevation="3dp"
                     android:padding="10dp"
                     android:text="D"
-                    android:textSize="17sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
 

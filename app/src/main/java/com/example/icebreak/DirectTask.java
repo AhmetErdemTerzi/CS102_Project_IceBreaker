@@ -43,18 +43,19 @@ public class DirectTask{
     String str;
 
     public  DirectTask(){
+
         store = FirebaseFirestore.getInstance();
         taskList = new ArrayList<>();
         getTasklist();
 
         database =  FirebaseDatabase.getInstance();
-        reference = database.getReference().child("Direct_Task");
-
+        reference = database.getReference().child("Direct_Task").child(OutDoorScoreBoard.directTaskCode);
 
         taskSuccess = false;
         taskOver = false;
         reference.child("Completion").setValue(0);
         reference.child("Update").setValue(0);
+
 
         reference.child("Completion").addValueEventListener(new ValueEventListener() {
             @Override
@@ -168,7 +169,6 @@ public class DirectTask{
 
     public String getTaskText(){
         return task;
-
     }
 
     public void taskOver(){
@@ -178,6 +178,4 @@ public class DirectTask{
     public boolean isTaskSuccess(){
         return taskSuccess;
     }
-
-
 }

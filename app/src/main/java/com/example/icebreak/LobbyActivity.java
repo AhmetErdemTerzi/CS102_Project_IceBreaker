@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class LobbyActivity extends AppCompatActivity {
 
@@ -32,6 +34,7 @@ public class LobbyActivity extends AppCompatActivity {
     ArrayList<User> players;
     boolean isLobbyLeader;
     Lobby lobby;
+    DatabaseReference reference;                           //KARDEŞ BURASI QUİZ
 
     String[] uidList;
     boolean flag;
@@ -42,6 +45,12 @@ public class LobbyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
+
+        // EY OKUYUCU BURAYI EMRECAN YAZDI, QUİZDE RANDOM SORU İÇİN AMAN HA ELLEME
+        reference = FirebaseDatabase.getInstance().getReference().child("Quiz");
+
+        //BURDAN SONRA BEN YOKUM --EMRECAN
+
 
         flag = false;
         textHelper = 0;
@@ -71,6 +80,8 @@ public class LobbyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Start").setValue(true);
+
+
             }
         });
 
@@ -138,6 +149,11 @@ public class LobbyActivity extends AppCompatActivity {
 
 
         //bir de normal oyuncu versiyonu
+
+
+
+
+
     }
 
     private void listenChanges() {

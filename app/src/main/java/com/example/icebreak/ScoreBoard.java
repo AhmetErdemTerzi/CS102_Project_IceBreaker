@@ -17,6 +17,7 @@ public class ScoreBoard {
     {
         this.gameLobby = gameLobby;
         gameLoby.findPlayers();
+        usersInScoreBoard = new ArrayList<>();
         usersInScoreBoard = gameLobby.getPlayers();
     }
 

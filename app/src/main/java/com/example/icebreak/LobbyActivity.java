@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +59,21 @@ public class LobbyActivity extends AppCompatActivity {
         start = this.findViewById(R.id.start);
         exit = this.findViewById(R.id.exit);
 
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
+                finish();
+            }
+        });
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Start").setValue(true);
+            }
+        });
+
         player[0] = (TextView) this.findViewById(R.id.player1);
         player[1] = (TextView) this.findViewById(R.id.player2);
         player[2] = (TextView) this.findViewById(R.id.player3);
@@ -102,8 +118,23 @@ public class LobbyActivity extends AppCompatActivity {
         },0,1000);
 
 
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Start").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if((Boolean) snapshot.getValue()){
+                    Intent intent = new Intent(LobbyActivity.this, QuizActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //lobby.findPlayers();
+
 
 
         //bir de normal oyuncu versiyonu

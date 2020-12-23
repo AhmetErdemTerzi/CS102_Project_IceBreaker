@@ -35,6 +35,7 @@ public class Lobby {
         this.isEventOfficial = isEventOfficial;
        // setDateTime(dateTime);
          lobby.child(lobbyCode).child("isEventOfficial").setValue(isEventOfficial);
+        lobby.child(lobbyCode).child("Start").setValue(false);
         lobby.child(lobbyCode).child("gameType").setValue(gameType);
         user_flag = false;
 
@@ -57,6 +58,7 @@ public class Lobby {
         this.isEventOfficial = isEventOfficial;
        // setDateTime(time);
         lobby.child(lobbyCode).child("isEventOfficial").setValue(isEventOfficial);
+        lobby.child(lobbyCode).child("Start").setValue(false);
         lobby.child(lobbyCode).child("gameType").setValue(gameType);
         user_flag = false;
         players = new ArrayList<User>();

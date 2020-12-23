@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".reviewSuggestionsActivity"
-    android:background="@color/teal_700">
+    android:background="#2b2b2b"
+    tools:context=".reviewSuggestionsActivity">
 
     <LinearLayout
         android:id="@+id/layoutMain"
@@ -27,8 +27,7 @@
             android:text="User"
             android:textColor="#7B8D93"
             android:textSize="12sp"
-            app:backgroundTint="#CFD8DC"
-            />
+            app:backgroundTint="#CFD8DC" />
 
         <Button
             android:id="@+id/btnPlay"
@@ -58,9 +57,9 @@
         android:id="@+id/notifications"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginTop="80dp"
         android:gravity="center"
+        android:orientation="vertical"
 
         >
 
@@ -69,24 +68,24 @@
             android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="#CFD8DC"
             android:text="@string/join_lobby"
-            android:textSize="20sp"
-            android:background="#CFD8DC"/>
+            android:textSize="20sp" />
+
         <LinearLayout
             android:id="@+id/review1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:orientation="horizontal"
             android:layout_marginBottom="10dp"
-            >
+            android:layout_weight="0"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/accept1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="#CFD8DC"
+                android:background="#4CAF50"
                 android:text="Accept"
                 android:textSize="12sp" />
 
@@ -95,9 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#CFD8DC"
+                android:background="#F44336"
                 android:text="Decline" />
-
 
 
         </LinearLayout>
@@ -107,24 +105,24 @@
             android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="#CFD8DC"
             android:text="@string/join_lobby"
-            android:textSize="20sp"
-            android:background="#CFD8DC"/>
+            android:textSize="20sp" />
+
         <LinearLayout
             android:id="@+id/review2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:orientation="horizontal"
             android:layout_marginBottom="10dp"
-            >
+            android:layout_weight="0"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/accept2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="#CFD8DC"
+                android:background="#4CAF50"
                 android:text="Accept"
                 android:textSize="12sp" />
 
@@ -133,9 +131,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#CFD8DC"
+                android:background="#F44336"
                 android:text="Decline" />
-
 
 
         </LinearLayout>
@@ -146,35 +143,34 @@
             android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="#CFD8DC"
             android:text="@string/join_lobby"
-            android:textSize="20sp"
-            android:background="#CFD8DC"/>
+            android:textSize="20sp" />
+
         <LinearLayout
             android:id="@+id/review3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:orientation="horizontal"
             android:layout_marginBottom="10dp"
-            >
+            android:layout_weight="0"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/accept3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="#CFD8DC"
+                android:background="#4CAF50"
                 android:text="Accept"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/dec3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#CFD8DC"
+                android:background="#F44336"
                 android:text="Decline" />
-
 
 
         </LinearLayout>
@@ -185,25 +181,24 @@
             android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/join_lobby"
-            android:textSize="20sp"
             android:background="#CFD8DC"
-            />
+            android:text="@string/join_lobby"
+            android:textSize="20sp" />
+
         <LinearLayout
             android:id="@+id/review4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:orientation="horizontal"
             android:layout_marginBottom="10dp"
-            >
+            android:layout_weight="0"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/accept4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="#CFD8DC"
+                android:background="#4CAF50"
                 android:text="Accept"
                 android:textSize="12sp" />
 
@@ -212,22 +207,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#CFD8DC"
+                android:background="#F44336"
                 android:text="Decline" />
 
 
-
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/adminPart"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_weight="0"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_alignParentBottom="true">
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/userInfo"
@@ -251,9 +246,9 @@
                 app:backgroundTint="#CFD8DC" />
 
 
-
         </LinearLayout>
 
-        ></LinearLayout>
+        >
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

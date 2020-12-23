@@ -35,7 +35,6 @@ public class playTabActivity extends AppCompatActivity {
         event = new Event("", false, "", 0);
 
         gameType = (Spinner) this.findViewById(R.id.gameType);
-        dateTime = (Spinner) this.findViewById(R.id.dateTime);
         numOfPlayers = (Spinner) this.findViewById(R.id.numOfPlayers);
 
         lobbyCode = (EditText) this.findViewById(R.id.lobbyCode);
@@ -55,10 +54,8 @@ public class playTabActivity extends AppCompatActivity {
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         numOfPlayers.setAdapter(adapter1);
 
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.time_date, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dateTime.setAdapter(adapter2);
+
+
 
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,19 +90,18 @@ public class playTabActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String gametype = gameType.getSelectedItem().toString();
-                String date_time = dateTime.getSelectedItem().toString();
                 String num_Players = numOfPlayers.getSelectedItem().toString();
 
-                if ( gametype.equals("SELECT GAME TYPE") || date_time.equals("SELECT TIME") || num_Players.equals("SELECT PLAYER COUNT") ) {
+                if ( gametype.equals("SELECT GAME TYPE")  || num_Players.equals("SELECT PLAYER COUNT") ) {
                     Toast.makeText(playTabActivity.this, "Please set all of the game settings.", Toast.LENGTH_LONG).show();
                 }
                 else {
                     Toast.makeText(playTabActivity.this, "Congrats! You created a game.", Toast.LENGTH_SHORT).show();
                     //TODO: SERVER'A BAĞLI Bİ LOBİ OLUŞCAK.
                     if (admin)
-                        event = new Event(gametype, true, date_time, Integer.parseInt(num_Players));
+                        event = new Event(gametype, true, "", Integer.parseInt(num_Players));
                     else
-                        event = new Event( gametype, false, date_time, Integer.parseInt(num_Players));
+                        event = new Event( gametype, false, "", Integer.parseInt(num_Players));
 
                     createLobby();
                 }

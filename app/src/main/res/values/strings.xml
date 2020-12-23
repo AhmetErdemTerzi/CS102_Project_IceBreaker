@@ -6,14 +6,14 @@
     <string name="welcome">WELCOME!</string>
     <string name="username">USERNAME</string>
     <string name="win_count">Win Count:</string>
-    <string name="games_payed">Games Payed:</string>
+    <string name="games_payed">Games Played:</string>
     <string name="average_points">Average Points:</string>
     <string name="quiz_suggestions">Quiz Suggestions</string>
-    <string name="enter_quiz_suggestions_here">Enter quiz suggestions here.</string>
-    <string name="send">SEND!!</string>
+    <string name="enter_quiz_suggestions_here">Enter quiz question suggestions here.</string>
+    <string name="send">SEND!</string>
     <string name="log_out">LOG OUT</string>
     <string name="enter_notifications_only_admins">Enter notifications (only admins)</string>
-    <string name="join_lobby">JOIN LOBBY</string>
+    <string name="join_lobby">Join Lobby</string>
 
     <string-array name="game_type">
         <item>SELECT GAME TYPE</item>

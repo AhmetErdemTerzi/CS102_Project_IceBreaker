@@ -7,3 +7,4 @@ Change log:
 21.12.2020 | Previously written GPS track code is trashed. More efficient GPS track code is written  without deprecated methods. LocationListener is rewritten in a exception free manner.
 22.12.2020 | Google Maps API and Map view is updated, CountDownTimer is added, nice looking notifications dialogs for finishing a task are created and implemented, GlobalTask is finished.
 22.12.2020 | Outdoor Event Game (Main) Screen is coded and buttons are linked to the other screens. GUI part is finished. New good looking icons are added.
+24.12.2020 | GUI is improved, new icons and images are added. XML constraints are added so it is more compatible with different screen sizes.

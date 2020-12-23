@@ -4,68 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2b2b2b"
     tools:context=".SignUpActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+
+        <Button
+            android:id="@+id/btnGoBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:textStyle="bold"
+            android:layout_margin="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:text="Go back" />
+
+        <TextView
+            android:id="@+id/signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="100dp"
+            android:text="Sign Up"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_margin="100dp"
-            android:layout_centerHorizontal="true"/>
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/username"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:layout_marginTop="150dp"
             android:layout_centerHorizontal="true"
-            android:hint="Enter username." />
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/signUp"
+            android:hint="Enter username."
+            android:textColor="@color/white"
+            android:textColorHint="#A19999" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="280dp"
             android:layout_height="50dp"
+            android:layout_below="@id/username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="Enter e-mail"
             android:inputType="textEmailAddress"
-            android:layout_below="@id/username"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"/>
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="enter pass"
-        android:inputType="textPassword"
-        android:layout_below="@id/email"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true" />
+            android:textColor="@color/white"
+            android:textColorHint="#A19999" />
 
-    <EditText
-        android:id="@+id/passwordAgain"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="enter pass again"
-        android:inputType="textPassword"
-        android:layout_below="@id/password"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="#A19999" />
+
+        <EditText
+            android:id="@+id/passwordAgain"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Enter password again"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="#A19999" />
+
         <Button
             android:id="@+id/signupButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
             android:layout_below="@id/passwordAgain"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:layout_centerHorizontal="true" />
-
-
+            android:text="Sign Up" />
 
 
     </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.icebreak;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUpActivity extends AppCompatActivity {
 
     EditText email, password, passwordAgain, username;
-    Button signupButton;
+    Button signupButton, goBackButton;
     ValidateInput validateInput;
     String userName;
     FirebaseAuth mAuth;
@@ -36,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
         passwordAgain = (EditText)this.findViewById(R.id.passwordAgain);
         username = (EditText) this.findViewById(R.id.username);
         signupButton = (Button)this.findViewById(R.id.signupButton);
+        goBackButton = (Button) this.findViewById(R.id.btnGoBack);
 
         validateInput = new ValidateInput(this);
 
@@ -43,6 +45,14 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signUpAction();
+            }
+        });
+
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -56,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
         userName = username.getText().toString();
 
         if(userName.isEmpty())
-            Toast.makeText(SignUpActivity.this, "Please enter a username.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, "Please enter a username", Toast.LENGTH_SHORT).show();
         else {
             if (validateInput.isEmailValid(mail) && validateInput.isPasswordValid(pw)) {
 
@@ -73,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
                 } else
-                    Toast.makeText(this, "pw dont match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
 
             }
         }

@@ -19,7 +19,8 @@ public class OutDoorScoreBoard extends ScoreBoard{
     User TaskGiver;
     User TaskReceiver;
     ArrayList<String> Notifications;
-    String str;
+    String str, code, all;
+    static String directTaskCode;
 
     public OutDoorScoreBoard(Lobby gameLobby){
         super(gameLobby);
@@ -43,6 +44,16 @@ public class OutDoorScoreBoard extends ScoreBoard{
             }
         });
 
+        reference2.child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                directTaskCode = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     public ArrayList<String> getNotifications(){
@@ -53,20 +64,34 @@ public class OutDoorScoreBoard extends ScoreBoard{
 
     public void sendTaskRequest(User taskReceiver)
     {
+        code = "";
+        all = "ABCDEFGHIJKLMONPQRSTUVWXYZ1234567890";
+        for(int n = 0; n < 6; n++)
+        {
+            int i = (int) (all.length() * Math.random());
+            code = code + all.charAt(i);
+        }
+
+        directTaskCode = code;
+
+
         this.TaskReceiver = taskReceiver;
         reference2.child(taskReceiver.getUID()).child("Outdoor").child("senderUID").setValue(UserTab.userClass.getUID());
-        reference.child("TaskReceiver").setValue(taskReceiver.getName());
-        reference.child("TaskGiver").setValue(UserTab.userClass.getName());
+        reference.child(directTaskCode).child("TaskReceiver").setValue(taskReceiver.getName());
+        reference.child(directTaskCode).child("TaskGiver").setValue(UserTab.userClass.getName());
         reference2.child(taskReceiver.getUID()).child("Outdoor").child("outdoorRequestReceived").setValue(true);
+        reference2.child(taskReceiver.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
     }
+
+
 
     public void responseTaskRequest(int i,String uid)
     {
-        // EĞER 1 VERİLİRSE KABUL -1 İSE RET
+
         reference2.child(uid).child("Outdoor").child("Response").setValue(i);
 
         if(i == 1){
-            reference.child("Random").setValue((int) (Math.random()*4));
+            reference.child(directTaskCode).child("Random").setValue((int) (Math.random()*4));
         }
     }
 

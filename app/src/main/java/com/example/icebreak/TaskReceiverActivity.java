@@ -1,12 +1,16 @@
 package com.example.icebreak;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +39,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
     CountDownTimer countDownTimer;
     TextView time, user, task, complet;
     FirebaseDatabase datacı;
-    DatabaseReference reference;
+    DatabaseReference reference, reference1;
     int complt;
 
     @Override
@@ -44,7 +48,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task_receiver);
 
         datacı = FirebaseDatabase.getInstance();
-        reference = datacı.getReference().child("Direct_Task");
+        reference = datacı.getReference().child("Direct_Task").child(OutDoorScoreBoard.directTaskCode);
 
         reference.child("Update").addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,15 +70,12 @@ public class TaskReceiverActivity extends AppCompatActivity {
                 complt = snapshot.getValue(Integer.class);
                 countDownTimer.cancel();
                 if(complt == -1){
-                    complet.setBackgroundColor(Color.RED);
-                    complet.setTextColor(Color.WHITE);
-                    complet.setText("You have failed to finish");
+                    openLoseDialog();
                 }
 
                 else if(complt == 1){
-                    complet.setBackgroundColor(Color.BLUE);
-                    complet.setTextColor(Color.WHITE);
-                    complet.setText("You have succesfully finished");
+                    openWinDialog();
+                    UserTab.userClass.setCurrentPoint(UserTab.userClass.getCurrentPoint() + 10);
                 }
             }
 
@@ -116,12 +117,68 @@ public class TaskReceiverActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                complet.setBackgroundColor(Color.RED);
-                complet.setTextColor(Color.WHITE);
-                complet.setText("You have failed to finish");
-
+                openLoseDialog();
             }
         };
         time.setText("5:00");
     }
+
+    private void openWinDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_winnotification);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imageViewClose = dialog.findViewById(R.id.imageViewClose);
+        Button OKButton = dialog.findViewById(R.id.OKButton);
+
+        imageViewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                startActivity(intent);
+            }
+        });
+
+        OKButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                startActivity(intent);
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void openLoseDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_losenotification);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imageViewClose = dialog.findViewById(R.id.imageViewClose);
+        Button OKButton = dialog.findViewById(R.id.OKButton);
+
+        imageViewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                startActivity(intent);
+            }
+        });
+
+        OKButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                startActivity(intent);
+            }
+        });
+
+        dialog.show();
+    }
+
 }

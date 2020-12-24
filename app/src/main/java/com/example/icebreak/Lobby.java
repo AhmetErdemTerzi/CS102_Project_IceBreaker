@@ -18,7 +18,7 @@ public class Lobby {
     String lobbyCode;
 
     //INSTANCES BELOW THIS COMMENT DO NOT EXIST IN UML
-    String lobbyName;
+    String lobbyName, gameType;
     DatabaseReference lobby;
     boolean flag;
     boolean user_flag;
@@ -31,6 +31,7 @@ public class Lobby {
 
         lobby.child(lobbyCode).child("isEventOfficial").setValue(isEventOfficial);
         lobby.child(lobbyCode).child("Start").setValue(false);
+
         user_flag = false;
         players = new ArrayList<User>();
 
@@ -60,6 +61,11 @@ public class Lobby {
 
     }
 
+    public void setGameType(String gameType){
+        this.gameType = gameType;
+        lobby.child(lobbyCode).child("gameType").setValue(gameType);
+    }
+    public String getGameType(){return gameType;}
     public void getInstances(){
         lobby.child(lobbyCode).child("isEventOfficial").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -22,6 +22,7 @@ public class Event {
        //     lobby = new Lobby(coordinates, isEventOfficial,  dateTime, lobbyCode);
        // else if(gameType.equals("Indoor Game"))
             lobby = new Lobby(isEventOfficial,  lobbyCode);
+            lobby.setGameType(gameType);
 
         if(isEventOfficial)
             ((AdminUser) UserTab.userClass).setNotifications("OFFICIAL EVENT TIME!! JOIN LOBBY: "+ lobbyCode);

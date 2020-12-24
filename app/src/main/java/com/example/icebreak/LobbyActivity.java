@@ -43,9 +43,12 @@ public class LobbyActivity extends AppCompatActivity {
     boolean flag;
     int i,textHelper;
     boolean textHelp;
+<<<<<<< HEAD
     List<User> list;
     FirebaseFirestore firebaseFirestore;
 
+=======
+>>>>>>> origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +140,7 @@ public class LobbyActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Start").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+<<<<<<< HEAD
                 if(snapshot.getValue() != null) {
                     if ((Boolean) snapshot.getValue()) {
                         if (timer != null) {
@@ -146,6 +150,8 @@ public class LobbyActivity extends AppCompatActivity {
                         startActivity(intent);
 
                     }
+=======
+>>>>>>> origin/master
                 }
             }
 
@@ -299,6 +305,7 @@ public class LobbyActivity extends AppCompatActivity {
         // }
 
     }
+<<<<<<< HEAD
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -312,4 +319,6 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
 
+=======
+>>>>>>> origin/master
 }

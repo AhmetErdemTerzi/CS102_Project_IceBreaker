@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IceBreak">
         <activity android:name=".ScoreBoardActivity"/>
+        <activity android:name=".OutdoorEventMainActivity"/>
         <activity android:name=".LobbyActivity"></activity>
         <activity android:name=".TaskGiverActivity" />
         <activity android:name=".QuizActivity" />

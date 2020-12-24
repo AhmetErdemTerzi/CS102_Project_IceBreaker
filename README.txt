@@ -25,6 +25,7 @@ Aral Salehyan 21703955
 20.12.2020 | AdminUser and User classes are almost done. reviewSuggestionsActivity is fully functioning. Firestore and database communication is achieved.
 22.12.2020 | Lobby class is almost done. LobbyActivity screen in progress. Minor mistakes are fixed.
 23.12.2020 | Lobby to QuizActivity transition for all players is achieved.
+24.12.2020 | Lobby to outdoor transition is done. Kick function is added for lobby leaders.
 
 ***********************  
 Emrecan Kutay 21702500

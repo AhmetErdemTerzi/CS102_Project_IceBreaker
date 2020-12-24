@@ -275,7 +275,6 @@ public class playTabActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobbyCode.getText().toString()).child("Players").child(UserTab.userClass.getUID()).setValue(UserTab.userClass.getUID());
         Intent intent = new Intent(playTabActivity.this, LobbyActivity.class);
         startActivity(intent);
-        setContentView(R.layout.activity_lobby);
     }
 
     private void getLobbyCodes(String joinRequestCode)

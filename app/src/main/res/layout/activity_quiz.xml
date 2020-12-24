@@ -9,38 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/layoutMain"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#2b2b2b">
 
-            <Button
-                android:id="@+id/btnGame"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#CFD8DC"
-                android:text="Game"
-                android:textColor="#7B8D93"
-                app:backgroundTint="#2b2b2b" />
-
-            <Button
-                android:id="@+id/btnScoreboard"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#CFD8DC"
-                android:text="Scoreboard"
-                android:textColor="#7B8D93"
-                android:textSize="12sp"
-                app:backgroundTint="#2b2b2b" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/Info"

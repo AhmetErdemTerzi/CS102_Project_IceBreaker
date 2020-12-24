@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -48,8 +50,13 @@ public class QuizActivity extends AppCompatActivity {
     char selected;
     int random1, random2, random3, random4, random5;
     ArrayList<Integer> randoms;
+    ArrayList<String> lobbyList,randomko;
     FirebaseDatabase database;
     DatabaseReference reference;
+    int index;
+
+
+    private static final String TAG = "GlobalTask1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +77,17 @@ public class QuizActivity extends AppCompatActivity {
         D.setOnClickListener(listen);
 
         questionList = new ArrayList<Question>();
+        lobbyList = new  ArrayList<String>();
+        randomko = new ArrayList<>();
+
         store = FirebaseFirestore.getInstance();
-        getQuestionList();
+        index = 0;
 
         countere = 0;
         score = 0;
         randoms = new ArrayList<>();
+
+        getRandoms();
 
         countDownTimer = new CountDownTimer(8700,1000) {
             @Override
@@ -148,7 +160,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         };
 
-        database = FirebaseDatabase.getInstance();
+        /*database = FirebaseDatabase.getInstance();
         reference = database.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Quiz");
         reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
 
@@ -163,14 +175,64 @@ public class QuizActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
+                System.out.println("ABOOOAAAAAAAAA");
             }
-        });
-
+        });*/
 
     }
 
+    public void getRandoms(){
+          store.collection("LobbyCodes").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+            for(QueryDocumentSnapshot doc : task.getResult()){
+                lobbyList.add(doc.getString("LobbyCode"));
+                randomko.add(doc.getString("Random1"));
+                randomko.add(doc.getString("Random2"));
+                randomko.add(doc.getString("Random3"));
+                randomko.add(doc.getString("Random4"));
+                randomko.add(doc.getString("Random5"));
+                randomko.add(doc.getString("Random6"));
+
+                System.out.println(lobbyList.size());
+                System.out.println(randomko.size());
+            }
+            setRandoms();
+            getQuestionList();
+        }
+    });
+    }
+
+
     public void setRandoms(){
+
+        //yeni
+        index = 0;
+        for(int i = 0; i < lobbyList.size(); i++){
+            if(UserTab.userClass.getCurrentLobby().getLobbyCode().equals(lobbyList.get(i))){
+                index = i;
+                break;
+            }
+        }
+
+        index = (index) * 6;
+        for(int i = 0; i < 5; i++) {
+            randoms.add(Integer.valueOf(randomko.get(index)));
+            index++;
+        }
+
+
+
         random1 = randoms.get(0);
+        while(randoms.get(1) == randoms.get(2) && randoms.get(2) == randoms.get(3) && randoms.get(3) == randoms.get(4) && randoms.get(4) == randoms.get(5) && randoms.get(5) == randoms.get(6)){
+
+            reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
+            System.out.println("ABOOO");
+        }
+
+
 
         if(randoms.get(1) != random1){
             random2 = randoms.get(1);}
@@ -330,6 +392,8 @@ public class QuizActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         countDownTimer.cancel();
+        Intent intent = new Intent(QuizActivity.this, playTabActivity.class);
+        setContentView(R.layout.activity_play_tab);
     }
 
 }

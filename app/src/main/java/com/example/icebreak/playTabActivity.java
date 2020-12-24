@@ -39,7 +39,7 @@ public class playTabActivity extends AppCompatActivity {
     Spinner gameType, dateTime, numOfPlayers;
     EditText lobbyCode;
     Button joinBtn, createBtn, btnUser, btnPlay, btnNotifications;
-    int random1,random2,random3,random4,random5,random6;
+    int random1,random2,random3,random4,random5,random6,randomm1;
 
     boolean codeCorrect;
     boolean admin;
@@ -115,6 +115,82 @@ public class playTabActivity extends AppCompatActivity {
                 String num_Players = numOfPlayers.getSelectedItem().toString();
 
 
+                // RANDOMİZATİON OF THE QUIZ QUESTTOINS
+                random1 = (int) ((Math.random()*990) / 50);
+
+                do {
+                    random2 = (int) ((Math.random()*990) / 50);
+                }while(random2 == random1);
+
+                do {
+                    random3 = (int) ((Math.random()*990) / 50);
+                }while(random3 == random2);
+
+
+                do {
+                    random4 = (int) ((Math.random()*990) / 50);
+                }while(random4 == random3);
+
+
+                do {
+                    random5 = (int) ((Math.random()*990) / 50);
+                }while(random5 == random4);         // Aynı sayılar glemesin diye
+
+                do {
+                    random6 = (int) ((Math.random()*990) / 50);
+                }while(random6 == random5);         // Aynı sayılar glemesin diye
+
+                if(random3 == random1)
+                {
+                    random3 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random4 == random1)
+                {
+                    random4 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random5 == random1)
+                {
+                    random5 = (int)((Math.random()*990) / 50);
+                }
+
+                if(random6 == random1)
+                {
+                    random6 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random4 == random2)
+                {
+                    random4 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random5 == random2)
+                {
+                    random5 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random6 == random2)
+                {
+                    random6 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random5 == random3)
+                {
+                    random5 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random6 == random3)
+                {
+                    random6 = (int) ((Math.random()*990) / 50);
+                }
+
+                if(random6 == random4)
+                {
+                    random6 = (int) ((Math.random()*990) / 50);
+                }
+
+
 
 
                 if ( gametype.equals("SELECT GAME TYPE")  || num_Players.equals("SELECT PLAYER COUNT") ) {
@@ -131,6 +207,12 @@ public class playTabActivity extends AppCompatActivity {
                     UserTab.userClass.setCurrentLobby(event.getLobby());
                     Map<String, String> code = new HashMap<>();
                     code.put("LobbyCode", event.getLobbyCode());
+                    code.put("Random1", Integer.toString(random1));
+                    code.put("Random2", Integer.toString(random2));
+                    code.put("Random3", Integer.toString(random3));
+                    code.put("Random4", Integer.toString(random4));
+                    code.put("Random5", Integer.toString(random5));
+                    code.put("Random6", Integer.toString(random6));
                     firebaseFirestore.collection("LobbyCodes").add(code).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -142,32 +224,6 @@ public class playTabActivity extends AppCompatActivity {
 
                         }
                     });
-
-                    // RANDOMİZATİON OF THE QUIZ QUESTTOINS
-                    random1 = ThreadLocalRandom.current().nextInt(0, 20);
-
-                    do {
-                        random2 = ThreadLocalRandom.current().nextInt(0, 20);
-                    }while(random2 == random1);
-
-                    do {
-                        random3 = ThreadLocalRandom.current().nextInt(0, 20);
-                    }while(random3 == random2);
-
-
-                    do {
-                        random4 = ThreadLocalRandom.current().nextInt(0, 20);
-                    }while(random4 == random3);
-
-
-                    do {
-                        random5 = ThreadLocalRandom.current().nextInt(0, 20);
-                    }while(random5 == random4);         // Aynı sayılar glemesin diye
-
-                    do {
-                        random6 = ThreadLocalRandom.current().nextInt(0, 20);
-                    }while(random6 == random5);         // Aynı sayılar glemesin diye
-
 
                     reference = FirebaseDatabase.getInstance().getReference().child("Lobby").child(event.getLobbyCode()).child("Quiz");
 

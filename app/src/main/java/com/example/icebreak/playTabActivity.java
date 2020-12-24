@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +40,8 @@ public class playTabActivity extends AppCompatActivity {
     Spinner gameType, dateTime, numOfPlayers;
     EditText lobbyCode;
     Button joinBtn, createBtn, btnUser, btnPlay, btnNotifications;
-    int random1,random2,random3,random4,random5,random6,randomm1;
+    int random1,random2,random3,random4,random5,random6;
+    static String FirestoreLobbyReference, FirestoreUserReference;
 
     boolean codeCorrect;
     boolean admin;
@@ -140,52 +142,52 @@ public class playTabActivity extends AppCompatActivity {
                     random6 = (int) ((Math.random()*990) / 50);
                 }while(random6 == random5);         // Aynı sayılar glemesin diye
 
-                if(random3 == random1)
+                while(random3 == random1)
                 {
                     random3 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random4 == random1)
+                while(random4 == random1)
                 {
                     random4 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random5 == random1)
+                while(random5 == random1)
                 {
                     random5 = (int)((Math.random()*990) / 50);
                 }
 
-                if(random6 == random1)
+                while(random6 == random1)
                 {
                     random6 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random4 == random2)
+                while(random4 == random2)
                 {
                     random4 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random5 == random2)
+                while(random5 == random2)
                 {
                     random5 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random6 == random2)
+                while(random6 == random2)
                 {
                     random6 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random5 == random3)
+                while(random5 == random3)
                 {
                     random5 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random6 == random3)
+                while(random6 == random3)
                 {
                     random6 = (int) ((Math.random()*990) / 50);
                 }
 
-                if(random6 == random4)
+                while(random6 == random4)
                 {
                     random6 = (int) ((Math.random()*990) / 50);
                 }
@@ -196,6 +198,7 @@ public class playTabActivity extends AppCompatActivity {
                 if ( gametype.equals("SELECT GAME TYPE")  || num_Players.equals("SELECT PLAYER COUNT") ) {
                     Toast.makeText(playTabActivity.this, "Please set all of the game settings.", Toast.LENGTH_LONG).show();
                 }
+
                 else {
                     Toast.makeText(playTabActivity.this, "Congrats! You created a game.", Toast.LENGTH_SHORT).show();
                     //TODO: SERVER'A BAĞLI Bİ LOBİ OLUŞCAK.
@@ -204,8 +207,11 @@ public class playTabActivity extends AppCompatActivity {
                     else
                         event = new Event( gametype, false, Integer.parseInt(num_Players));
 
+
                     UserTab.userClass.setCurrentLobby(event.getLobby());
-                    Map<String, String> code = new HashMap<>();
+
+
+                    Map<String, Object> code = new HashMap<>();
                     code.put("LobbyCode", event.getLobbyCode());
                     code.put("Random1", Integer.toString(random1));
                     code.put("Random2", Integer.toString(random2));
@@ -213,17 +219,31 @@ public class playTabActivity extends AppCompatActivity {
                     code.put("Random4", Integer.toString(random4));
                     code.put("Random5", Integer.toString(random5));
                     code.put("Random6", Integer.toString(random6));
-                    firebaseFirestore.collection("LobbyCodes").add(code).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    firebaseFirestore.collection("LobbyCodes").document(event.getLobbyCode()).set(code).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "lobby code eklendi: " + documentReference.getId());
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "lobby code eklendi: ");
+                            FirestoreLobbyReference = event.getLobby().getLobbyCode();
+                            createLobby();
                         }
                     });
+
+
+                //           .add  .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                //       @Override
+                //       public void onSuccess(DocumentReference documentReference) {
+                //           Log.d(TAG, "lobby code eklendi: " + documentReference.getId());
+                //
+                //       }
+                //   }).addOnFailureListener(new OnFailureListener() {
+                //       @Override
+                //       public void onFailure(@NonNull Exception e) {
+
+                //       }
+                //   });
+
+
+
 
                     reference = FirebaseDatabase.getInstance().getReference().child("Lobby").child(event.getLobbyCode()).child("Quiz");
 
@@ -234,7 +254,7 @@ public class playTabActivity extends AppCompatActivity {
                     reference.child("Random5").setValue(random5);
                     reference.child("Random6").setValue(random6);
 
-                    createLobby();
+
                 }
 
             }
@@ -265,6 +285,25 @@ public class playTabActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("isLobbyLeader").setValue(true);
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(event.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).setValue(UserTab.userClass.getUID());
+
+        DocumentReference x = FirebaseFirestore.getInstance().collection("LobbyCodes").document(event.getLobbyCode());
+        Map<String, String> uid = new HashMap<>();
+        uid.put("Uid", UserTab.userClass.getUID());
+        uid.put("Point", "0");
+        uid.put("Name", UserTab.userClass.getName());
+        x.collection("Users").add(uid).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "lobbye uid eklendi: " + documentReference.getId());
+                FirestoreUserReference = documentReference.getId();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
         Intent intent = new Intent(playTabActivity.this, LobbyActivity.class);
         startActivity(intent);
     }
@@ -273,6 +312,29 @@ public class playTabActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("isLobbyLeader").setValue(false);
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobbyCode.getText().toString()).child("Players").child(UserTab.userClass.getUID()).setValue(UserTab.userClass.getUID());
+
+
+        FirestoreLobbyReference = lobbyCode.getText().toString();
+
+        DocumentReference x = FirebaseFirestore.getInstance().collection("LobbyCodes").document(lobbyCode.getText().toString());
+        Map<String, String> uid = new HashMap<>();
+        uid.put("Uid", UserTab.userClass.getUID());
+        uid.put("Point", "0");
+        uid.put("Name", UserTab.userClass.getName());
+        x.collection("Users").add(uid).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "lobbye uid AMA OLMADII: " + documentReference.getId());
+                FirestoreUserReference = documentReference.getId();
+                System.out.println("ANNENİNAMMMIIII" + FirestoreUserReference);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
         Intent intent = new Intent(playTabActivity.this, LobbyActivity.class);
         startActivity(intent);
     }
@@ -311,6 +373,10 @@ public class playTabActivity extends AppCompatActivity {
         }
         else
             Toast.makeText(playTabActivity.this, "You entered wrong lobby code!", Toast.LENGTH_LONG).show();
+    }
+
+    public static Event getEvent(){
+        return event;
     }
 
 }

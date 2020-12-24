@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#808080"
     tools:context=".ScoreBoardActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#2b2b2b">
+            android:background="#2b2b2b"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/layoutMain"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="#2b2b2b"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="#2b2b2b">
+                app:layout_constraintTop_toTopOf="parent">
 
 
-                <Button
+                <TextView
                     android:id="@+id/btnScoreboard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#CFD8DC"
+                    android:background="#2b2b2b"
+                    android:gravity="center"
                     android:text="Scoreboard"
+                    android:textAlignment="center"
                     android:textColor="#7B8D93"
-                    android:textSize="12sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:backgroundTint="#2b2b2b" />
 
 
@@ -49,8 +56,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:footerDividersEnabled="false"
+                    android:background="#808080"
                     android:numColumns="2"
-                    android:padding="1dp"></GridView>
+                    android:padding="1dp"
+                    android:horizontalSpacing="10sp"
+                    android:verticalSpacing="10sp"
+                    android:layout_margin="8sp"
+                    ></GridView>
 
                 <Button
                     android:id="@+id/Exit"
@@ -68,7 +80,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

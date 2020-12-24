@@ -28,7 +28,7 @@ public class LobbyActivity extends AppCompatActivity {
 
     Button  but1, but2, but3, but4, but5, but6, but7, but8, start, exit;
     TextView[]  player;
-    TextView gametype, code;
+    TextView gametype, code, lobbyOwner;
     ArrayList<User> players;
     boolean isLobbyLeader;
     Lobby lobby;
@@ -58,6 +58,8 @@ public class LobbyActivity extends AppCompatActivity {
         but8 = (Button) this.findViewById(R.id.but8);
         start = this.findViewById(R.id.start);
         exit = this.findViewById(R.id.exit);
+        lobbyOwner = this.findViewById(R.id.lobbyOwner);
+        //lobbyOwner.setText(UserTab.userClass.getName() + "'s Lobby");
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +126,7 @@ public class LobbyActivity extends AppCompatActivity {
                 if((Boolean) snapshot.getValue()){
                     Intent intent = new Intent(LobbyActivity.this, QuizActivity.class);
                     startActivity(intent);
+                    setContentView(R.layout.activity_quiz);
                 }
             }
 
@@ -276,6 +279,11 @@ public class LobbyActivity extends AppCompatActivity {
         //     player[i].setText(players.get(i).getName());
         // }
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
     }
 
 }

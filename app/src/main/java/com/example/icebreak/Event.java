@@ -6,31 +6,37 @@ public class Event {
     int numOfPlayers;
     boolean gameStatus;
     String gameType;
-    String dateTime;
     String lobbyCode;
     boolean isEventOfficial;
 
-    public Event(String gameType, boolean isEventOfficial, String dateTime, int numOfPlayers)//LOBBYCODE CONSTRUCTOR'DAN SİLİNDİ.
+    public Event(String gameType, boolean isEventOfficial,  int numOfPlayers)//LOBBYCODE CONSTRUCTOR'DAN SİLİNDİ.
     // TÜRETİLMEDEN NASIL İÇİNE KOYCAZ Kİ ZATEN
     {
         this.gameType = gameType;
         this.isEventOfficial = isEventOfficial;
-        this.dateTime = dateTime;
         generateLobbyCode();
         this.numOfPlayers = numOfPlayers;
 
-        //TODO: ERDEM HELP ME!
-        double[] coordinates = new double[2];
 
        // if (gameType.equals("Outdoor Game"))
        //     lobby = new Lobby(coordinates, isEventOfficial,  dateTime, lobbyCode);
        // else if(gameType.equals("Indoor Game"))
-            lobby = new Lobby(isEventOfficial,  dateTime, lobbyCode);
+            lobby = new Lobby(isEventOfficial,  lobbyCode);
 
         if(isEventOfficial)
             ((AdminUser) UserTab.userClass).setNotifications("OFFICIAL EVENT TIME!! JOIN LOBBY: "+ lobbyCode);
 
     }
+
+
+    // for joiners
+    public Event( Lobby lobby)
+    {
+        this.lobby = lobby;
+        lobbyCode = lobby.getLobbyCode();
+    }
+
+
 
     public void updatePoints()
     {

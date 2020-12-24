@@ -4,8 +4,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
+
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,29 +25,17 @@ public class ScoreBoardActivity extends AppCompatActivity {
     Button exit;
     ScoreBoard scoreBoard;
     ArrayList<User> sortedUsers;
+    GridView usersAndScores;
+    ArrayList<String> userNameandScores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_board);
 
-        user1 = (TextView) findViewById(R.id.User1);
-        user2 = (TextView) findViewById(R.id.User2);
-        user3 = (TextView) findViewById(R.id.User3);
-        user4 = (TextView) findViewById(R.id.User4);
-        user5 = (TextView) findViewById(R.id.User5);
-        user6 = (TextView) findViewById(R.id.User6);
-        user7 = (TextView) findViewById(R.id.User7);
-        user8 = (TextView) findViewById(R.id.User8);
 
-        score1 = (TextView) findViewById(R.id.Score1);
-        score2 = (TextView) findViewById(R.id.Score2);
-        score3 = (TextView) findViewById(R.id.Score3);
-        score4 = (TextView) findViewById(R.id.Score4);
-        score5 = (TextView) findViewById(R.id.Score5);
-        score6 = (TextView) findViewById(R.id.Score6);
-        score7 = (TextView) findViewById(R.id.Score7);
-        score8 = (TextView) findViewById(R.id.Score8);
+        usersAndScores = (GridView) findViewById(R.id.table);
+
 
 
         exit = findViewById(R.id.Exit);
@@ -49,58 +44,18 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
         sortedUsers = scoreBoard.sortingUsers();
 
-        //EGER DAHA AZ KİŞİ VARSA ORALAR GORUNMEZ YAP
-        if(sortedUsers.size() < 8){
-            setUnvisible(score8,user8);
-        }
-        else if(sortedUsers.size() <7){
-            setUnvisible(score8,user8);
-            setUnvisible(score7,user7);
-        }
-        else if(sortedUsers.size() <6){
-            setUnvisible(score8,user8);
-            setUnvisible(score7,user7);
-            setUnvisible(score6,user6);
-        }
-        else if(sortedUsers.size() <5){
-            setUnvisible(score8,user8);
-            setUnvisible(score7,user7);
-            setUnvisible(score6,user6);
-            setUnvisible(score5,user5);
-        }
-        else if(sortedUsers.size() <4){
-            setUnvisible(score8,user8);
-            setUnvisible(score7,user7);
-            setUnvisible(score6,user6);
-            setUnvisible(score5,user5);
-            setUnvisible(score4,user4);
-        }
-        else if(sortedUsers.size() <3){
-            setUnvisible(score8,user8);
-            setUnvisible(score7,user7);
-            setUnvisible(score6,user6);
-            setUnvisible(score5,user5);
-            setUnvisible(score4,user4);
-            setUnvisible(score3,user3);
+
+        userNameandScores.add("Users");
+        userNameandScores.add("Points");
+        for(int i = 0; i < 2*sortedUsers.size(); i++){
+            userNameandScores.add(sortedUsers.get(i).getName());
+            userNameandScores.add(Integer.toString(sortedUsers.get(i).getCurrentPoint()));
         }
 
-        user1.setText(sortedUsers.get(0).getName());
-        user2.setText(sortedUsers.get(1).getName());
-        user3.setText(sortedUsers.get(2).getName());
-        user4.setText(sortedUsers.get(3).getName());
-        user5.setText(sortedUsers.get(4).getName());
-        user6.setText(sortedUsers.get(5).getName());
-        user7.setText(sortedUsers.get(6).getName());
-        user8.setText(sortedUsers.get(7).getName());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameandScores);
+        usersAndScores.setAdapter(adapter);
 
-        score1.setText(sortedUsers.get(0).getCurrentPoint());
-        score2.setText(sortedUsers.get(1).getCurrentPoint());
-        score3.setText(sortedUsers.get(2).getCurrentPoint());
-        score4.setText(sortedUsers.get(3).getCurrentPoint());
-        score5.setText(sortedUsers.get(4).getCurrentPoint());
-        score6.setText(sortedUsers.get(5).getCurrentPoint());
-        score7.setText(sortedUsers.get(6).getCurrentPoint());
-        score8.setText(sortedUsers.get(7).getCurrentPoint());
+
 
         exit.setOnClickListener(new Listener());
     }
@@ -118,13 +73,6 @@ public class ScoreBoardActivity extends AppCompatActivity {
             }
 
         }
-    }
-
-    private void setUnvisible(TextView score, TextView user){
-        user.setBackgroundColor(Color.rgb(43,43,43));
-        score.setBackgroundColor(Color.rgb(43,43,43));
-        user.setTextColor(Color.rgb(43,43,43));
-        score.setTextColor(Color.rgb(43,43,43));
     }
 
 }

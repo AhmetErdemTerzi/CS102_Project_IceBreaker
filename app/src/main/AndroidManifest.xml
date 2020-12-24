@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IceBreak">
+        <activity android:name=".ScoreBoardActivity"/>
         <activity android:name=".LobbyActivity"></activity>
         <activity android:name=".TaskGiverActivity" />
         <activity android:name=".QuizActivity" />

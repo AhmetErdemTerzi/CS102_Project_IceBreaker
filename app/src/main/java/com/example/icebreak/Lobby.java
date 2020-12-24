@@ -16,50 +16,21 @@ public class Lobby {
     ArrayList<User> players;
     boolean isEventOfficial;
     String lobbyCode;
-    double[] lobbyCoordinates;
 
     //INSTANCES BELOW THIS COMMENT DO NOT EXIST IN UML
     String lobbyName;
     DatabaseReference lobby;
     boolean flag;
     boolean user_flag;
-    String gameType;
 
-
-    public Lobby(double[] lobbyCoordinates, boolean isEventOfficial, String dateTime, String lobbyCode){
-        flag = false;
-        lobby = FirebaseDatabase.getInstance().getReference().child("Lobby");
-        gameType = "Outdoor";
-        this.lobbyCode = lobbyCode;
-        this.lobbyCoordinates = lobbyCoordinates;
-        this.isEventOfficial = isEventOfficial;
-       // setDateTime(dateTime);
-         lobby.child(lobbyCode).child("isEventOfficial").setValue(isEventOfficial);
-        lobby.child(lobbyCode).child("Start").setValue(false);
-        lobby.child(lobbyCode).child("gameType").setValue(gameType);
-        user_flag = false;
-
-        players = new ArrayList<User>();
-
-        lobby.child(lobbyCode).child("Players").child("ZZZZZZZZZZZZZZ").setValue("");
-
-        findPlayers();
-
-        lobby.child(lobbyCode).child("Players").child("ZZZZZZZZZZZZZZ").removeValue();
-
-
-    }
-
-    public Lobby(boolean isEventOfficial, String time, String lobbyCode){
+    public Lobby(boolean isEventOfficial,  String lobbyCode){
         lobby = FirebaseDatabase.getInstance().getReference().child("Lobby");
         flag = false;
-        gameType = "Indoor";
         this.lobbyCode = lobbyCode;
         this.isEventOfficial = isEventOfficial;
-       // setDateTime(time);
+
         lobby.child(lobbyCode).child("isEventOfficial").setValue(isEventOfficial);
         lobby.child(lobbyCode).child("Start").setValue(false);
-        lobby.child(lobbyCode).child("gameType").setValue(gameType);
         user_flag = false;
         players = new ArrayList<User>();
 
@@ -70,6 +41,7 @@ public class Lobby {
         lobby.child(lobbyCode).child("Players").child("ZZZZZZZZZZZZZZ").removeValue();
 
     }
+
     //FOR JOINERS
     public Lobby(String lobbyCode){
         lobby = FirebaseDatabase.getInstance().getReference().child("Lobby");
@@ -100,23 +72,12 @@ public class Lobby {
 
             }
         });
-        lobby.child(lobbyCode).child("gameType").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                gameType = snapshot.getValue().toString();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     public String getLobbyCode(){
         return lobbyCode;
     }
-    public String getGameType(){return gameType;}
 
     public boolean isEventOfficial(){
         return isEventOfficial;
@@ -146,7 +107,6 @@ public class Lobby {
 
     public void findPlayers(){
 
-
         lobby.child(lobbyCode).child("Players").addValueEventListener(new ValueEventListener() {//TO GET PLAYERS; FIRST, FIND PLAYERS.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -172,7 +132,6 @@ public class Lobby {
 
     public ArrayList<User> getPlayers(){
 
-        System.out.println(players);
         return players;
     }
 
@@ -189,4 +148,5 @@ public class Lobby {
     public void removePlayer(String uid){
         lobby.child(lobbyCode).child("Players").child(uid).removeValue();
     }
+
 }

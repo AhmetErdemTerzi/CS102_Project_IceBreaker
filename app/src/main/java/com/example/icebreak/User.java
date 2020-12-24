@@ -28,6 +28,7 @@ public class User {
     String str;
     //Event currentEvent;
     int requestCount;
+    Lobby currentLobby;
 
     public User(){
         userInstances = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -56,6 +57,16 @@ public class User {
         //listenValuesAlways();
 //
 
+    }
+
+    public User(String uid, int currentPoint)
+    {
+        userInstances = FirebaseDatabase.getInstance().getReference().child("Users");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        this.uid = uid;
+        userInstances.child(uid).child("controller").setValue(0);
+        userInstances.child(uid).child("HOSHBULDUUUUUK").setValue(true);
+        this.currentPoint = currentPoint;
     }
 
     public void controller(){
@@ -340,6 +351,16 @@ public class User {
 
     public double getAvgPoints() {
         return averagePoint;
+    }
+
+    public void setCurrentLobby(Lobby lobby)
+    {
+        currentLobby=lobby;
+    }
+
+    public Lobby getCurrentLobby()
+    {
+        return currentLobby;
     }
 
     //public void setEvent(Event event){}

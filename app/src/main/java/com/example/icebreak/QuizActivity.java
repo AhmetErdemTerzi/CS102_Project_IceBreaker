@@ -149,7 +149,7 @@ public class QuizActivity extends AppCompatActivity {
         };
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference().child("Lobby").child(Lobby.getLobbyCode()).child("Quiz");
+        reference = database.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Quiz");
         reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -165,6 +165,8 @@ public class QuizActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+
     }
 
     public void setRandoms(){

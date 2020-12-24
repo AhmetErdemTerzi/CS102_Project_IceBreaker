@@ -8,7 +8,7 @@ public class OutdoorEvent extends Event{
     double[] coordinates;
 
     public OutdoorEvent(String gameType, boolean isEventOfficial, String dateTime, String lobbyCode, int numOfPlayers){
-        super(gameType,isEventOfficial,dateTime,numOfPlayers);//LOBBY CODE SİLİNDİ
+        super(gameType,isEventOfficial,numOfPlayers);//LOBBY CODE SİLİNDİ
         coordinates = new double[2];
     }
 

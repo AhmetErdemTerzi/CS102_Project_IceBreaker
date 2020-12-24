@@ -98,6 +98,12 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 countDownTimer.cancel();
+
+                A.setClickable(false);
+                B.setClickable(false);
+                C.setClickable(false);
+                D.setClickable(false);
+
                 if(flag)
                 {
                     if (question.tryThis(selected)) {

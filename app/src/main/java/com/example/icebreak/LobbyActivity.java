@@ -10,11 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,12 +37,15 @@ public class LobbyActivity extends AppCompatActivity {
     ArrayList<User> players;
     boolean isLobbyLeader;
     Lobby lobby;
+    Event event;
 
     String[] uidList;
     boolean flag;
     int i,textHelper;
     boolean textHelp;
     List<User> list;
+    FirebaseFirestore firebaseFirestore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,7 @@ public class LobbyActivity extends AppCompatActivity {
         textHelper = 0;
         textHelp = false;
         player = new TextView[8];
+        firebaseFirestore =FirebaseFirestore.getInstance();
 
         but1 = (Button) this.findViewById(R.id.but1);
         but2 = (Button) this.findViewById(R.id.but2);
@@ -65,6 +74,9 @@ public class LobbyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
+
+                firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
+
                 finish();
             }
         });
@@ -88,8 +100,10 @@ public class LobbyActivity extends AppCompatActivity {
         gametype = (TextView) this.findViewById(R.id.gametype);
         code = (TextView) this.findViewById(R.id.code);
 
-        lobby = playTabActivity.event.getLobby();
-        code.setText(lobby.getLobbyCode());
+        if(playTabActivity.getEvent().getLobby() != null) {
+            lobby = playTabActivity.getEvent().getLobby();
+            code.setText(lobby.getLobbyCode());
+        }
 
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("isLobbyLeader").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -123,10 +137,15 @@ public class LobbyActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Start").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if((Boolean) snapshot.getValue()){
-                    Intent intent = new Intent(LobbyActivity.this, QuizActivity.class);
-                    startActivity(intent);
-                    setContentView(R.layout.activity_quiz);
+                if(snapshot.getValue() != null) {
+                    if ((Boolean) snapshot.getValue()) {
+                        if (timer != null) {
+                            timer.cancel();
+                        }
+                        Intent intent = new Intent(LobbyActivity.this, QuizActivity.class);
+                        startActivity(intent);
+
+                    }
                 }
             }
 
@@ -284,6 +303,13 @@ public class LobbyActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
+        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
+
     }
+
+    public void setEvent(Event event){
+        this.event = event;
+    }
+
 
 }

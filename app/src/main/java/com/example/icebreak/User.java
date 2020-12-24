@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.renderscript.Sampler;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -11,9 +13,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
 
@@ -29,6 +36,8 @@ public class User {
     //Event currentEvent;
     int requestCount;
     Lobby currentLobby;
+
+    FirebaseFirestore firebaseFirestore;
 
     public User(){
         userInstances = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -59,7 +68,7 @@ public class User {
 
     }
 
-    public User(String uid, int currentPoint)
+    public User(String uid, int currentPoint, String name)
     {
         userInstances = FirebaseDatabase.getInstance().getReference().child("Users");
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,6 +76,7 @@ public class User {
         userInstances.child(uid).child("controller").setValue(0);
         userInstances.child(uid).child("HOSHBULDUUUUUK").setValue(true);
         this.currentPoint = currentPoint;
+        this.username = name;
     }
 
     public void controller(){
@@ -296,6 +306,10 @@ public class User {
 
     public void setCurrentPoint(int point){
         userInstances.child(getUID()).child("Current Point").setValue(point);
+
+        DocumentReference x = FirebaseFirestore.getInstance().collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference);
+        x.collection("Users").document(playTabActivity.FirestoreUserReference).update("Point", Integer.toString(point));
+
 
     }
 

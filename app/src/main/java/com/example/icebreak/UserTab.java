@@ -39,7 +39,8 @@ public class UserTab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_tab);
 
-        userClass = new User();
+        if(userClass == null){
+        userClass = new User();}
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference root = firebaseDatabase.getReference();

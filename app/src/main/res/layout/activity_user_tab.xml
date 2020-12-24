@@ -24,7 +24,7 @@
             android:background="#CFD8DC"
             android:text="User"
             android:textColor="#7B8D93"
-            android:textSize="12sp"
+            android:textSize="10sp"
             app:backgroundTint="#CFD8DC" />
 
         <Button
@@ -45,7 +45,7 @@
             android:background="#CFD8DC"
             android:text="Notıfıcations"
             android:textColor="#7B8D93"
-            android:textSize="12sp"
+            android:textSize="10sp"
             app:backgroundTint="#CFD8DC" />
 
 
@@ -141,7 +141,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:layout_below="@id/averagePoints"
-            android:text="@string/quiz_suggestions"
+            android:text="Direct task suggestion:"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
@@ -151,7 +151,8 @@
             android:layout_height="90dp"
             android:layout_below="@id/quizSuggestion"
             android:layout_marginStart="16dp"
-            android:hint="@string/enter_quiz_suggestions_here"
+            android:layout_alignParentStart="true"
+            android:hint="Enter direct task suggestions here"
 
             android:textColor="@color/white"
             android:textColorHint="#A3A0A0" />
@@ -172,14 +173,16 @@
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="91dp"
-            android:layout_height="83dp"
-            android:layout_above="@id/adminPart"
+            android:layout_width="61dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/btnSuggestion"
+            android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="60dp"
             android:background="@drawable/logouticon"
-            android:layout_margin="16dp"/>
+            android:padding="16dp" />
 
         <LinearLayout
             android:id="@+id/adminPart"
@@ -187,7 +190,6 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_weight="0"
             android:orientation="horizontal">
 
             <Button
@@ -200,16 +202,17 @@
                 android:textColor="#7B8D93"
                 android:textSize="12sp"
                 app:backgroundTint="#CFD8DC" />
-
             <Button
                 android:id="@+id/revSug"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#CFD8DC"
-                android:text="Review Suggestions"
+                android:text="Suggestions"
                 android:textColor="#7B8D93"
+                android:textSize="12sp"
                 app:backgroundTint="#CFD8DC" />
+
 
 
         </LinearLayout>

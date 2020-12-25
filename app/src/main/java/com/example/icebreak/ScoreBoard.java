@@ -60,6 +60,11 @@ public class ScoreBoard {
         if(bom.size() == 0)
         {
             firebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
+            if(tempList.get(0).getUID().equals(UserTab.userClass.getUID())){
+                UserTab.userClass.increaseWinCount();
+            }
+            else
+                UserTab.userClass.increaseLoseCount();
         }
 
         else {

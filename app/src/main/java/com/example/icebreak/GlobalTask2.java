@@ -48,8 +48,8 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
 
     private int totalStep;
     private Timer time;
-    private final int upperStep = 600;
-    private final int lowerStep = 500;
+    private final int upperStep = 300;
+    private final int lowerStep = 200;
     private static boolean taskSucessful2 = false;
     private int step_number;
     private int prev_step;
@@ -60,6 +60,10 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
 
     //to check if sensor is percieved first time
     private boolean checkk = false;
+
+
+    //oyun bitti mi bitmedi ona baksın
+    private boolean checkk2 = false;
 
     //for timer
     private CountDownTimer countDownTimer;
@@ -240,20 +244,22 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
                 prev_step = (int) (event.values[0]);
                 checkk = true;
             }
+            if(!checkk2) {
 
-            step = (int) (event.values[0]) -prev_step;
-            if(step >= step_number) {
-                taskSucessful2 = true;
-                step_taken.setText(String.valueOf(step_number));
-                float step_full = Float.intBitsToFloat(step_number);
-                circularProgressBar.setProgressWithAnimation(step_full);
-                taskOver();
+                step = (int) (event.values[0]) - prev_step;
+                if (step >= step_number) {
+                    taskSucessful2 = true;
+                    step_taken.setText(String.valueOf(step_number));
+                    float step_full = Float.intBitsToFloat(step_number);
+                    circularProgressBar.setProgressWithAnimation(step_full);
+                    checkk2 = true;
+                    taskOver();
 
-            }
-            else {
-                step_taken.setText(String.valueOf(step));
-                float step_f = Float.intBitsToFloat(step);
-                circularProgressBar.setProgressWithAnimation(step_f);
+                } else {
+                    step_taken.setText(String.valueOf(step));
+                    float step_f = Float.intBitsToFloat(step);
+                    circularProgressBar.setProgressWithAnimation(step_f);
+                }
             }
         }
     }

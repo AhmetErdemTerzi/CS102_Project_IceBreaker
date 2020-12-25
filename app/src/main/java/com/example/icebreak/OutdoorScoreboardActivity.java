@@ -45,9 +45,8 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outdoor_scoreboard);
-        System.out.println(playTabActivity.event.getLobby());
-
-        outDoorScoreBoard = new OutDoorScoreBoard(playTabActivity.event.getLobby());  //LOBY STATİK OLACAK ÇEKİLECEK !!!
+        if((playTabActivity.event.getLobby()!=null)){
+        outDoorScoreBoard = new OutDoorScoreBoard(playTabActivity.event.getLobby()); } //LOBY STATİK OLACAK ÇEKİLECEK !!!
         sortedUsers = new ArrayList<>();
         userNameandScores = new ArrayList<>();
         userNameandScores.add("USERS");
@@ -246,9 +245,9 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
             int x = v.getId();
 
             if(x == exit.getId()){
-                firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
-                firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).removeValue();
-                Intent intent = new Intent(OutdoorScoreboardActivity.this, UserTab.class);
+                firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
+                firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
+                Intent intent = new Intent(OutdoorScoreboardActivity.this, playTabActivity.class);
                 startActivity(intent);
             }
 
@@ -259,5 +258,15 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
+        firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
+        Intent intent = new Intent(OutdoorScoreboardActivity.this, playTabActivity.class);
+        startActivity(intent);
+    }
+
 
 }

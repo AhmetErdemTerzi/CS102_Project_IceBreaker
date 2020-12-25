@@ -101,13 +101,18 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
 
             if(x == exit.getId()){
-                firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
-                firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).removeValue();
                 Intent intent = new Intent(ScoreBoardActivity.this, UserTab.class);
                 startActivity(intent);
             }
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ScoreBoardActivity.this, UserTab.class);
+        startActivity(intent);
+    }
+
 
 }

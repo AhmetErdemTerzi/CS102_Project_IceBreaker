@@ -9,16 +9,24 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class OutdoorEventMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton imageButtonGoogleMaps, imageButtonPedometer;
     Button btnSend, btnGame, btnScoreboard;
     EditText codeInput;
+    FirebaseFirestore firebaseFirestore;
+    FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outdoor_event_main);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         imageButtonGoogleMaps = this.findViewById(R.id.mapImageButton);
         imageButtonPedometer = this.findViewById(R.id.walkImageButton);
@@ -62,5 +70,13 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
             // TODO get orienteering code and test it
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
+        firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
+        Intent intent = new Intent(OutdoorEventMainActivity.this, playTabActivity.class);
+        startActivity(intent);
     }
 }

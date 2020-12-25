@@ -1,8 +1,10 @@
 package com.example.icebreak;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -54,7 +56,8 @@ public class QuizActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     int index;
-
+    FirebaseFirestore firebaseFirestore;
+    FirebaseDatabase firebaseDatabase;
 
     private static final String TAG = "GlobalTask1";
 
@@ -75,6 +78,9 @@ public class QuizActivity extends AppCompatActivity {
         B.setOnClickListener(listen);
         C.setOnClickListener(listen);
         D.setOnClickListener(listen);
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
 
         questionList = new ArrayList<Question>();
         lobbyList = new  ArrayList<String>();
@@ -396,10 +402,27 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         countDownTimer.cancel();
-        Intent intent = new Intent(QuizActivity.this, playTabActivity.class);
-        setContentView(R.layout.activity_play_tab);
+
+        AlertDialog dialog = new AlertDialog.Builder(QuizActivity.this)
+                .setMessage("Would you like to leave?")
+                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
+                        firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).removeValue();
+                      Intent intent = new Intent(QuizActivity.this, playTabActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        countDownTimer.start();
+                    }
+                })
+                .show();
     }
 
 }

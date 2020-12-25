@@ -46,7 +46,6 @@ public class DirectTask{
 
         store = FirebaseFirestore.getInstance();
         taskList = new ArrayList<>();
-        getTasklist();
 
         database =  FirebaseDatabase.getInstance();
         reference = database.getReference().child("Direct_Task").child(OutDoorScoreBoard.directTaskCode);
@@ -99,6 +98,7 @@ public class DirectTask{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 random = snapshot.getValue(Integer.class);
+                getTasklist();
             }
 
             @Override

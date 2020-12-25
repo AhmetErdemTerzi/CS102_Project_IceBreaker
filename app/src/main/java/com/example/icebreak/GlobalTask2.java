@@ -137,7 +137,7 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
 
             //current user puan alınımı eklenecek sorun çıkardığı için comment atıldı
             //currentUser.setCurrentPoint(currentUser.getCurrentPoint() + 1);
-
+            UserTab.userClass.setCurrentPoint(UserTab.userClass.getCurrentPoint() + 10);
 
             openWinDialog();
 

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +28,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.widget.Toast;
+
 
 public class LobbyActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,12 +46,8 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
     boolean flag;
     int i,textHelper;
     boolean textHelp;
-<<<<<<< HEAD
-    List<User> list;
     FirebaseFirestore firebaseFirestore;
 
-=======
->>>>>>> origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +74,6 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
 
         start = this.findViewById(R.id.start);
         exit = this.findViewById(R.id.exit);
-        //lobbyOwner = this.findViewById(R.id.lobbyOwner);
-        //lobbyOwner.setText(UserTab.userClass.getName() + "'s Lobby");
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +105,7 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         gametype = (TextView) this.findViewById(R.id.gametype);
         code = (TextView) this.findViewById(R.id.code);
 
-        if(playTabActivity.getEvent().getLobby() != null) {
+        if(playTabActivity.getEvent() != null) {
             lobby = playTabActivity.getEvent().getLobby();
             code.setText(lobby.getLobbyCode());
         }
@@ -149,39 +144,42 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Start").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-<<<<<<< HEAD
                 if(snapshot.getValue() != null) {
                     if ((Boolean) snapshot.getValue()) {
-                        if (timer != null) {
-                            timer.cancel();
-                        }
-                        Intent intent = new Intent(LobbyActivity.this, QuizActivity.class);
-                        startActivity(intent);
+
+                        //ERKOŞKOOO ************    İNANILMAZ BİR ATLAYIŞ
+
+
+                        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("gameType").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.getValue().toString().equals("Indoor Game")) {
+                                    if (timer != null) {
+                                        timer.cancel();
+                                    }
+                                    Intent intent = new Intent(LobbyActivity.this, QuizActivity.class);
+                                    startActivity(intent);
+                                }
+                                else if(snapshot.getValue().toString().equals("Outdoor Game")){
+                                    if (timer != null) {
+                                        timer.cancel();
+                                    }
+                                    Intent intent = new Intent(LobbyActivity.this, OutdoorEventMainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        //ERKOŞKOOO ************ OOOMAAYYGAT
+
+
 
                     }
-=======
-                if((Boolean) snapshot.getValue()){
-                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("gameType").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.getValue().toString().equals("Indoor Game")) {
-                                Intent intent = new Intent(LobbyActivity.this, QuizActivity.class);
-                                startActivity(intent);
-                                setContentView(R.layout.activity_quiz);
-                            }
-                            else if(snapshot.getValue().toString().equals("Outdoor Game")){
-                                Intent intent = new Intent(LobbyActivity.this, OutdoorEventMainActivity.class);
-                                startActivity(intent);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
->>>>>>> origin/master
                 }
             }
 
@@ -198,40 +196,7 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         //bir de normal oyuncu versiyonu
     }
 
-    private void listenChanges() {
-        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                getPlayerList();
-                getPlayerList();
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                getPlayerList();
-                getPlayerList();
-
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
+    //ERKİNNN NAPTIN BABAAAA
 
     public void removePlayer(int n) {
 
@@ -272,6 +237,8 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
+    //YOK ETMİŞŞŞSİNNN
 
     public void getPlayerList() {
 
@@ -324,7 +291,7 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
 
         }
         else if(textHelper<uidList.length) {
-            System.out.println(uidList[textHelper]+"------------------"+textHelper);
+            System.out.println(uidList[textHelper]+"------------------");
             FirebaseDatabase.getInstance().getReference().child("Users").child(uidList[textHelper]).child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -347,15 +314,9 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
         }
-
-
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
     }
 
+    //ERKİNCİM
     @Override
     public void onClick(View v) {
         if(isLobbyLeader) {
@@ -379,27 +340,24 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void amIKicked(){
+
+    public void amIKicked() {
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Kicked").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(Boolean.class)){
+                if (snapshot.getValue(Boolean.class)) {
                     FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Kicked").setValue(false);
-                    Toast.makeText(LobbyActivity.this,"You are kicked.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LobbyActivity.this, "You are kicked.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-
     }
-<<<<<<< HEAD
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -413,6 +371,4 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-=======
->>>>>>> origin/master
 }

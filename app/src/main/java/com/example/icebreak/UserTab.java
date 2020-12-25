@@ -34,6 +34,7 @@ public class UserTab extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +81,7 @@ public class UserTab extends AppCompatActivity {
 
 
 
-        userInfo= (Button) this.findViewById(R.id.userInfo);
+        userInfo = (Button) this.findViewById(R.id.userInfo);
         revSug= (Button) this.findViewById(R.id.revSug);
         adminPart = (LinearLayout) this.findViewById(R.id.adminPart);
 

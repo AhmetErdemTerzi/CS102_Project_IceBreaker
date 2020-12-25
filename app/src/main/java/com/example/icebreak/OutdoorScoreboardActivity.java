@@ -96,12 +96,6 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
 
                 noOfUser = sortedUsers.size();
 
-             //  for(int i = 2; i < (usersAndScores.size()-2/2); i++){
-             //      if(position == i){
-             //          outDoorScoreBoard.sendTaskRequest(sortedUsers.get(i));
-             //      }
-             //  }
-
                 if(position == 2 || position == 3){
                     outDoorScoreBoard.sendTaskRequest(sortedUsers.get(0));
 
@@ -267,6 +261,5 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
         Intent intent = new Intent(OutdoorScoreboardActivity.this, playTabActivity.class);
         startActivity(intent);
     }
-
 
 }

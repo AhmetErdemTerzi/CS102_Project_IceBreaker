@@ -409,9 +409,6 @@ public class QuizActivity extends AppCompatActivity {
                 .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
-                        firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).removeValue();
                       Intent intent = new Intent(QuizActivity.this, playTabActivity.class);
                         startActivity(intent);
                     }

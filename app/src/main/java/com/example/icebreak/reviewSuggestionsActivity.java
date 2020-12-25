@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.api.Distribution;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,6 +32,11 @@ public class reviewSuggestionsActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_review_suggestions);
 
         userInfo= (Button) this.findViewById(R.id.userInfo);
@@ -202,4 +208,6 @@ public class reviewSuggestionsActivity extends AppCompatActivity implements View
         FirebaseDatabase.getInstance().getReference().child("Suggestions").child("Sug0").removeValue();
 
     }
+
+
 }

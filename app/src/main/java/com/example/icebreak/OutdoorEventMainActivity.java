@@ -1,16 +1,27 @@
 package com.example.icebreak;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class OutdoorEventMainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,10 +30,16 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
     EditText codeInput;
     FirebaseFirestore firebaseFirestore;
     FirebaseDatabase firebaseDatabase;
+    ArrayList<String> oCodes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_outdoor_event_main);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -40,7 +57,30 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
         btnScoreboard.setOnClickListener(this);
         btnGame.setOnClickListener(this);
         btnSend.setOnClickListener(this);
+        oCodes.add("ICEBREAK");
+        oCodes.add("OzcanHocaIsBest");
+        oCodes.add("CS102IsTheBest");
+        oCodes.add("KINGKONGDONKEYBEST");
 
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if((boolean)snapshot.getValue())
+                    gameIsOver();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void gameIsOver()
+    {
+
+        Intent intent = new Intent(OutdoorEventMainActivity.this, ScoreBoardActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -67,10 +107,29 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
 
         else if(id == btnSend.getId())
         {
-            // TODO get orienteering code and test it
+            String str = codeInput.getText().toString();
+            if(oCodes.contains(str))
+            {
+                oCodes.remove(str);
+                UserTab.userClass.setCurrentPoint(UserTab.userClass.getCurrentPoint() + 10);
+                AlertDialog dialog = new AlertDialog.Builder(OutdoorEventMainActivity.this)
+                        .setMessage("Congrats! You entered a valid code!")
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+            else
+            {
+                Toast.makeText(this, "The code is invalid!", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -79,4 +138,5 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
         Intent intent = new Intent(OutdoorEventMainActivity.this, playTabActivity.class);
         startActivity(intent);
     }
+
 }

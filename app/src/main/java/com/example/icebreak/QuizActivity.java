@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -64,6 +65,11 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_quiz);
         A = (Button) findViewById(R.id.A);
         B = (Button) findViewById(R.id.B);
@@ -372,7 +378,6 @@ public class QuizActivity extends AppCompatActivity {
             this.finish();
             Intent intent = new Intent(QuizActivity.this, ScoreBoardActivity.class);
             startActivity(intent);
-            setContentView(R.layout.activity_score_board);
         }
 
     }
@@ -399,4 +404,9 @@ public class QuizActivity extends AppCompatActivity {
                 .show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseAuth.getInstance().signOut();
+    }
 }

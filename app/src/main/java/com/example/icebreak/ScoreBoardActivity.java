@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,6 +45,11 @@ public class ScoreBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_score_board);
 
 
@@ -129,7 +135,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
 
             if(x == exit.getId()){
-                Intent intent = new Intent(ScoreBoardActivity.this, UserTab.class);
+                Intent intent = new Intent(ScoreBoardActivity.this, playTabActivity.class);
                 startActivity(intent);
             }
 

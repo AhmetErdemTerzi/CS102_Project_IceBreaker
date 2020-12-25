@@ -117,7 +117,10 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 username = snapshot.getValue(String.class);
+
                 str = username;
+                controller();
+
                 //System.out.println(username);
 
             }
@@ -170,6 +173,7 @@ public class User {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 winCount = snapshot.getValue(Integer.class);
                 // System.out.println(winCount);
+                controller();
             }
 
             @Override
@@ -177,8 +181,6 @@ public class User {
 
             }
         });
-        controller();
-
 
     }
 
@@ -240,6 +242,8 @@ public class User {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 username = (String) snapshot.getValue().toString();
+                str = username;
+                controller();
                 //System.out.println("username 2 ");
             }
 
@@ -310,6 +314,9 @@ public class User {
         DocumentReference x = FirebaseFirestore.getInstance().collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference);
         x.collection("Users").document(playTabActivity.FirestoreUserReference).update("Point", Integer.toString(point));
 
+        Map<String, Object> data = new HashMap<>();
+        data.put("currentPoint", point);
+        FirebaseFirestore.getInstance().collection("Users").document(getUID()).update(data);
 
     }
 

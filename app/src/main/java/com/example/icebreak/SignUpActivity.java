@@ -34,6 +34,11 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_sign_up);
 
         email = (EditText)this.findViewById(R.id.email);
@@ -120,4 +125,5 @@ public class SignUpActivity extends AppCompatActivity {
         data.put("numOfGamesPlayed", 0);
         FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).set(data);
     }
+
 }

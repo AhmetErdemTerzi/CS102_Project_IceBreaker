@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +56,11 @@ public class playTabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_play_tab);
 
         gameType = (Spinner) this.findViewById(R.id.gameType);
@@ -202,8 +208,10 @@ public class playTabActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(playTabActivity.this, "Congrats! You created a game.", Toast.LENGTH_SHORT).show();
                     //TODO: SERVER'A BAĞLI Bİ LOBİ OLUŞCAK.
-                    if (admin)
+                    if (admin) {
                         event = new Event(gametype, true, Integer.parseInt(num_Players));
+                        ((AdminUser)UserTab.userClass).setNotifications("OFFICIAL EVENT TIME!! JOIN LOBBY: " + event.getLobbyCode());
+                    }
                     else
                         event = new Event( gametype, false, Integer.parseInt(num_Players));
 
@@ -213,6 +221,7 @@ public class playTabActivity extends AppCompatActivity {
 
                     Map<String, Object> code = new HashMap<>();
                     code.put("LobbyCode", event.getLobbyCode());
+                    code.put("GameType", gametype);
                     code.put("Random1", Integer.toString(random1));
                     code.put("Random2", Integer.toString(random2));
                     code.put("Random3", Integer.toString(random3));
@@ -304,6 +313,11 @@ public class playTabActivity extends AppCompatActivity {
             }
         });
 
+        //currentPoint - Avg.Point- number of games played in firestore.
+        Map<String, Object> data = new HashMap<>();
+        data.put("currentPoint", 0);
+        FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Current Point").setValue(0);
+        FirebaseFirestore.getInstance().collection("Users").document(UserTab.userClass.getUID()).update(data);
         Intent intent = new Intent(playTabActivity.this, LobbyActivity.class);
         startActivity(intent);
     }
@@ -333,7 +347,11 @@ public class playTabActivity extends AppCompatActivity {
 
             }
         });
-
+        //currentPoint - Avg.Point- number of games played in firestore.
+        Map<String, Object> data = new HashMap<>();
+        data.put("currentPoint", 0);
+        FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Current Point").setValue(0);
+        FirebaseFirestore.getInstance().collection("Users").document(UserTab.userClass.getUID()).update(data);
         Intent intent = new Intent(playTabActivity.this, LobbyActivity.class);
         startActivity(intent);
     }
@@ -362,7 +380,7 @@ public class playTabActivity extends AppCompatActivity {
     private void checkCodeBoolean(String code)
     {
         codeCorrect = lobbyCodes.contains(code);
-        Toast.makeText(this, "code is" + codeCorrect, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "code is " + codeCorrect, Toast.LENGTH_LONG).show();
         if(codeCorrect)
         {
             lobby = new Lobby(lobbyCode.getText().toString());
@@ -378,4 +396,9 @@ public class playTabActivity extends AppCompatActivity {
         return event;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseAuth.getInstance().signOut();
+    }
 }

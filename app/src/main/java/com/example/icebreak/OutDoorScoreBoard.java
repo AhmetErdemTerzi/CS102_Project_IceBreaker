@@ -65,7 +65,13 @@ public class OutDoorScoreBoard extends ScoreBoard{
 
         if(bom.size() == 0)
         {
-            firebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
+            FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
+
+            if(tempList.get(0).getCurrentPoint() >= 60)
+            {
+                System.out.println("EN YUKEEK PUAN" + tempList.get(0).getCurrentPoint());
+                FirebaseDatabase.getInstance().getReference().child("Lobby").child(gameLobby.getLobbyCode()).child("isOver").setValue(true);
+            }
 
         }
 
@@ -127,7 +133,7 @@ public class OutDoorScoreBoard extends ScoreBoard{
         reference2.child(uid).child("Outdoor").child("Response").setValue(i);
 
         if(i == 1){
-            reference.child(directTaskCode).child("Random").setValue((int) (Math.random()*4));
+            reference.child(directTaskCode).child("Random").setValue((int) (Math.random()*11));
         }
     }
 

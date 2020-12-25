@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,11 @@ public class notifActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_notif);
 
         btnUser = (Button) this.findViewById(R.id.btnUser);
@@ -183,6 +189,11 @@ public class notifActivity extends AppCompatActivity implements View.OnClickList
             notif4.setText("");
         }
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 }

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +46,11 @@ public class TaskReceiverActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_task_receiver);
 
         datacı = FirebaseDatabase.getInstance();
@@ -118,6 +124,19 @@ public class TaskReceiverActivity extends AppCompatActivity {
             }
         };
         time.setText("5:00");
+
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if((boolean)snapshot.getValue())
+                    gameIsOver();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void openWinDialog() {
@@ -178,4 +197,12 @@ public class TaskReceiverActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
+    private void gameIsOver()
+    {
+        if(countDownTimer != null)
+            countDownTimer.cancel();
+        Intent intent = new Intent(TaskReceiverActivity.this, ScoreBoardActivity.class);
+        startActivity(intent);
+    }
 }

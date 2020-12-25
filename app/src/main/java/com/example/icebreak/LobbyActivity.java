@@ -11,12 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -52,6 +55,11 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_lobby);
 
         amIALone = false;
@@ -60,6 +68,12 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         textHelp = false;
         player = new TextView[8];
         firebaseFirestore =FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                gametype.setText(documentSnapshot.getString("GameType"));
+            }
+        });
 
         but[0] = (Button) this.findViewById(R.id.but1);
         but[1] = (Button) this.findViewById(R.id.but2);
@@ -109,10 +123,12 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         player[7] = (TextView) this.findViewById(R.id.player8);
 
         gametype = (TextView) this.findViewById(R.id.gametype);
+
         code = (TextView) this.findViewById(R.id.code);
 
         if(playTabActivity.getEvent() != null) {
             lobby = playTabActivity.getEvent().getLobby();
+            gametype.setText(lobby.getGameType());
             code.setText(lobby.getLobbyCode());
         }
 
@@ -385,6 +401,8 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
     public void setEvent(Event event){
         this.event = event;
     }
+
+
 
 
 }

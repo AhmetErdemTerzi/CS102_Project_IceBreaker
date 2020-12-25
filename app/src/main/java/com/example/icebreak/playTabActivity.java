@@ -326,7 +326,6 @@ public class playTabActivity extends AppCompatActivity {
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(TAG, "lobbye uid AMA OLMADII: " + documentReference.getId());
                 FirestoreUserReference = documentReference.getId();
-                System.out.println("ANNENİNAMMMIIII" + FirestoreUserReference);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

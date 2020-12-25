@@ -119,12 +119,10 @@ public class Lobby {
                 players.clear();
                 for(DataSnapshot child : snapshot.getChildren()){
                     String uid = child.getValue().toString();
-                    //System.out.println("İÇERDEYİM BEEEEEE: " + uid);
                     User user = new User(uid);
                     players.add(user);
 
                 }
-                System.out.println(players.size());
             }
 
             @Override

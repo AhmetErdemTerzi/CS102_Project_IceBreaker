@@ -226,7 +226,6 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
                     }
                     else
                         a++;
-                    //System.out.println("İÇERDEYİM BEEEEEE: " + uid)
                 }
                 if(uidList.length >= n) {
                     FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(uidList[n]).removeValue();

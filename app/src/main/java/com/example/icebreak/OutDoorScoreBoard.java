@@ -124,7 +124,6 @@ public class OutDoorScoreBoard extends ScoreBoard{
 
     public void responseTaskRequest(int i,String uid)
     {
-        System.out.println(uid);
         reference2.child(uid).child("Outdoor").child("Response").setValue(i);
 
         if(i == 1){

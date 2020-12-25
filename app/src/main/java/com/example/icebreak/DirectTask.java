@@ -116,10 +116,7 @@ public class DirectTask{
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (DocumentSnapshot doc : task.getResult()) {
                     str = doc.getString("objective").toString();
-                    Log.d(TAG, "DocumentSnapshot data: " + str);
                     taskList.add(str);
-                    Log.d(TAG, "size " + taskList.size());
-                    Log.d(TAG, "rando " + random);
                 }
                 setTask();
             }

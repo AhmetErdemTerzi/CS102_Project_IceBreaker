@@ -17,6 +17,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -108,5 +112,12 @@ public class SignUpActivity extends AppCompatActivity {
         rootReference.child("Users").child(user.getUid()).child("Outdoor").child("senderUID").setValue("");
         rootReference.child("Users").child(user.getUid()).child("Outdoor").child("Response").setValue(0);
         rootReference.child("Users").child(user.getUid()).child("Kicked").setValue(false);
+
+        //currentPoint - Avg.Point- number of games played in firestore.
+        Map<String, Object> data = new HashMap<>();
+        data.put("averagePoint", 0.0);
+        data.put("currentPoint", 0);
+        data.put("numOfGamesPlayed", 0);
+        FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).set(data);
     }
 }

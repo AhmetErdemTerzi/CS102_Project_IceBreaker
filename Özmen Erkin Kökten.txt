@@ -8,3 +8,4 @@
 22.12.2020 | Lobby class is almost done. LobbyActivity screen in progress. Minor mistakes are fixed.
 23.12.2020 | Lobby to QuizActivity transition for all players is achieved.
 24.12.2020 | Lobby to outdoor transition is done. Kick function is added for lobby leaders.
+25.12.2020 | Point calculations are done. 

@@ -18,13 +18,17 @@ import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ScoreBoardActivity extends AppCompatActivity {
 
@@ -72,6 +76,32 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
         exit = findViewById(R.id.Exit);
         exit.setOnClickListener(new Listener());
+        updateAvgPoint_and_gameCount();
+
+    }
+
+    private void updateAvgPoint_and_gameCount() {
+        FirebaseFirestore.getInstance().collection("Users").document(UserTab.userClass.getUID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                long count = (long) documentSnapshot.get("numOfGamesPlayed");
+                long currentPoint = (long) documentSnapshot.get("currentPoint");
+                double averagePoint = (double) documentSnapshot.get("averagePoint");
+
+                averagePoint = (count * averagePoint + currentPoint)/(count+1);
+                UserTab.userClass.setAveragePoint(averagePoint);
+
+                Map<String, Object> data = new HashMap<>();
+                data.put("averagePoint", averagePoint);
+                data.put("currentPoint", 0);
+                data.put("numOfGamesPlayed", (count + 1));
+                FirebaseFirestore.getInstance().collection("Users").document(UserTab.userClass.getUID()).update(data);
+
+
+            }
+        });
+
+
     }
 
     private void creatorstation(){

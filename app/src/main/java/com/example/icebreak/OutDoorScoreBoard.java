@@ -59,6 +59,32 @@ public class OutDoorScoreBoard extends ScoreBoard{
         });
     }
 
+    public void sortUsers(ArrayList<User> bom)
+    {
+        maxIndex = 0;
+
+        if(bom.size() == 0)
+        {
+            firebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
+
+        }
+
+        else {
+            temp = bom.get(0);
+            for (int i = 0; i < bom.size(); i++)
+            {
+                if (temp.getCurrentPoint() < bom.get(i).getCurrentPoint())
+                {//EMRECAN BU getScore değil getCurrentPoint olcak
+                    temp = bom.get(i);
+                    maxIndex = i;
+                }
+            }
+            tempList.add(temp);
+            bom.remove(maxIndex);
+            sortUsers(bom);
+        }
+    }
+
     public ArrayList<String> getNotifications(){
         return Notifications;
     }

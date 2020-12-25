@@ -172,26 +172,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         };
 
-        /*database = FirebaseDatabase.getInstance();
-        reference = database.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Quiz");
-        reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnap : snapshot.getChildren()) {
-                    randoms.add(dataSnap.getValue(Integer.class));
-                }
-                setRandoms();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
-                System.out.println("ABOOOAAAAAAAAA");
-            }
-        });*/
-
     }
 
     public void getRandoms(){
@@ -208,8 +188,6 @@ public class QuizActivity extends AppCompatActivity {
                 randomko.add(doc.getString("Random5"));
                 randomko.add(doc.getString("Random6"));
 
-                System.out.println(lobbyList.size());
-                System.out.println(randomko.size());
             }
             setRandoms();
             getQuestionList();
@@ -241,7 +219,6 @@ public class QuizActivity extends AppCompatActivity {
         while(randoms.get(1) == randoms.get(2) && randoms.get(2) == randoms.get(3) && randoms.get(3) == randoms.get(4) && randoms.get(4) == randoms.get(5) && randoms.get(5) == randoms.get(6)){
 
             reference.child("Upd").setValue(ThreadLocalRandom.current().nextInt(0, 20));
-            System.out.println("ABOOO");
         }
 
 

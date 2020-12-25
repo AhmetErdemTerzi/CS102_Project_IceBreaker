@@ -11,4 +11,11 @@ Event and OutDoor classes were worked but not finished. -- 17.12.2020
 
 ScoreBoard and OutdoorScoreBoard were started to be worked on. -- 18.12.2020
 
+Direct Task database connections in the outdoorscoreboard was completed. -- 22.12.2020
+
+
+With Erdem, Aral and Erkin, lobby class is corrected (now the lobby is fully capable of starting the correct game), scoreboard class is written and its xml is enhanced ,and the connections of these classes to Firebase is done. 24.12.2020 
+
+With Erdem, Aral and Erkin, Scoreboards and their screen are completed so they are working nicely (Sorting users depending on their scores and showing them in a table format). Direct task is completed, globaltask1 and globaltask2 is done. Outdoor event working nicely. 25.12.2020 | 
+
 

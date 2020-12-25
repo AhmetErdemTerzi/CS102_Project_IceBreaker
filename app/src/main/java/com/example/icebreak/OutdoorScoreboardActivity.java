@@ -226,9 +226,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
 
         for (int i = 0; i < sortedUsers.size(); i++) {
             userNameandScores.add(sortedUsers.get(i).getName());
-            System.out.println("babacık" + sortedUsers.get(i).getName());
             userNameandScores.add(Integer.toString(sortedUsers.get(i).getCurrentPoint()));
-            System.out.println("annecik" + sortedUsers.get(i).getCurrentPoint());
         }
 
 

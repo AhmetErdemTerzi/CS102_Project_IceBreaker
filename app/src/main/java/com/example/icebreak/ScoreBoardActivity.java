@@ -76,7 +76,6 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
     private void creatorstation(){
 
-            System.out.println("ananınammmmmcığı");
 
             sortedUsers = scoreBoard.sortingUsers();
 

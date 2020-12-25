@@ -5,24 +5,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".OutdoorScoreboardActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#2b2b2b">
+            android:background="#2b2b2b"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/layoutMain"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="#2b2b2b"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="#2b2b2b">
+                app:layout_constraintTop_toTopOf="parent">
+
 
                 <Button
                     android:id="@+id/btnGame"
@@ -42,553 +46,46 @@
                     android:background="#CFD8DC"
                     android:text="Scoreboard"
                     android:textColor="#7B8D93"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:backgroundTint="#2b2b2b" />
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="25sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="25sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Task:"
-                    android:textSize="25sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="35dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/User1"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
+                <GridView
+                    android:id="@+id/table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:footerDividersEnabled="false"
                     android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score1"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
+                    android:numColumns="2"
+                    android:padding="1dp"
+                    android:horizontalSpacing="10sp"
+                    android:verticalSpacing="10sp"
+                    android:layout_margin="8sp"
+                    ></GridView>
 
                 <Button
-
-                    android:id="@+id/Button1"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
+                    android:id="@+id/Exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="#FF0000"
+                    android:elevation="3dp"
+                    android:padding="11dp"
+                    android:text="Exıt"
                     android:textSize="11sp"
-                    android:textColor="@color/white"/>
-
+                    android:textStyle="bold" />
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/User2"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score2"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button2"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/User3"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score3"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button3"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/User4"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score4"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button4"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/User5"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score5"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button5"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/User6"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score6"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button6"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/User7"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score7"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button7"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#2b2b2b"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/User8"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="Users:"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:background="#808080"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <TextView
-
-                    android:id="@+id/Score8"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="Scores:"
-                    android:textSize="15sp"
-                    android:background="#808080"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.03"
-                    android:background="#2b2b2b"
-                    android:textAlignment="center"/>
-
-                <Button
-
-                    android:id="@+id/Button8"
-                    android:backgroundTint="#808080"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:text="+"
-                    android:textSize="11sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/Exit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="#FF0000"
-                android:elevation="3dp"
-                android:padding="11dp"
-                android:text="Exıt"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-
-
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

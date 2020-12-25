@@ -1,5 +1,7 @@
 package com.example.icebreak;
 
+import android.os.Handler;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -9,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class OutDoorScoreBoard extends ScoreBoard{
 
@@ -32,17 +35,17 @@ public class OutDoorScoreBoard extends ScoreBoard{
         reference1 = database.getReference().child("Notifications"); //notification için
 
 
-        reference1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                str = snapshot.getValue(String.class);
-                Notifications.add(str);
-            }
+      // reference1.addValueEventListener(new ValueEventListener() {
+      //     @Override
+      //     public void onDataChange(@NonNull DataSnapshot snapshot) {
+      //         str =  snapshot.getValue();
+      //         Notifications.add(str);
+      //     }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+      //     @Override
+      //     public void onCancelled(@NonNull DatabaseError error) {
+      //     }
+      // });
 
         reference2.child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,17 +80,25 @@ public class OutDoorScoreBoard extends ScoreBoard{
 
         this.TaskReceiver = taskReceiver;
         reference2.child(taskReceiver.getUID()).child("Outdoor").child("senderUID").setValue(UserTab.userClass.getUID());
-        reference.child(directTaskCode).child("TaskReceiver").setValue(taskReceiver.getName());
-        reference.child(directTaskCode).child("TaskGiver").setValue(UserTab.userClass.getName());
-        reference2.child(taskReceiver.getUID()).child("Outdoor").child("outdoorRequestReceived").setValue(true);
-        reference2.child(taskReceiver.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                reference.child(directTaskCode).child("TaskReceiver").setValue(taskReceiver.getName());
+                reference.child(directTaskCode).child("TaskGiver").setValue(UserTab.userClass.getName());
+                reference2.child(taskReceiver.getUID()).child("Outdoor").child("outdoorRequestReceived").setValue(true);
+                reference2.child(taskReceiver.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
+                reference2.child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
+            }
+        }, 1000);
+
     }
 
 
 
     public void responseTaskRequest(int i,String uid)
     {
-
+        System.out.println(uid);
         reference2.child(uid).child("Outdoor").child("Response").setValue(i);
 
         if(i == 1){

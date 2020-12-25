@@ -55,7 +55,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 task.setText(directTask.getTaskText());
-                user.setText(directTask.getTaskReceiver());
+                user.setText(directTask.getTaskGiver());
                 countDownTimer.start();
             }
 
@@ -88,9 +88,6 @@ public class TaskReceiverActivity extends AppCompatActivity {
         directTask = new DirectTask();
 
 
-        directTask.setTaskGiver("emrecaaan");
-        directTask.setTaskReceiver("ASDEQWQ");
-        directTask.setRandom((int) (Math.random()*4));
 
 
         time = (TextView) findViewById(R.id.Timer);
@@ -135,7 +132,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                Intent intent = new Intent(TaskReceiverActivity.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -144,7 +141,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                Intent intent = new Intent(TaskReceiverActivity.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -164,7 +161,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                Intent intent = new Intent(TaskReceiverActivity.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -173,7 +170,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TaskReceiverActivity.this, OutDoorScoreBoard.class);
+                Intent intent = new Intent(TaskReceiverActivity.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });

@@ -31,11 +31,12 @@ public class TaskGiverActivity extends AppCompatActivity {
     FirebaseDatabase datacı;
     DatabaseReference reference;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_giver);
+        directTask = new DirectTask();
+
 
         datacı = FirebaseDatabase.getInstance();
         reference = datacı.getReference().child("Direct_Task").child(OutDoorScoreBoard.directTaskCode);
@@ -53,9 +54,8 @@ public class TaskGiverActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        directTask = new DirectTask();
 
-        directTask.setRandom((int) (Math.random()*4));
+
 
 
         time = (TextView) findViewById(R.id.Timer);
@@ -132,7 +132,7 @@ public class TaskGiverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TaskGiverActivity.this, OutDoorScoreBoard.class);
+                Intent intent = new Intent(TaskGiverActivity.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -141,7 +141,7 @@ public class TaskGiverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TaskGiverActivity.this, OutDoorScoreBoard.class);
+                Intent intent = new Intent(TaskGiverActivity.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -161,7 +161,7 @@ public class TaskGiverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(TaskGiverActivity.this, OutDoorScoreBoard.class);
+                Intent intent = new Intent(TaskGiverActivity.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });

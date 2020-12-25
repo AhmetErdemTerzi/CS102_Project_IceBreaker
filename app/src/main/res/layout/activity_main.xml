@@ -7,17 +7,34 @@
     android:background="#2b2b2b"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/signupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOG IN"
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="287dp"
+        android:layout_height="40dp"
+        android:drawableStart="@android:drawable/sym_action_email"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="Enter e-mail"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="#A19999"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="45dp"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.09" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.394"
+        app:srcCompat="@drawable/penguinicon2" />
 
     <EditText
         android:id="@+id/password"
@@ -34,24 +51,19 @@
         app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintVertical_bias="0.557" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="287dp"
-        android:layout_height="40dp"
-        android:drawableStart="@android:drawable/sym_action_email"
-        android:ems="10"
-        android:gravity="center_vertical"
-        android:hint="Enter e-mail"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:textColorHint="#A19999"
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG IN"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.085" />
 
     <TextView
         android:id="@+id/textView5"
@@ -67,13 +79,14 @@
         app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.425" />
+        app:layout_constraintVertical_bias="0.399" />
 
     <TextView
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="88dp"
         android:layout_marginBottom="179dp"
         android:text="Do not have an account yet? SIGN UP!"
@@ -94,19 +107,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.213"
+        app:layout_constraintVertical_bias="0.187"
         app:srcCompat="@drawable/icebreaklogo" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="45dp"
-        android:layout_height="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42"
-        app:srcCompat="@drawable/penguinicon2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

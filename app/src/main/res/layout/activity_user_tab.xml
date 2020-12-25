@@ -7,49 +7,51 @@
     tools:context=".UserTab"
     android:background="@color/teal_700">
 
-    <LinearLayout
-        android:id="@+id/layoutMain"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/btnUser"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#CFD8DC"
-            android:text="User"
-            android:textColor="#7B8D93"
-            android:textSize="10sp"
-            app:backgroundTint="#CFD8DC" />
-
-        <Button
-            android:id="@+id/btnPlay"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#CFD8DC"
-            android:text="Play"
-            android:textColor="#7B8D93"
-            app:backgroundTint="#CFD8DC" />
-
-        <Button
-            android:id="@+id/btnNotifications"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#CFD8DC"
-            android:text="Notıfıcations"
-            android:textColor="#7B8D93"
-            android:textSize="10sp"
-            app:backgroundTint="#CFD8DC" />
 
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btnUser"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="User"
+                android:textColor="#7B8D93"
+                android:textSize="10sp"
+                app:backgroundTint="#CFD8DC" />
+
+            <Button
+                android:id="@+id/btnPlay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Play"
+                android:textColor="#7B8D93"
+                app:backgroundTint="#CFD8DC" />
+
+            <Button
+                android:id="@+id/btnNotifications"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CFD8DC"
+                android:text="Notıfıcations"
+                android:textColor="#7B8D93"
+                android:textSize="10sp"
+                app:backgroundTint="#CFD8DC" />
+
+
+        </LinearLayout>
 
 
     <RelativeLayout
@@ -57,19 +59,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-        android:orientation="vertical"
+        android:background="#2b2b2b"
         android:gravity="center"
-        android:background = "#2b2b2b"
-        >
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/layoutMain">
 
         <ImageView
             android:id="@+id/penguinuser"
-            android:layout_width="125dp"
-            android:layout_height="115dp"
-            android:layout_margin="16dp"
-            app:srcCompat="@drawable/penguinicon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="59dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/penguinicon" />
 
         <TextView
             android:id="@+id/welcome"
@@ -77,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="44dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:layout_toRightOf="@id/penguinuser"
 
             android:text="User Details"
@@ -90,17 +98,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/penguinuser"
-            android:textColor="@color/white"
-            android:layout_margin="16dp"
+            android:layout_margin="24dp"
             android:text="@string/username"
+            android:textColor="@color/white"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/winCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_below="@id/txtUsername"
+            android:layout_marginStart="24dp"
             android:layout_marginBottom="8dp"
             android:text="@string/win_count"
             android:textColor="@color/white"
@@ -112,9 +120,9 @@
             android:id="@+id/gamesPlayed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
             android:layout_below="@id/winCount"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/games_payed"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -125,9 +133,9 @@
             android:id="@+id/averagePoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="24dp"
             android:layout_below="@id/gamesPlayed"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/average_points"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -138,20 +146,20 @@
             android:id="@+id/quizSuggestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
             android:layout_below="@id/averagePoints"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="8dp"
             android:text="Direct task suggestion:"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <EditText
             android:id="@+id/enterSuggestion"
-            android:layout_width="286dp"
-            android:layout_height="90dp"
+            android:layout_width="240dp"
+            android:layout_height="80dp"
             android:layout_below="@id/quizSuggestion"
-            android:layout_marginStart="16dp"
             android:layout_alignParentStart="true"
+            android:layout_marginStart="24dp"
             android:hint="Enter direct task suggestions here"
 
             android:textColor="@color/white"
@@ -162,25 +170,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/quizSuggestion"
-            android:layout_alignParentEnd="true"
-
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_toRightOf="@id/enterSuggestion"
             android:background="#8BC34A"
             android:text="@string/send" />
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="61dp"
+            android:layout_width="55dp"
             android:layout_height="60dp"
             android:layout_below="@id/btnSuggestion"
-            android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="195dp"
             android:background="@drawable/logouticon"
             android:padding="16dp" />
 
@@ -189,19 +195,21 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/userInfo"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#CFD8DC"
                 android:text="User Info"
                 android:textColor="#7B8D93"
                 android:textSize="12sp"
                 app:backgroundTint="#CFD8DC" />
+
             <Button
                 android:id="@+id/revSug"
                 android:layout_width="0dp"
@@ -212,7 +220,6 @@
                 android:textColor="#7B8D93"
                 android:textSize="12sp"
                 app:backgroundTint="#CFD8DC" />
-
 
 
         </LinearLayout>

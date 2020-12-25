@@ -50,6 +50,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -114,6 +119,11 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_global_task1);
         isRandomLocationCreated = false;
 
@@ -138,7 +148,18 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
         setAndStartTimer(300);
 
 
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if((boolean)snapshot.getValue())
+                    gameIsOver();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -147,6 +168,15 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+    }
+
+    private void gameIsOver()
+    {
+        if(countDownTimer != null)
+            countDownTimer.cancel();
+        stopLocationUpdates();
+        Intent intent = new Intent(GlobalTask1.this, ScoreBoardActivity.class);
+        startActivity(intent);
     }
 
     public void onClick(View v) {
@@ -324,7 +354,7 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask1.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -333,7 +363,7 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask1.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -353,7 +383,7 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask1.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -362,7 +392,7 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask1.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask1.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -456,5 +486,10 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
                 askLocationPermission();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

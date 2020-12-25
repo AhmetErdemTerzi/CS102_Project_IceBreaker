@@ -65,8 +65,8 @@
         <EditText
             android:id="@+id/notif1"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
             android:background="#CFD8DC"
             android:hint="@string/enter_notifications_only_admins"
             android:textSize="20sp" />

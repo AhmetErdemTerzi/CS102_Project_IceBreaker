@@ -25,6 +25,7 @@ public class Lobby {
 
     public Lobby(boolean isEventOfficial,  String lobbyCode){
         lobby = FirebaseDatabase.getInstance().getReference().child("Lobby");
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobbyCode).child("isOver").setValue(false);
         flag = false;
         this.lobbyCode = lobbyCode;
         this.isEventOfficial = isEventOfficial;

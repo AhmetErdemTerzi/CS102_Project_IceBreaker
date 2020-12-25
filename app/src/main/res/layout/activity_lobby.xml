@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:background="#2b2b2b"
-        android:layout_marginTop="50dp"
         android:layout_marginBottom="100dp"
         android:orientation="vertical">
 
@@ -29,23 +28,27 @@
             android:textSize="25sp"
             tools:ignore="Suspicious0dp" />
 
+        <TextView
+            android:id="@+id/gametype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GAME TYPE:"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:background="#808080"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textAlignment="center"
             android:text="LOBBY CODE: "
             android:textSize="20sp"
             android:background="#808080"
             android:layout_marginTop="20dp"/>
-
-        <TextView
-            android:id="@+id/gametype"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GAME TYPE:  "
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"/>
 
 
         <LinearLayout

@@ -1,4 +1,5 @@
 package com.example.icebreak;
+import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -7,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -23,6 +26,8 @@ import android.view.View;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 
 import androidx.core.app.ActivityCompat;
@@ -123,7 +128,7 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
                 break;
 
             case R.id.btnScoreboard:
-                intent = new Intent(GlobalTask2.this, OutDoorScoreBoard.class);
+                intent = new Intent(GlobalTask2.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -177,6 +182,11 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
 
 
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_global_task2);
 
 
@@ -230,7 +240,18 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
         //starting time
         setAndStartTimer(300);
 
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if((boolean)snapshot.getValue())
+                    gameIsOver();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -296,7 +317,7 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask2.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask2.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -305,7 +326,7 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask2.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask2.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -325,7 +346,7 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask2.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask2.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
@@ -334,11 +355,25 @@ public class GlobalTask2 extends AppCompatActivity implements Task, SensorEventL
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(GlobalTask2.this, OutdoorEventMainActivity.class);
+                Intent intent = new Intent(GlobalTask2.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
             }
         });
 
         dialog.show();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    private void gameIsOver()
+    {
+        if(countDownTimer != null)
+            countDownTimer.cancel();
+        Intent intent = new Intent(GlobalTask2.this, ScoreBoardActivity.class);
+        startActivity(intent);
     }
 }

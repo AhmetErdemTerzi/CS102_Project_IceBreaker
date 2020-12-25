@@ -38,10 +38,17 @@ public class UserTab extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_user_tab);
 
-        if(userClass == null){
-        userClass = new User();}
+        if(userClass == null)
+        {
+            userClass = new User();
+        }
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference root = firebaseDatabase.getReference();
@@ -135,6 +142,7 @@ public class UserTab extends AppCompatActivity {
                 winCount.setText("Win Count: " + userClass.getWinCount());
                 gamesPlayed.setText("Games Played: " + (userClass.getWinCount() + userClass.getLoseCount()));
                 averagePoints.setText("Average Points: " + userClass.getAvgPoints());
+                userClass.userInstances.child(userClass.getUID()).child("controller").setValue(0);
             }
 
             @Override
@@ -190,7 +198,6 @@ public class UserTab extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
     }
 

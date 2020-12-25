@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_main);
         UserTab.userClass = null;
 
@@ -96,4 +101,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent signupActivity = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(signupActivity);
     }
+    @Override
+    public void onBackPressed() {
+
+    }
+
 }

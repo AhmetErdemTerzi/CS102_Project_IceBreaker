@@ -43,6 +43,7 @@ public class playTabActivity extends AppCompatActivity {
     Button joinBtn, createBtn, btnUser, btnPlay, btnNotifications;
     int random1,random2,random3,random4,random5,random6;
     static String FirestoreLobbyReference, FirestoreUserReference;
+    String str;
 
     boolean codeCorrect;
     boolean admin;
@@ -89,9 +90,11 @@ public class playTabActivity extends AppCompatActivity {
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getLobbyCodes(lobbyCode.getText().toString());
+                str = lobbyCode.getText().toString().toUpperCase();
+                str = str.toUpperCase();
+                getLobbyCodes(str);
 
-                //lobby = new Lobby(lobbyCode.getText().toString());
+                //lobby = new Lobby(lobbyCode.getText().toString().toUpperCase());
                 //event = new Event(lobby.getGameType(),lobby.getOfficial(),0);
                 //event.setLobby(lobby);
             }
@@ -325,12 +328,12 @@ public class playTabActivity extends AppCompatActivity {
     public void joinLobby(){
 
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("isLobbyLeader").setValue(false);
-        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobbyCode.getText().toString()).child("Players").child(UserTab.userClass.getUID()).setValue(UserTab.userClass.getUID());
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobbyCode.getText().toString().toUpperCase()).child("Players").child(UserTab.userClass.getUID()).setValue(UserTab.userClass.getUID());
 
 
-        FirestoreLobbyReference = lobbyCode.getText().toString();
+        FirestoreLobbyReference = lobbyCode.getText().toString().toUpperCase();
 
-        DocumentReference x = FirebaseFirestore.getInstance().collection("LobbyCodes").document(lobbyCode.getText().toString());
+        DocumentReference x = FirebaseFirestore.getInstance().collection("LobbyCodes").document(lobbyCode.getText().toString().toUpperCase());
         Map<String, String> uid = new HashMap<>();
         uid.put("Uid", UserTab.userClass.getUID());
         uid.put("Point", "0");
@@ -372,7 +375,6 @@ public class playTabActivity extends AppCompatActivity {
                 }
 
                 checkCodeBoolean(joinRequestCode);
-
             }
         });
     }
@@ -383,7 +385,7 @@ public class playTabActivity extends AppCompatActivity {
         Toast.makeText(this, "code is " + codeCorrect, Toast.LENGTH_LONG).show();
         if(codeCorrect)
         {
-            lobby = new Lobby(lobbyCode.getText().toString());
+            lobby = new Lobby(lobbyCode.getText().toString().toUpperCase().toUpperCase());
             event = new Event(lobby);
             UserTab.userClass.setCurrentLobby(lobby);
             joinLobby();

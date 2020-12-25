@@ -44,7 +44,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
     int noOfUser;
     FirebaseFirestore firebaseFirestore;
     FirebaseDatabase firebaseDatabase;
-
+    User tempUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
         catch (NullPointerException e){}
         setContentView(R.layout.activity_outdoor_scoreboard);
         if((playTabActivity.event.getLobby()!=null)){
-        outDoorScoreBoard = new OutDoorScoreBoard(playTabActivity.event.getLobby()); } //LOBY STATİK OLACAK ÇEKİLECEK !!!
+            outDoorScoreBoard = new OutDoorScoreBoard(playTabActivity.event.getLobby()); } //LOBY STATİK OLACAK ÇEKİLECEK !!!
         sortedUsers = new ArrayList<>();
         userNameandScores = new ArrayList<>();
         userNameandScores.add("USERS");
@@ -107,45 +107,53 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
                 noOfUser = sortedUsers.size();
 
                 if(position == 2 || position == 3){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(0).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(0));
+                    tempUser = sortedUsers.get(0);
 
                 }
 
                 else if(position == 4 || position == 5){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(1).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(1));
+                    tempUser = sortedUsers.get(1);
                 }
 
                 else if(position == 6 || position == 7){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(2).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(2));
+                    tempUser = sortedUsers.get(2);
                 }
 
                 else if(position == 8 || position == 9){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(3).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(3));
+                    tempUser = sortedUsers.get(3);
                 }
 
                 else if(position == 10 || position == 11){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(4).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(4));
+                    tempUser = sortedUsers.get(4);
                 }
 
                 else if(position == 12 || position == 13){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(5).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(5));
+                    tempUser = sortedUsers.get(5);
                 }
 
                 else if(position == 14 || position == 15){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(6).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(6));
+                    tempUser = sortedUsers.get(6);
                 }
 
                 else if(position == 16 || position == 17){
-                    if(!(UserTab.userClass.getName().equals(sortedUsers.get(7).getName())))
-                        outDoorScoreBoard.sendTaskRequest(sortedUsers.get(7));
+                    tempUser = sortedUsers.get(7);
                 }
+
+                if(!(UserTab.userClass.getName().equals(tempUser.getName()))) {
+                    AlertDialog dialog = new AlertDialog.Builder(OutdoorScoreboardActivity.this)
+                            .setMessage("Would you like to give task to " + tempUser.getName())
+                            .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    outDoorScoreBoard.sendTaskRequest(tempUser);
+                                }
+                            })
+                            .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();}
             }
         });
 

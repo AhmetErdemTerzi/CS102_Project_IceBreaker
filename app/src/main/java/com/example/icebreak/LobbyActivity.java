@@ -41,6 +41,7 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
     boolean isLobbyLeader;
     Lobby lobby;
     Event event;
+    boolean amIALone;
 
     String[] uidList;
     boolean flag;
@@ -53,6 +54,7 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
 
+        amIALone = false;
         flag = false;
         textHelper = 0;
         textHelp = false;
@@ -79,8 +81,12 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
-
                 firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
+                if(amIALone){
+                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).removeValue();
+                    firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
+
+                }
 
                 finish();
             }
@@ -247,6 +253,10 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 System.out.println("Number of players: " + snapshot.getChildrenCount());
+                if(snapshot.getChildrenCount() == 1){
+                    amIALone = true;
+                }
+
                 uidList = new String[(int) snapshot.getChildrenCount()];
                 int a = 0;
                 boolean next;
@@ -345,10 +355,12 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Kicked").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue(Boolean.class)) {
-                    FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Kicked").setValue(false);
-                    Toast.makeText(LobbyActivity.this, "You are kicked.", Toast.LENGTH_SHORT).show();
-                    finish();
+                if (snapshot.getValue() != null) {
+                    if (snapshot.getValue(Boolean.class)) {
+                        FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Kicked").setValue(false);
+                        Toast.makeText(LobbyActivity.this, "You are kicked.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
             }
 
@@ -364,6 +376,11 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
         firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
 
+        if(amIALone){
+            FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).removeValue();
+            firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
+
+        }
     }
 
     public void setEvent(Event event){

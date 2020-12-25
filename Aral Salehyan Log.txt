@@ -1,3 +1,7 @@
 Aral Salehyan - 21703955
 
 16.12.2020 | Some of the methods of GlobalTask2 were generated. Th requirements of adding the step counter will be researched.  
+20.12.2020 | In order to use sensor, Actvity recognition request was added. Sensor type was added as step counter. Timer was added to global task 2. Circular progress bar added.
+Global task 2 xml was adjusted according to circular progress bar. Global task 2 actvity and gloabl task 2 xml were almost done.
+24.12.2020 | With Erkin, Emrecan and Erdem, lobby class is corrected (now the lobby is fully capable of starting the correct game), scoreboard class is written and its xml is enhanced ,and the connections of these classes to Firebase is done.
+25.12.2020 | With Emrecan, Erdem and Erkin, Scoreboards and their screen are completed so they are working nicely (Sorting users depending on their scores and showing them in a table format). Direct task is completed, globaltask1 and globaltask2 is done. Outdoor event working nicely.

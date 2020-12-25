@@ -88,7 +88,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="179dp"
+        android:layout_marginBottom="125dp"
         android:text="Do not have an account yet? SIGN UP!"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -67,12 +67,12 @@ public class OutDoorScoreBoard extends ScoreBoard{
         {
             FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
 
-            if(tempList.get(0).getCurrentPoint() >= 60)
-            {
-                System.out.println("EN YUKEEK PUAN" + tempList.get(0).getCurrentPoint());
-                FirebaseDatabase.getInstance().getReference().child("Lobby").child(gameLobby.getLobbyCode()).child("isOver").setValue(true);
+            if(tempList.size() != 0) {
+                if (tempList.get(0).getCurrentPoint() >= 60) {
+                    System.out.println("EN YUKEEK PUAN" + tempList.get(0).getCurrentPoint());
+                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(gameLobby.getLobbyCode()).child("isOver").setValue(true);
+                }
             }
-
         }
 
         else {

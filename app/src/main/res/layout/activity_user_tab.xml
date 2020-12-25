@@ -64,8 +64,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/layoutMain">
+        app:layout_constraintTop_toTopOf="@+id/layoutMain"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/penguinuser"
@@ -181,12 +183,12 @@
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="55dp"
-            android:layout_height="60dp"
-            android:layout_below="@id/btnSuggestion"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="195dp"
+            android:layout_width="75dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/welcome"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="39dp"
             android:background="@drawable/logouticon"
             android:padding="16dp" />
 
@@ -194,8 +196,8 @@
             android:id="@+id/adminPart"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 

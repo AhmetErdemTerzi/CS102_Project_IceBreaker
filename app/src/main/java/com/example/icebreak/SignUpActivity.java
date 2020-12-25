@@ -87,6 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(SignUpActivity.this, "Signed up successfully: " + user.getEmail(), Toast.LENGTH_SHORT).show();
                                 saveUsernameFirebaseDatabase(mAuth.getCurrentUser()); //FirebaseUser inside method
+                                finish();
                             } else
                                 Toast.makeText(SignUpActivity.this, "ERROR " + task.getException(), Toast.LENGTH_SHORT).show();
                         }

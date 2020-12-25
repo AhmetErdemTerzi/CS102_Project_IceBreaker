@@ -59,7 +59,7 @@ public class ScoreBoard {
 
         if(bom.size() == 0)
         {
-            firebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
+            firebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(tempList.size());
             if(tempList.get(0).getUID().equals(UserTab.userClass.getUID())){
                 UserTab.userClass.increaseWinCount();
             }
@@ -92,9 +92,6 @@ public class ScoreBoard {
                 {
                     usersInScoreBoard.add(new User(doc.getString("Uid"), Integer.parseInt(doc.getString("Point")), doc.getString("Name")));
                 }
-
-                System.out.println("****************");
-                System.out.println(usersInScoreBoard.size());
                 sortUsers(usersInScoreBoard);
             }
 
@@ -102,38 +99,3 @@ public class ScoreBoard {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-       /* reference.child(gameLobby.getLobbyCode()).child("Players").addValueEventListener(new ValueEventListener() {//TO GET PLAYERS; FIRST, FIND PLAYERS.
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usersInScoreBoard.clear();
-                for(DataSnapshot child : snapshot.getChildren()){
-                    System.out.println("FORA GIRDI!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                    String uid = child.getValue().toString();
-                    int point = Integer.parseInt(child.child(uid).child("Current Point").getValue().toString());
-                    //System.out.println("İÇERDEYİM BEEEEEE: " + uid);
-                    User user = new User(uid, point);
-                    usersInScoreBoard.add(user);
-
-                }
-                System.out.println("\n\n\n" + usersInScoreBoard.size() + "\n\n\n");
-                sortUsers(usersInScoreBoard);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-        });
-*/

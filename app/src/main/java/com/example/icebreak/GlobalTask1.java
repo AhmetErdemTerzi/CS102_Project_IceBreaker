@@ -238,7 +238,7 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
 
             //current user puan alınımı eklenecek sorun çıkardığı için comment atıldı
             //currentUser.setCurrentPoint(currentUser.getCurrentPoint() + 1);
-            UserTab.userClass.setCurrentPoint(UserTab.userClass.getCurrentPoint() + 10);
+            UserTab.userClass.setCurrentPoint(UserTab.userClass.getCurrentPoint() + 25);
 
 
             stopLocationUpdates();

@@ -2,10 +2,13 @@ package com.example.icebreak;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -192,10 +195,25 @@ public class UserTab extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //LOG OUT HERE
-                Toast.makeText(UserTab.this,"Goodbye " + userClass.getName(), Toast.LENGTH_SHORT).show();
-                firebaseAuth.getInstance().signOut();//logs out
-                Intent intent = new Intent(UserTab.this, MainActivity.class);
-                startActivity(intent);
+
+                AlertDialog dialog = new AlertDialog.Builder(UserTab.this)
+                        .setMessage("Do you want to log out?")
+                        .setPositiveButton("Log out", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(UserTab.this,"Goodbye " + userClass.getName(), Toast.LENGTH_SHORT).show();
+                                firebaseAuth.getInstance().signOut();//logs out
+                                Intent intent = new Intent(UserTab.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Stay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .show();
+
             }
         });
 

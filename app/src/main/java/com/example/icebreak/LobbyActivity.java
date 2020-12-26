@@ -193,6 +193,7 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
                                     if (timer != null) {
                                         timer.cancel();
                                     }
+                                    FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").setValue("");
                                     Intent intent = new Intent(LobbyActivity.this, OutdoorEventMainActivity.class);
                                     startActivity(intent);
                                 }

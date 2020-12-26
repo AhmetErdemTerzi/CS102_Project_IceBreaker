@@ -127,4 +127,7 @@ public class SignUpActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).set(data);
     }
 
+    public void onBackPressed() {
+    }
+
 }

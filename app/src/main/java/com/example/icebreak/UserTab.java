@@ -219,5 +219,7 @@ public class UserTab extends AppCompatActivity {
 
     }
 
+    public void onBackPressed() {
+    }
 
 }

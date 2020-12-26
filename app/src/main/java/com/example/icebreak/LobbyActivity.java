@@ -349,9 +349,11 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
                         System.out.println("Kullanıcı adı : " + snapshot.getValue().toString());
 
                         if(bollle){
+                            player[textHelper].setTextColor(Color.RED);
                             player[textHelper].setText(snapshot.getValue().toString() + "  (LEADER)");
                         }
                         else{
+                            player[textHelper].setTextColor(Color.WHITE);
                             player[textHelper].setText(snapshot.getValue().toString());
                         }
                         if(isLobbyLeader){

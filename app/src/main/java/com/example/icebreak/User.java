@@ -370,8 +370,8 @@ public class User {
         return available;
     }
 
-    public double getAvgPoints() {
-        return averagePoint;
+    public int getAvgPoints() {
+        return (int)averagePoint;
     }
 
     public void setCurrentLobby(Lobby lobby)

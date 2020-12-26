@@ -403,10 +403,4 @@ public class QuizActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        FirebaseAuth.getInstance().signOut();
-    }
 }

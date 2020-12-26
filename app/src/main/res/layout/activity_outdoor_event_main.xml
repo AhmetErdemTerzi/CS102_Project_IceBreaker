@@ -131,7 +131,8 @@
             android:inputType="textPersonName"
             android:textColorHint="#2B2B2B"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/globalTasks" />
+            app:layout_constraintTop_toBottomOf="@+id/globalTasks"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/sendButton"

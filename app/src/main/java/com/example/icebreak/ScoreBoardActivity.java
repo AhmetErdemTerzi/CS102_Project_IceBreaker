@@ -144,8 +144,6 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ScoreBoardActivity.this, UserTab.class);
-        startActivity(intent);
     }
 
 

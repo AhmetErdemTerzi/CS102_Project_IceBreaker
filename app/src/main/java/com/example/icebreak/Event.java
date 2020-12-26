@@ -17,10 +17,6 @@ public class Event {
         generateLobbyCode();
         this.numOfPlayers = numOfPlayers;
 
-
-       // if (gameType.equals("Outdoor Game"))
-       //     lobby = new Lobby(coordinates, isEventOfficial,  dateTime, lobbyCode);
-       // else if(gameType.equals("Indoor Game"))
             lobby = new Lobby(isEventOfficial,  lobbyCode);
             lobby.setGameType(gameType);
 

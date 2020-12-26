@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,11 +48,14 @@ public class notifActivity extends AppCompatActivity implements View.OnClickList
         notif2 = (TextView) this.findViewById(R.id.notif2);
         notif3 = (TextView) this.findViewById(R.id.notif3);
         notif4 = (TextView) this.findViewById(R.id.notif4);
+        notif1.setTextColor(Color.BLACK);
+        notif2.setTextColor(Color.BLACK);
+        notif3.setTextColor(Color.BLACK);
+        notif4.setTextColor(Color.BLACK);
 
         del2 = (Button) this.findViewById(R.id.del2);
         del3 = (Button) this.findViewById(R.id.del3);
         del4 = (Button) this.findViewById(R.id.del4);
-
 
 
         notifications = new ArrayList<String>();
@@ -82,6 +86,8 @@ public class notifActivity extends AppCompatActivity implements View.OnClickList
                     del3.setVisibility(View.VISIBLE);
                     del4.setVisibility(View.VISIBLE);
                     admin = true;
+                        notif1.setVisibility(View.VISIBLE);
+                        btnSEND.setVisibility(View.VISIBLE);
                 }
                 else {
                     btnSEND.setEnabled(false);
@@ -89,8 +95,12 @@ public class notifActivity extends AppCompatActivity implements View.OnClickList
                     del3.setVisibility(View.GONE);
                     del4.setVisibility(View.GONE);
                     admin = false;
+                        notif1.setVisibility(View.INVISIBLE);
+                        btnSEND.setVisibility(View.INVISIBLE);
                 }
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

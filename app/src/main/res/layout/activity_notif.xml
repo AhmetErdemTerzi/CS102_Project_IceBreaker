@@ -69,6 +69,7 @@
             android:layout_marginTop="16dp"
             android:background="#CFD8DC"
             android:hint="@string/enter_notifications_only_admins"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <Button
@@ -102,8 +103,9 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="#CFD8DC"
-                    android:text="@string/join_lobby"
-                    android:textSize="20sp" />
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
         </LinearLayout>
 
         <Button
@@ -137,8 +139,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:background="#CFD8DC"
-                android:text="@string/join_lobby"
-                android:textSize="20sp" />
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15sp" />
         </LinearLayout>
 
 
@@ -173,8 +176,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:background="#CFD8DC"
-                android:text="@string/join_lobby"
-                android:textSize="20sp" />
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15sp" />
         </LinearLayout>
 
 

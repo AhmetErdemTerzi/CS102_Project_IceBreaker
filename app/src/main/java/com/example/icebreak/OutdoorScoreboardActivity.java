@@ -236,7 +236,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
             }
         });
 
-        updateAvgPoint_and_gameCount();
+        //updateAvgPoint_and_gameCount();
 
 
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {

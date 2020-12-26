@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -61,6 +62,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
         userNameandScores = new ArrayList<>();
         userNameandScores.add("USERS");
         userNameandScores.add("POINTS");
+        Toast.makeText(this, "Press a user to give task", Toast.LENGTH_SHORT).show();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -202,6 +204,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     reference.child(UserTab.userClass.getUID()).child("outdoorRequestReceived").setValue(false);
+                                    reference.child(UserTab.userClass.getUID()).child("Availability").setValue(true);
                                     outDoorScoreBoard.responseTaskRequest(-1,taskGiverUID);
                                 }
                             })
@@ -220,6 +223,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue(Integer.class) == 1){
+                    Toast.makeText(OutdoorScoreboardActivity.this, "Accepted" , Toast.LENGTH_LONG);
                     reference.child(UserTab.userClass.getUID()).child("Availability").setValue(false);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -230,13 +234,30 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
                         }
                     }, 2500);
                 }
+                else if(snapshot.getValue(Integer.class) == -1){
+                    AlertDialog dialog = new AlertDialog.Builder(OutdoorScoreboardActivity.this)
+                            .setMessage("Task request is rejected by " + tempUser.getName())
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setNegativeButton("", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
+                }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-        updateAvgPoint_and_gameCount();
+       // updateAvgPoint_and_gameCount();
 
 
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {

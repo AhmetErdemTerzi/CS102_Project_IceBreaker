@@ -374,7 +374,7 @@ public class QuizActivity extends AppCompatActivity {
         {
             // Go to Score Activity
             // GO TO SCOREBOARD
-            UserTab.userClass.setCurrentPoint(score);
+            UserTab.userClass.setCurrentPoint(score*8);
             this.finish();
             Intent intent = new Intent(QuizActivity.this, ScoreBoardActivity.class);
             startActivity(intent);

@@ -2,10 +2,14 @@ package com.example.icebreak;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -45,6 +49,8 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
     Lobby lobby;
     Event event;
     boolean amIALone;
+    int tempp;
+    boolean bollle;
 
     String[] uidList;
     boolean flag;
@@ -94,13 +100,14 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
                 firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
-                if(amIALone){
-                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).removeValue();
-                    firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
+              //if(amIALone){
+              //    FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).removeValue();
+              //    firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
 
-                }
+              //}
 
                 finish();
             }
@@ -311,18 +318,56 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
             System.out.println("BASE CASE");
             for(int a = textHelper; a< player.length; a++){
                 player[a].setText("*EMPTY*");
+                setUnvisible(player[a], but[a]);
             }
             textHelper = 0;
 
         }
         else if(textHelper<uidList.length) {
             System.out.println(uidList[textHelper]+"------------------");
+            FirebaseDatabase.getInstance().getReference().child("Users").child(uidList[textHelper]).child("isLobbyLeader").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot1) {
+                    System.out.println("deger" + snapshot1.getValue().toString());
+                    if(snapshot1.getValue().toString().equals("true")){
+                        bollle = true;
+                    }
+                    else{
+                        bollle = false;
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+
             FirebaseDatabase.getInstance().getReference().child("Users").child(uidList[textHelper]).child("Username").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.getValue() != null) {
                         System.out.println("Kullanıcı adı : " + snapshot.getValue().toString());
-                        player[textHelper].setText(snapshot.getValue().toString());
+
+                        if(bollle){
+                            player[textHelper].setText(snapshot.getValue().toString() + "  (LEADER)");
+                        }
+                        else{
+                            player[textHelper].setText(snapshot.getValue().toString());
+                        }
+                        if(isLobbyLeader){
+                            if(snapshot.getValue().toString().equals(UserTab.userClass.getName())){
+                                player[textHelper].setVisibility(View.VISIBLE);
+                                but[textHelper].setVisibility(View.INVISIBLE);
+                            }
+                            else {
+                                setVisible(player[textHelper], but[textHelper]);
+                            }
+                        }
+                        else{
+                            setVisible(player[textHelper], but[textHelper]);
+                            but[textHelper].setVisibility(View.INVISIBLE);
+                            }
+
                         textHelp = true;
                     }
                     if(textHelp) {
@@ -345,23 +390,37 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(isLobbyLeader) {
-            if (v.getId() == R.id.but1) {
-                removePlayer(0);
-            } else if (v.getId() == R.id.but2) {
-                removePlayer(1);
-            } else if (v.getId() == R.id.but3) {
-                removePlayer(2);
-            } else if (v.getId() == R.id.but4) {
-                removePlayer(3);
-            } else if (v.getId() == R.id.but5) {
-                removePlayer(4);
-            } else if (v.getId() == R.id.but6) {
-                removePlayer(5);
-            } else if (v.getId() == R.id.but7) {
-                removePlayer(6);
-            } else if (v.getId() == R.id.but8) {
-                removePlayer(7);
+            if (v.getId() == R.id.but1 && !player[0].getText().equals(UserTab.userClass.getName()) && !player[0].getText().equals("*EMPTY*")) {
+                tempp = 0;
+            } else if (v.getId() == R.id.but2 && !player[1].getText().equals(UserTab.userClass.getName()) && !player[1].getText().equals("*EMPTY*")) {
+                tempp = 1;
+            } else if (v.getId() == R.id.but3 && !player[2].getText().equals(UserTab.userClass.getName()) && !player[2].getText().equals("*EMPTY*")) {
+                tempp = 2;
+            } else if (v.getId() == R.id.but4 && !player[3].getText().equals(UserTab.userClass.getName()) && !player[3].getText().equals("*EMPTY*")) {
+                tempp = 3;
+            } else if (v.getId() == R.id.but5 && !player[4].getText().equals(UserTab.userClass.getName()) && !player[4].getText().equals("*EMPTY*")) {
+                tempp = 4;
+            } else if (v.getId() == R.id.but6 && !player[5].getText().equals(UserTab.userClass.getName()) && !player[5].getText().equals("*EMPTY*")) {
+                tempp = 5;
+            } else if (v.getId() == R.id.but7 && !player[6].getText().equals(UserTab.userClass.getName()) && !player[6].getText().equals("*EMPTY*")) {
+                tempp = 6;
+            } else if (v.getId() == R.id.but8 && !player[7].getText().equals(UserTab.userClass.getName()) && !player[7].getText().equals("*EMPTY*")) {
+                tempp = 7;
             }
+            AlertDialog dialog = new AlertDialog.Builder(LobbyActivity.this)
+                    .setMessage("Do you want to kick " + player[tempp].getText() + " ?")
+                    .setPositiveButton("Kick", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            removePlayer(tempp);
+                        }
+                    })
+                    .setNegativeButton("Let him stay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -391,15 +450,27 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
         firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
 
-        if(amIALone){
-            FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).removeValue();
-            firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
+       //if(amIALone){
+       //    FirebaseDatabase.getInstance().getReference().child("Lobby").child(lobby.getLobbyCode()).removeValue();
+       //    firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).delete();
 
-        }
+       //}
     }
 
     public void setEvent(Event event){
         this.event = event;
+    }
+
+    public void setUnvisible(TextView textView, Button button){
+        textView.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+        button.setClickable(false);
+    }
+
+    public void setVisible(TextView textView, Button button){
+        textView.setVisibility(View.VISIBLE);
+        button.setVisibility(View.VISIBLE);
+        button.setClickable(true);
     }
 
 

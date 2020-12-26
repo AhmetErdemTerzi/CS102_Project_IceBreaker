@@ -69,7 +69,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#CFD8DC"
-            android:text="@string/join_lobby"
+            android:text=""
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -106,7 +107,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#CFD8DC"
-            android:text="@string/join_lobby"
+            android:text=""
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -144,7 +146,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#CFD8DC"
-            android:text="@string/join_lobby"
+            android:text=""
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -182,7 +185,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#CFD8DC"
-            android:text="@string/join_lobby"
+            android:text=""
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <LinearLayout

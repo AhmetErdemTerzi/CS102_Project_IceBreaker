@@ -2,6 +2,7 @@ package com.example.icebreak;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -51,6 +52,7 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
         btnGame = this.findViewById(R.id.btnGame);
         btnScoreboard = this.findViewById(R.id.btnScoreboard);
         codeInput = this.findViewById(R.id.codeEditText);
+        codeInput.setTextColor(Color.BLACK);
 
         imageButtonPedometer.setOnClickListener(this);
         imageButtonGoogleMaps.setOnClickListener(this);
@@ -121,10 +123,12 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
                             }
                         })
                         .show();
+                codeInput.setText("");
             }
             else
             {
                 Toast.makeText(this, "The code is invalid!", Toast.LENGTH_SHORT).show();
+                codeInput.setText("");
             }
         }
 
@@ -133,10 +137,6 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
 
     @Override
     public void onBackPressed() {
-        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
-        firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
-        Intent intent = new Intent(OutdoorEventMainActivity.this, playTabActivity.class);
-        startActivity(intent);
     }
 
 }

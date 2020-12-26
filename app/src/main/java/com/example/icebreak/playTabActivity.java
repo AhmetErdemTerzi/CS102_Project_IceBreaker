@@ -117,7 +117,7 @@ public class playTabActivity extends AppCompatActivity {
             }
         });
 
-        //isAdmin();
+        isAdmin();
 
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -397,10 +397,6 @@ public class playTabActivity extends AppCompatActivity {
     public static Event getEvent(){
         return event;
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        FirebaseAuth.getInstance().signOut();
+    public void onBackPressed() {
     }
 }

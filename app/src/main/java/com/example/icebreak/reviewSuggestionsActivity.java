@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -60,6 +61,10 @@ public class reviewSuggestionsActivity extends AppCompatActivity implements View
         notif2 = (TextView) this.findViewById(R.id.notif2);
         notif3 = (TextView) this.findViewById(R.id.notif3);
         notif4 = (TextView) this.findViewById(R.id.notif4);
+        notif1.setTextColor(Color.BLACK);
+        notif2.setTextColor(Color.BLACK);
+        notif3.setTextColor(Color.BLACK);
+        notif4.setTextColor(Color.BLACK);
 
         accept1.setOnClickListener(this);
         accept2.setOnClickListener(this);
@@ -112,48 +117,56 @@ public class reviewSuggestionsActivity extends AppCompatActivity implements View
         if(v.getId() == R.id.accept1 ){
             if(numOfSuggestions >=1) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions, true);
+                notif1.setText("");
                 numOfSuggestions--;
             }
         }
         else if(v.getId() == R.id.accept2){
             if(numOfSuggestions >=2) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions-1, true);
+                notif2.setText("");
                 numOfSuggestions--;
             }
         }
         else if(v.getId() == R.id.accept3){
             if(numOfSuggestions >=3) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions-2, true);
+                notif3.setText("");
                 numOfSuggestions--;
             }
         }
         else if(v.getId() == R.id.accept4){
             if(numOfSuggestions >=4) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions-3, true);
+                notif4.setText("");
                 numOfSuggestions--;
             }
         }
         else if(v.getId() == R.id.dec1){
             if(numOfSuggestions >=1) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions, false);
+                notif1.setText("");
                 numOfSuggestions--;
             }
         }
         else if(v.getId() == R.id.dec2){
             if(numOfSuggestions >=2) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions - 1, false);
+                notif2.setText("");
                 numOfSuggestions--;
             }
         }
         else if(v.getId() == R.id.dec3){
             if(numOfSuggestions >=3) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions - 2, false);
+                notif3.setText("");
                 numOfSuggestions--;
             }
         }
         else if(v.getId() == R.id.dec4){
             if(numOfSuggestions >=4) {
                 ((AdminUser) UserTab.userClass).respondRequest(numOfSuggestions - 3, false);
+                notif4.setText("");
                 numOfSuggestions--;
             }
         }
@@ -206,8 +219,9 @@ public class reviewSuggestionsActivity extends AppCompatActivity implements View
 
 
         FirebaseDatabase.getInstance().getReference().child("Suggestions").child("Sug0").removeValue();
-
     }
 
+    public void onBackPressed() {
+    }
 
 }

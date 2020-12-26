@@ -4,11 +4,16 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -24,6 +29,8 @@ public class OutDoorScoreBoard extends ScoreBoard{
     ArrayList<String> Notifications;
     String str, code, all;
     static String directTaskCode;
+    int count;
+
 
     public OutDoorScoreBoard(Lobby gameLobby){
         super(gameLobby);
@@ -112,17 +119,33 @@ public class OutDoorScoreBoard extends ScoreBoard{
 
         this.TaskReceiver = taskReceiver;
         reference2.child(taskReceiver.getUID()).child("Outdoor").child("senderUID").setValue(UserTab.userClass.getUID());
+
+        reference2.child(taskReceiver.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
+        reference2.child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
+        reference.child(directTaskCode).child("TaskGiver").setValue(UserTab.userClass.getName());
+
+
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                reference.child(directTaskCode).child("TaskReceiver").setValue(taskReceiver.getName());
-                reference.child(directTaskCode).child("TaskGiver").setValue(UserTab.userClass.getName());
-                reference2.child(taskReceiver.getUID()).child("Outdoor").child("outdoorRequestReceived").setValue(true);
                 reference2.child(taskReceiver.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
                 reference2.child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").setValue(directTaskCode);
+                reference.child(directTaskCode).child("TaskReceiver").setValue(taskReceiver.getName());
+                reference.child(directTaskCode).child("TaskGiver").setValue(UserTab.userClass.getName());
+                try
+                {
+                    Thread.sleep(750);
+                }
+                catch(InterruptedException ex)
+                {
+                    Thread.currentThread().interrupt();
+                }
+                reference2.child(taskReceiver.getUID()).child("Outdoor").child("outdoorRequestReceived").setValue(true);
             }
-        }, 1000);
+        }, 1500);
 
     }
 
@@ -130,11 +153,34 @@ public class OutDoorScoreBoard extends ScoreBoard{
 
     public void responseTaskRequest(int i,String uid)
     {
-        reference2.child(uid).child("Outdoor").child("Response").setValue(i);
-
-        if(i == 1){
-            reference.child(directTaskCode).child("Random").setValue((int) (Math.random()*11));
-        }
+        getTasklist(i, uid);
     }
 
+    public void getTasklist(int i, String uid) {
+        count = 0;
+
+        FirebaseFirestore.getInstance().collection("Missions").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (DocumentSnapshot doc : task.getResult()) {
+                    count++;
+                }
+
+                if(i == 1){
+                    reference2.child(uid).child("Outdoor").child("Response").setValue(Math.random()*(1));
+                }
+                else if(i == -1){
+                    reference2.child(uid).child("Outdoor").child("Response").setValue(Math.random()*(-1));
+                }
+
+
+                reference2.child(uid).child("Outdoor").child("Response").setValue(i);
+
+                if(i == 1){
+                    reference.child(directTaskCode).child("Random").setValue((int) (Math.random()*count));
+                }
+                System.out.println(" bug cozum" + count);
+            }
+        });
+    }
 }

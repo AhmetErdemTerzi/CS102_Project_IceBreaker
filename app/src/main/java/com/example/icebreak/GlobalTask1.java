@@ -490,6 +490,5 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onBackPressed() {
-
     }
 }

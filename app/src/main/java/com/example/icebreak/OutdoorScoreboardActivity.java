@@ -46,6 +46,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     FirebaseDatabase firebaseDatabase;
     User tempUser;
+    String str, str1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +176,19 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
             }
         });
 
+        reference.child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                str1 = snapshot.getValue().toString();
+                System.out.println("code" + str1);
+                dinle();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //GELEN TASK REQUESTLER
         reference.child(UserTab.userClass.getUID()).child("Outdoor").child("outdoorRequestReceived").addValueEventListener(new ValueEventListener() {
@@ -182,7 +196,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue(Boolean.class) && UserTab.userClass.getAvailability()){
                     AlertDialog dialog = new AlertDialog.Builder(OutdoorScoreboardActivity.this)
-                            .setMessage("You received a request!")
+                            .setMessage("You received a request by " + str + " !")
                             .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -206,6 +220,9 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
                                     reference.child(UserTab.userClass.getUID()).child("outdoorRequestReceived").setValue(false);
                                     reference.child(UserTab.userClass.getUID()).child("Availability").setValue(true);
                                     outDoorScoreBoard.responseTaskRequest(-1,taskGiverUID);
+                                    data.getReference().child("Users").child(UserTab.userClass.getUID()).child("Outdoor").child("outdoorRequestReceived").setValue(false);
+                                    data.getReference().child("Users").child(UserTab.userClass.getUID()).child("Outdoor").child("senderUID").setValue("");
+                                    data.getReference().child("Users").child(UserTab.userClass.getUID()).child("Outdoor").child("Response").setValue(0);
                                 }
                             })
                             .show();
@@ -218,11 +235,12 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
         });
 
 
+
         //Gonderilen request cevaplari
         reference.child(UserTab.userClass.getUID()).child("Outdoor").child("Response").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(Integer.class) == 1){
+                if(snapshot.getValue(Integer.class)> 0){
                     Toast.makeText(OutdoorScoreboardActivity.this, "Accepted" , Toast.LENGTH_LONG);
                     reference.child(UserTab.userClass.getUID()).child("Availability").setValue(false);
                     Handler handler = new Handler();
@@ -234,7 +252,7 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
                         }
                     }, 2500);
                 }
-                else if(snapshot.getValue(Integer.class) == -1){
+                else if(snapshot.getValue(Integer.class) < 0){
                     AlertDialog dialog = new AlertDialog.Builder(OutdoorScoreboardActivity.this)
                             .setMessage("Task request is rejected by " + tempUser.getName())
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -274,6 +292,21 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
         });
 
     }
+
+    private void dinle(){
+        FirebaseDatabase.getInstance().getReference().child("Direct_Task").child(str1).child("TaskGiver").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                str = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     private void gameIsOver()
     {
@@ -319,11 +352,6 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        firebaseFirestore.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").document(playTabActivity.FirestoreUserReference).delete();
-        firebaseDatabase.getReference().child("Lobby").child(UserTab.userClass.getCurrentLobby().getLobbyCode()).child("Players").child(UserTab.userClass.getUID()).removeValue();
-        Intent intent = new Intent(OutdoorScoreboardActivity.this, playTabActivity.class);
-        startActivity(intent);
     }
 
     private void updateAvgPoint_and_gameCount() {

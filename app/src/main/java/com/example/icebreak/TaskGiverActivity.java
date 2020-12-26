@@ -1,6 +1,7 @@
 package com.example.icebreak;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -204,5 +206,8 @@ public class TaskGiverActivity extends AppCompatActivity {
             countDownTimer.cancel();
         Intent intent = new Intent(TaskGiverActivity.this, ScoreBoardActivity.class);
         startActivity(intent);
+    }
+
+    public void onBackPressed() {
     }
 }

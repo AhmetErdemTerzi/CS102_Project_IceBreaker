@@ -191,7 +191,7 @@ public class GlobalTask1 extends AppCompatActivity implements OnMapReadyCallback
                 break;
 
             case R.id.btnScoreboard:
-                intent = new Intent(GlobalTask1.this, OutDoorScoreBoard.class);
+                intent = new Intent(GlobalTask1.this, OutdoorScoreboardActivity.class);
                 startActivity(intent);
                 break;
         }

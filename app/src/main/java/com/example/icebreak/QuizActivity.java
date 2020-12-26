@@ -340,7 +340,7 @@ public class QuizActivity extends AppCompatActivity {
         D.setTextColor(Color.WHITE);
         flag = false;
         count.setText(Integer.toString(countere+1) + "/" + Integer.toString(SelectedQuestionList.size()));
-        sco.setText(Integer.toString(score));
+        sco.setText(Integer.toString(score*8));
         A.setClickable(true);
         B.setClickable(true);
         C.setClickable(true);

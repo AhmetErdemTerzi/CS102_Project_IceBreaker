@@ -1,21 +1,21 @@
 Emrecan Kutay 21702500
 
-Question Class was done. -- 14.12.2020
 
-Quiz Activity Class and its xml were finished. -- 15.12.2020
+14.12.2020 | Question Class was done. 
+15.12.2020 | Quiz Activity Class and its xml were finished.
+17.12.2020 | DirectTask class, TaskGiverActivity and TaskReceiverActivity and their xml s were done.
+17.12.2020 | Event and OutDoor classes were worked but not finished.
+18.12.2020 | ScoreBoard and OutdoorScoreBoard were started to be worked on.
+22.12.2020 | Direct Task database connections in the outdoorscoreboard was completed.
+24.12.2020 | With Erdem, Aral and Erkin, lobby class is corrected (now the lobby is fully capable of starting the correct game), scoreboard class is written and its xml is                      enhanced ,and the connections of these classes to Firebase is done.
 
-DirectTask class, TaskGiverActivity and TaskReceiverActivity and their xml s were done. -- 17.12.2020
+25.12.2020 | With Erdem, Aral and Erkin, Scoreboards and their screen are completed so they are working nicely (Sorting users depending on their scores and showing them in a table               format). Direct task is completed, globaltask1 and globaltask2 is done. Outdoor event working nicely. 
+
+26.12.2020 | Bugs are fixed. Lobby view was corrected to set visible and unvisible buttons. Users become able to see the task giver's name in the task quest. Fail button added to              task receiver's view. Point listener added to the outdoor event main to listen the new points from orienteering code.
+
+27.12.2020 | Bugs are fixed in the quiz scoreboard.
 
 
-Event and OutDoor classes were worked but not finished. -- 17.12.2020
 
-ScoreBoard and OutdoorScoreBoard were started to be worked on. -- 18.12.2020
-
-Direct Task database connections in the outdoorscoreboard was completed. -- 22.12.2020
-
-
-With Erdem, Aral and Erkin, lobby class is corrected (now the lobby is fully capable of starting the correct game), scoreboard class is written and its xml is enhanced ,and the connections of these classes to Firebase is done. 24.12.2020 
-
-With Erdem, Aral and Erkin, Scoreboards and their screen are completed so they are working nicely (Sorting users depending on their scores and showing them in a table format). Direct task is completed, globaltask1 and globaltask2 is done. Outdoor event working nicely. 25.12.2020 | 
 
 

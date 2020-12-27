@@ -1,5 +1,5 @@
 Barkın Saday - 21902967
 19.12.2020 | Lobby class is worked on but not finished.
 20.12.2020 | OutDoorEvent worked on.
-22.12.2020 | Lobby is worked on.
+21.12.2020 | Lobby is worked on.
 26.12.2020 | Generating Lobby code finished.(For Event class).

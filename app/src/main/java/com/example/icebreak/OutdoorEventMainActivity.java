@@ -42,6 +42,7 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
     int maxIndex;
     ArrayList<User> usersInScoreBoard;
     FirebaseFirestore x;
+    ArrayList<Integer> ints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
         x =FirebaseFirestore.getInstance();
         usersInScoreBoard = new ArrayList<>();
         tempList = new ArrayList<>();
+        ints = new ArrayList<>();
         imageButtonGoogleMaps = this.findViewById(R.id.mapImageButton);
         imageButtonPedometer = this.findViewById(R.id.walkImageButton);
         btnSend = this.findViewById(R.id.sendButton);
@@ -162,43 +164,22 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
                 for(QueryDocumentSnapshot doc : task.getResult())
                 {
                     System.out.println("denemee" + doc.getString("Name") + " " + doc.getString("Point") );
-                    usersInScoreBoard.add(new User(doc.getString("Uid"), Integer.parseInt(doc.getString("Point")), doc.getString("Name")));
+                    ints.add(Integer.parseInt(doc.getString("Point")));
                 }
-                sortUsers(usersInScoreBoard);
+                look(ints);
             }
 
         });
     }
 
-    public void sortUsers(ArrayList<User> bom)
-    {
-        maxIndex = 0;
+    private void look(ArrayList<Integer> ints){
 
-        if(bom.size() == 0)
-        {
-            if(tempList.size() != 0) {
-                if (tempList.get(0).getCurrentPoint() >= 80) {
-                    System.out.println("EN YUKEEK PUAN" + tempList.get(0).getCurrentPoint());
-                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.getEvent().getLobby().getLobbyCode()).child("isOver").setValue(Math.random());
+        for(int i = 0; i < ints.size(); i++)
+                if (ints.get(i) >= 80) {
+                    System.out.println("EN YUKEEK PUAN" + ints);
+                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.getEvent().getLobby().getLobbyCode()).child("isOver").setValue(true);
                 }
-            }
-        }
-
-        else {
-            temp = bom.get(0);
-            for (int i = 0; i < bom.size(); i++)
-            {
-                if (temp.getCurrentPoint() < bom.get(i).getCurrentPoint())
-                {//EMRECAN BU getScore değil getCurrentPoint olcak
-                    temp = bom.get(i);
-                    maxIndex = i;
                 }
-            }
-            tempList.add(temp);
-            bom.remove(maxIndex);
-            sortUsers(bom);
-        }
-    }
 
 
     @Override

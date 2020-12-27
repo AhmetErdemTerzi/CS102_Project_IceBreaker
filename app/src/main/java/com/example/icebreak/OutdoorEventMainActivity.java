@@ -27,6 +27,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.SortedMap;
 
 public class OutdoorEventMainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -55,7 +56,8 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         x =FirebaseFirestore.getInstance();
-
+        usersInScoreBoard = new ArrayList<>();
+        tempList = new ArrayList<>();
         imageButtonGoogleMaps = this.findViewById(R.id.mapImageButton);
         imageButtonPedometer = this.findViewById(R.id.walkImageButton);
         btnSend = this.findViewById(R.id.sendButton);
@@ -78,18 +80,7 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
         oCodes.add("B_Building");
         oCodes.add("HARAMBE");
 
-        FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if((boolean)snapshot.getValue())
-                    gameIsOver();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
             @Override
@@ -103,6 +94,8 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
 
             }
         });
+
+
     }
 
     private void gameIsOver()
@@ -115,7 +108,7 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
     @Override
     public void onClick(View v) {
         int id = v.getId();
-
+        sortUsers();
         if(id == imageButtonGoogleMaps.getId())
         {
             Intent intent = new Intent(OutdoorEventMainActivity.this, GlobalTask1.class);
@@ -168,6 +161,7 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for(QueryDocumentSnapshot doc : task.getResult())
                 {
+                    System.out.println("denemee" + doc.getString("Name") + " " + doc.getString("Point") );
                     usersInScoreBoard.add(new User(doc.getString("Uid"), Integer.parseInt(doc.getString("Point")), doc.getString("Name")));
                 }
                 sortUsers(usersInScoreBoard);
@@ -182,12 +176,10 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
 
         if(bom.size() == 0)
         {
-            FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
-
             if(tempList.size() != 0) {
                 if (tempList.get(0).getCurrentPoint() >= 80) {
                     System.out.println("EN YUKEEK PUAN" + tempList.get(0).getCurrentPoint());
-                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.getEvent().getLobby().getLobbyCode()).child("isOver").setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.getEvent().getLobby().getLobbyCode()).child("isOver").setValue(Math.random());
                 }
             }
         }

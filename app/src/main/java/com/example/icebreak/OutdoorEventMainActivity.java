@@ -15,12 +15,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -32,6 +36,11 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
     FirebaseFirestore firebaseFirestore;
     FirebaseDatabase firebaseDatabase;
     ArrayList<String> oCodes = new ArrayList<>();
+    ArrayList<User> tempList;
+    User temp;
+    int maxIndex;
+    ArrayList<User> usersInScoreBoard;
+    FirebaseFirestore x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,7 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        x =FirebaseFirestore.getInstance();
 
         imageButtonGoogleMaps = this.findViewById(R.id.mapImageButton);
         imageButtonPedometer = this.findViewById(R.id.walkImageButton);
@@ -63,6 +73,23 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
         oCodes.add("OzcanHocaIsBest");
         oCodes.add("CS102IsTheBest");
         oCodes.add("KINGKONGDONKEYBEST");
+        oCodes.add("BILKENT");
+        oCodes.add("JAVACODE");
+        oCodes.add("B_Building");
+        oCodes.add("HARAMBE");
+
+        FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if((boolean)snapshot.getValue())
+                    gameIsOver();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
             @Override
@@ -132,6 +159,53 @@ public class OutdoorEventMainActivity extends AppCompatActivity implements View.
             }
         }
 
+    }
+
+    public void sortUsers(){
+
+        x.collection("LobbyCodes").document(playTabActivity.FirestoreLobbyReference).collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(QueryDocumentSnapshot doc : task.getResult())
+                {
+                    usersInScoreBoard.add(new User(doc.getString("Uid"), Integer.parseInt(doc.getString("Point")), doc.getString("Name")));
+                }
+                sortUsers(usersInScoreBoard);
+            }
+
+        });
+    }
+
+    public void sortUsers(ArrayList<User> bom)
+    {
+        maxIndex = 0;
+
+        if(bom.size() == 0)
+        {
+            FirebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
+
+            if(tempList.size() != 0) {
+                if (tempList.get(0).getCurrentPoint() >= 80) {
+                    System.out.println("EN YUKEEK PUAN" + tempList.get(0).getCurrentPoint());
+                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.getEvent().getLobby().getLobbyCode()).child("isOver").setValue(true);
+                }
+            }
+        }
+
+        else {
+            temp = bom.get(0);
+            for (int i = 0; i < bom.size(); i++)
+            {
+                if (temp.getCurrentPoint() < bom.get(i).getCurrentPoint())
+                {//EMRECAN BU getScore değil getCurrentPoint olcak
+                    temp = bom.get(i);
+                    maxIndex = i;
+                }
+            }
+            tempList.add(temp);
+            bom.remove(maxIndex);
+            sortUsers(bom);
+        }
     }
 
 

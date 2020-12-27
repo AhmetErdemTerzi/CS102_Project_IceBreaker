@@ -42,17 +42,6 @@ public class OutDoorScoreBoard extends ScoreBoard{
         reference1 = database.getReference().child("Notifications"); //notification için
 
 
-      // reference1.addValueEventListener(new ValueEventListener() {
-      //     @Override
-      //     public void onDataChange(@NonNull DataSnapshot snapshot) {
-      //         str =  snapshot.getValue();
-      //         Notifications.add(str);
-      //     }
-
-      //     @Override
-      //     public void onCancelled(@NonNull DatabaseError error) {
-      //     }
-      // });
 
         reference2.child(UserTab.userClass.getUID()).child("Outdoor").child("DirectTaskCode").addValueEventListener(new ValueEventListener() {
             @Override

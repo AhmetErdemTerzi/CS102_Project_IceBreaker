@@ -53,19 +53,24 @@ public class ScoreBoard {
         return tempList;
     }
 
+
     public void sortUsers(ArrayList<User> bom)
     {
         maxIndex = 0;
 
         if(bom.size() == 0)
         {
-            firebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(tempList.size());
-            if(tempList.get(0).getUID().equals(UserTab.userClass.getUID())){
-                UserTab.userClass.increaseWinCount();
+
+                firebaseDatabase.getInstance().getReference().child("Users").child(UserTab.userClass.getUID()).child("UPDATER").setValue(Math.random()*5);
+                if(tempList.get(0).getUID().equals(UserTab.userClass.getUID())){
+                    UserTab.userClass.increaseWinCount();
+                }
+                else
+                    UserTab.userClass.increaseLoseCount();
+
+                    FirebaseDatabase.getInstance().getReference().child("Lobby").child(gameLobby.getLobbyCode()).child("isOver").setValue(true);
             }
-            else
-                UserTab.userClass.increaseLoseCount();
-        }
+
 
         else {
             temp = bom.get(0);
@@ -82,6 +87,11 @@ public class ScoreBoard {
             sortUsers(bom);
         }
     }
+
+
+
+
+
 
     public void sortUsers(){
 

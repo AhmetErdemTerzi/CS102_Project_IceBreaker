@@ -44,6 +44,7 @@ public class TaskReceiverActivity extends AppCompatActivity {
     FirebaseDatabase datacı;
     DatabaseReference reference, reference1;
     int complt;
+    Button fail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class TaskReceiverActivity extends AppCompatActivity {
         }
         catch (NullPointerException e){}
         setContentView(R.layout.activity_task_receiver);
+        fail = (Button) findViewById(R.id.Fail);
+        fail.setOnClickListener(new Listenko());
 
         datacı = FirebaseDatabase.getInstance();
         reference = datacı.getReference().child("Direct_Task").child(OutDoorScoreBoard.directTaskCode);
@@ -139,6 +142,20 @@ public class TaskReceiverActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public class Listenko implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            int x = v.getId();
+            countDownTimer.cancel();
+
+            if (x == fail.getId()) {
+                directTask.setFailed();
+                fail.setClickable(false);
+                openLoseDialog();
+            }
+        }
     }
 
     private void openWinDialog() {

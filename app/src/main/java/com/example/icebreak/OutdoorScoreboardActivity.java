@@ -145,13 +145,13 @@ public class OutdoorScoreboardActivity extends AppCompatActivity {
                 if(!(UserTab.userClass.getName().equals(tempUser.getName()))) {
                     AlertDialog dialog = new AlertDialog.Builder(OutdoorScoreboardActivity.this)
                             .setMessage("Would you like to give task to " + tempUser.getName())
-                            .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Give Task", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     outDoorScoreBoard.sendTaskRequest(tempUser);
                                 }
                             })
-                            .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("Forget it", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                 }

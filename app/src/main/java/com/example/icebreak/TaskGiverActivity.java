@@ -33,6 +33,7 @@ public class TaskGiverActivity extends AppCompatActivity {
     View.OnClickListener listen = new Listener();
     FirebaseDatabase datacı;
     DatabaseReference reference;
+    int complt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,6 +102,21 @@ public class TaskGiverActivity extends AppCompatActivity {
             }
         };
         time.setText("5:00");
+
+        reference.child("Completion").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                complt = snapshot.getValue(Integer.class);
+                if(complt == -1){
+                    countDownTimer.cancel();
+                    openLoseDialog();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         FirebaseDatabase.getInstance().getReference().child("Lobby").child(playTabActivity.event.getLobbyCode()).child("isOver").addValueEventListener(new ValueEventListener() {
             @Override

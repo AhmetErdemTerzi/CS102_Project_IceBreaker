@@ -1,0 +1,39 @@
+18.12.2020 Meeting
+  Present: Ahmet Erdem Terzi, Özmen Erkin kökten, Emrecan Kutay, Aral Salehyan  
+  Absent: Barkın Saday
+
+  Discussion: We prepared for the code check. Individual progresses are examined.
+
+
+21.12.2020 Meeting
+  Present: Ahmet Erdem Terzi, Özmen Erkin kökten, Emrecan Kutay, Aral Salehyan 
+  Absent: Barkın Saday
+  
+  Discussion: We reviewed progress. We continued to work on assigned tasks. The remaining parts are checked so the distribution of tasks are updated.
+  
+  
+23.12.2020 Meeting
+  Present: Ahmet Erdem Terzi, Özmen Erkin kökten, Emrecan Kutay, Aral Salehyan 
+  Absent: Barkın Saday
+  
+  Discussion: Reviewed the works done. Observed bugs are examined, discussed.
+
+
+25.12.2020 Meeting
+  Present: Ahmet Erdem Terzi, Özmen Erkin kökten, Emrecan Kutay, Aral Salehyan 
+  Absent: Barkın Saday
+  
+  Discussion: The last touches and bug fixes are done, all of the classes are completed now.
+
+
+26.12.2020 Meeting
+  Present: Ahmet Erdem Terzi, Özmen Erkin kökten, Emrecan Kutay, Aral Salehyan 
+  Absent: Barkın Saday
+  
+  Discussion: Testing and bug fixing.
+  
+  
+27.12.2020 Meeting
+  Present: Ahmet Erdem Terzi, Özmen Erkin kökten, Emrecan Kutay, Aral Salehyan, Barkın Saday
+  
+  Discussion: Project video is recorded and report is written.
